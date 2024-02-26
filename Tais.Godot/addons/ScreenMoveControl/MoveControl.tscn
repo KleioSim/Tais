@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnukaohmlm2bl"]
+
+[ext_resource type="Script" path="res://addons/ScreenMoveControl/MoveControl.cs" id="1_jg1xk"]
+
+[node name="MoveControl" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_jg1xk")
+
+[node name="Top" type="Panel" parent="."]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+mouse_filter = 1
+
+[node name="Bottom" type="Panel" parent="."]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+
+[node name="Left" type="Panel" parent="."]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Right" type="Panel" parent="."]
+custom_minimum_size = Vector2(3, 3)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 1
+
+[connection signal="gui_input" from="Top" to="." method="OnControlGUIInput"]
+[connection signal="mouse_entered" from="Top" to="." method="OnMouseEnterControl"]
+[connection signal="mouse_exited" from="Top" to="." method="OnMouseExitControl"]
+[connection signal="gui_input" from="Bottom" to="." method="OnControlGUIInput"]
+[connection signal="mouse_entered" from="Bottom" to="." method="OnMouseEnterControl"]
+[connection signal="mouse_exited" from="Bottom" to="." method="OnMouseExitControl"]
+[connection signal="gui_input" from="Left" to="." method="OnControlGUIInput"]
+[connection signal="mouse_entered" from="Left" to="." method="OnMouseEnterControl"]
+[connection signal="mouse_exited" from="Left" to="." method="OnMouseExitControl"]
+[connection signal="gui_input" from="Right" to="." method="OnControlGUIInput"]
+[connection signal="mouse_entered" from="Right" to="." method="OnMouseEnterControl"]
+[connection signal="mouse_exited" from="Right" to="." method="OnMouseExitControl"]
