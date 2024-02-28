@@ -4,9 +4,10 @@ namespace Tais.Interfaces;
 
 public interface ISession
 {
-    IEnumerable<ITask> Tasks { get; }
-
     IEvent CurrEvent { get; }
+
+    IFinance Finance { get; }
+    IEnumerable<ITask> Tasks { get; }
 
     void OnCommand(ICommand command);
 }

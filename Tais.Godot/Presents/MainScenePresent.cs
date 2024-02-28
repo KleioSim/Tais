@@ -20,6 +20,9 @@ public partial class MainScenePresent : PresentControl<MainScene, ISessionProxy>
 
     protected override void Update(MainScene view, ISessionProxy model)
     {
+        view.FinanceCurrent.Text = model.Finance.Current.ToString();
+        view.FinanceSurplus.Text = model.Finance.Surplus.ToString();
+
         view.TaskContainer.Refresh(model.Tasks.OfType<object>().ToHashSet());
 
         if (model.CurrEvent != null)

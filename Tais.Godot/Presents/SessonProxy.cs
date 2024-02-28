@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Tais.Commands;
 using Tais.Interfaces;
 
 
 public class SessionProxyMock : ISessionProxy
 {
-    public IEnumerable<ITask> Tasks => tasks;
-
     public IEvent CurrEvent { get; private set; }
 
-    private List<Task> tasks = new List<Task>();
+    public IEnumerable<ITask> Tasks => tasks;
+    public IFinance Finance => finance;
+
+    internal FinanceMock finance = new FinanceMock();
+    internal List<TaskMock> tasks = new List<TaskMock>();
 
     public void OnCommand(object command)
     {
@@ -23,12 +26,13 @@ public class SessionProxyMock : ISessionProxy
         {
             case Cmd_CreateTask:
                 {
-                    tasks.Add(new Task());
+                    tasks.Add(new TaskMock());
                 }
                 break;
             case Cmd_NextTurn:
                 {
-                    CurrEvent = new Event();
+                    finance.NextTurn();
+                    CurrEvent = new EventMock();
                 }
                 break;
         }
@@ -36,14 +40,14 @@ public class SessionProxyMock : ISessionProxy
 
     public SessionProxyMock()
     {
-        Event.OnSelected = () =>
+        EventMock.OnSelected = () =>
         {
             CurrEvent = null;
         };
     }
 }
 
-public class Event : IEvent
+public class EventMock : IEvent
 {
     public static Action OnSelected;
 
@@ -53,7 +57,42 @@ public class Event : IEvent
     }
 }
 
-public class Task : ITask
+public class TaskMock : ITask
 {
 
+}
+
+public class FinanceMock : IFinance
+{
+    public float Current { get; set; }
+
+    public float Surplus { get; set; }
+
+    public IEnumerable<IEffectValue> Incomes => incomes;
+
+    public IEnumerable<IEffectValue> Spends => spends;
+
+    public List<EffectValueMock> incomes = new List<EffectValueMock>();
+    public List<EffectValueMock> spends = new List<EffectValueMock>();
+
+    internal void NextTurn()
+    {
+        Current += Surplus;
+    }
+}
+
+public class EffectValueMock : IEffectValue
+{
+    public float BaseValue { get; set; }
+
+    public IEnumerable<IEffect> Effects => effects;
+
+    public List<EffectMock> effects = new List<EffectMock>();
+}
+
+public class EffectMock : IEffect
+{
+    public string Desc { get; set; }
+
+    public float Percent { get; set; }
 }

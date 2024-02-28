@@ -6,6 +6,9 @@ public partial class MainScene : ViewControl
     internal Button CreateEvent { get; }
     internal Button NextTurn => GetNode<Button>("NextTurn");
 
+    internal Label FinanceCurrent => GetNode<Label>("Finance/HBoxContainer/Current");
+    internal Label FinanceSurplus => GetNode<Label>("Finance/HBoxContainer/Surplus");
+
     internal InstancePlaceholder EventDialogHolder => GetNode<InstancePlaceholder>("EventDialog");
 
     internal ItemContainer<TaskItem> TaskContainer;

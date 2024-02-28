@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://60dhhv05ukbj"]
+
+[ext_resource type="Script" path="res://MainScene/TopInfos/ProductTopInfoItemView.cs" id="1_38etr"]
+
+[node name="PanelContainer" type="PanelContainer"]
+offset_right = 180.0
+offset_bottom = 40.0
+script = ExtResource("1_38etr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Type" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Type"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Surplus" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1

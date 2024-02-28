@@ -11,6 +11,38 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_52frr")
 
+[node name="Finance" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Finance"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Type" type="Label" parent="Finance/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Finance"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Current" type="Label" parent="Finance/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Surplus" type="Label" parent="Finance/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="CreateTask" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8

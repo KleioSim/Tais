@@ -9,4 +9,7 @@
     <ProjectReference Include="..\Tais.Commands\Tais.Commands.csproj" />
     <ProjectReference Include="..\Tais.Interfaces\Tais.Interfaces.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MainScene\TopInfos\" />
+  </ItemGroup>
 </Project>
