@@ -2,7 +2,7 @@
 
 public abstract partial class MockControl<TView, TModel> : Control
     where TView : ViewControl
-    where TModel : class, IModel
+    where TModel : class
 {
     protected PresentControl<TView, TModel> Present => GetParent() as PresentControl<TView, TModel>;
 

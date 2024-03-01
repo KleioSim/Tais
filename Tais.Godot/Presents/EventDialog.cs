@@ -1,9 +1,9 @@
 ﻿using Godot;
 using Tais.Interfaces;
 
-public partial class EventDialogPresent : PresentControl<EventDialog, ISessionProxy>
+public partial class EventDialogPresent : PresentControl<EventDialog>
 {
-    protected override void Initialize(EventDialog view, ISessionProxy model)
+    protected override void Initialize(EventDialog view, ISession model)
     {
         var eventObj = view.Object as IEvent;
         view.Option.Pressed += () =>
@@ -15,7 +15,7 @@ public partial class EventDialogPresent : PresentControl<EventDialog, ISessionPr
         };
     }
 
-    protected override void Update(EventDialog view, ISessionProxy model)
+    protected override void Update(EventDialog view, ISession model)
     {
 
     }

@@ -3,7 +3,7 @@ using System;
 
 public abstract partial class PresentControl<TView, TModel> : PresentBase
     where TView : ViewControl
-    where TModel : class, IModel
+    where TModel : class
 {
     public TModel Model
     {
@@ -14,7 +14,7 @@ public abstract partial class PresentControl<TView, TModel> : PresentBase
         }
     }
 
-    private TView View => GetParent<TView>();
+    public TView View => GetParent<TView>();
     private MockControl<TView, TModel> MockControl => GetNodeOrNull<MockControl<TView, TModel>>("Mock");
 
     public bool IsInitialized { get; private set; } = false;
@@ -73,22 +73,22 @@ public abstract partial class PresentControl<TView, TModel> : PresentBase
         Update(View, Model);
     }
 
+    //internal void SendCommand(object command)
+    //{
+    //    if (command is not Cmd_UIRefresh)
+    //    {
+    //        GD.Print($"OnUICommand:{command.GetType()}");
 
-    internal void SendCommand(object command)
-    {
-        if (command is not Cmd_UIRefresh)
-        {
-            GD.Print($"OnUICommand:{command.GetType()}");
+    //        Model.OnCommand(command);
+    //    }
 
-            Model.OnCommand(command);
-        }
-
-        foreach (PresentBase item in list)
-        {
-            item.IsDirty = true;
-        }
-    }
+    //    foreach (PresentBase item in list)
+    //    {
+    //        item.IsDirty = true;
+    //    }
+    //}
 
     protected abstract void Initialize(TView view, TModel model);
     protected abstract void Update(TView view, TModel model);
+    protected abstract void SendCommand(object command);
 }

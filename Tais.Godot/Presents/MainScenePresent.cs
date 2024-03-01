@@ -2,9 +2,9 @@
 using Tais.Commands;
 using Tais.Interfaces;
 
-public partial class MainScenePresent : PresentControl<MainScene, ISessionProxy>
+public partial class MainScenePresent : PresentControl<MainScene>
 {
-    protected override void Initialize(MainScene view, ISessionProxy model)
+    protected override void Initialize(MainScene view, ISession model)
     {
         view.CreateTask.Pressed += () =>
         {
@@ -18,7 +18,7 @@ public partial class MainScenePresent : PresentControl<MainScene, ISessionProxy>
     }
 
 
-    protected override void Update(MainScene view, ISessionProxy model)
+    protected override void Update(MainScene view, ISession model)
     {
         view.TaskContainer.Refresh(model.Tasks.OfType<object>().ToHashSet());
 

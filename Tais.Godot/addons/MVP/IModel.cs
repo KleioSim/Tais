@@ -1,4 +1,4 @@
-﻿public interface IModel
-{
-    void OnCommand(object command);
-}
+﻿//public interface IModel
+//{
+//    void OnCommand(object command);
+//}

@@ -1,6 +1,8 @@
-﻿public partial class MainSceneMock : MockControl<MainScene, ISessionProxy>
+﻿using Tais.Interfaces;
+
+public partial class MainSceneMock : MockControl<MainScene>
 {
-    public override ISessionProxy Mock
+    public override ISession Mock
     {
         get
         {
