@@ -5,7 +5,7 @@ public abstract partial class PresentControl<TView, TModel> : PresentBase
     where TView : ViewControl
     where TModel : class
 {
-    public TModel Model
+    public new TModel Model
     {
         get => PresentBase.Model as TModel;
         set

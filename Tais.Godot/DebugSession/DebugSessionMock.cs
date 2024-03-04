@@ -1,8 +1,9 @@
 ﻿using System;
+using Tais.Interfaces;
 
-public partial class DebugSessionMock : MockControl<DebugSession, ISessionProxy>
+public partial class DebugSessionMock : MockControl<DebugSession, ISession>
 {
-    public override ISessionProxy Mock => throw new NotImplementedException();
+    public override ISession Mock => throw new NotImplementedException();
 }
 
 public interface IFoo
