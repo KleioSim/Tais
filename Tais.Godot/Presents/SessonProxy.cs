@@ -5,12 +5,13 @@ using Tais.Commands;
 using Tais.Interfaces;
 
 
-public class SessionProxyMock : ISession
+public class SessionMock : ISession
 {
     public IEvent CurrEvent { get; private set; }
 
     public IEnumerable<ITask> Tasks => tasks;
     public IFinance Finance => finance;
+    public IEnumerable<ICity> Cities => throw new NotImplementedException();
 
     internal FinanceMock finance = new FinanceMock();
     internal List<TaskMock> tasks = new List<TaskMock>();
@@ -38,7 +39,7 @@ public class SessionProxyMock : ISession
         }
     }
 
-    public SessionProxyMock()
+    public SessionMock()
     {
         EventMock.OnSelected = () =>
         {

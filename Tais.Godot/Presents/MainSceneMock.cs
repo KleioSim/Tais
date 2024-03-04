@@ -6,7 +6,7 @@ public partial class MainSceneMock : MockControl<MainScene, ISession>
     {
         get
         {
-            var session = new SessionProxyMock();
+            var session = new SessionMock();
             session.finance.Current = 100;
             session.finance.Surplus = 10;
 
