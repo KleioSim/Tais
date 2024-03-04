@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Tais.Interfaces;
+﻿//using System.Collections.Generic;
+//using Tais.Interfaces;
 
-public interface ISessionProxy : IModel, ISession
-{
-}
+//public interface ISessionProxy : IModel, ISession
+//{
+//}

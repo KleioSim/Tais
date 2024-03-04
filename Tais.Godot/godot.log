@@ -5,3 +5,10 @@ Vulkan API 1.2.175 - Forward+ - Using Vulkan Device #0: NVIDIA - NVIDIA GeForce 
 [P] MainScenePresent Ready
 [M] MainSceneMock Ready
 [P]Use MainScenePresent mock model
+OnUICommand:Tais.Commands.Cmd_CreateTask
+[V] TaskItem Ready
+OnUICommand:Tais.Commands.Cmd_CreateTask
+[V] TaskItem Ready
+OnUICommand:Tais.Commands.Cmd_CreateTask
+[V] TaskItem Ready
+OnUICommand:Tais.Commands.Cmd_CreateTask

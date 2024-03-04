@@ -13,8 +13,6 @@ public class PresentManager
          && x.BaseType.GetGenericTypeDefinition() == typeof(PresentControl<,>))
         .ToDictionary(x => x.BaseType.GetGenericArguments()[0], x => x);
 
-    public static IModel Model;
-
     public void OnViewReady(ViewControl view)
     {
         var viewType = view.GetType();
@@ -40,11 +38,11 @@ public class MockManager
          && x.BaseType.GetGenericTypeDefinition() == typeof(MockControl<,>))
         .ToDictionary(x => x.BaseType.GetGenericArguments()[0], x => x);
 
-    public static IModel Model;
+    public static object Model;
 
     public void OnPresentReady<TView, TModel>(PresentControl<TView, TModel> present)
         where TView : ViewControl
-        where TModel : class, IModel
+        where TModel : class
     {
         var viewType = typeof(TView);
 

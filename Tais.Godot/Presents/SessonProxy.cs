@@ -5,7 +5,7 @@ using Tais.Commands;
 using Tais.Interfaces;
 
 
-public class SessionProxyMock : ISessionProxy
+public class SessionProxyMock : ISession
 {
     public IEvent CurrEvent { get; private set; }
 
