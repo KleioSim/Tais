@@ -13,8 +13,6 @@ public class PresentManager
          && x.BaseType.GetGenericTypeDefinition() == typeof(PresentControl<,>))
         .ToDictionary(x => x.BaseType.GetGenericArguments()[0], x => x);
 
-    public static object Model;
-
     public void OnViewReady(ViewControl view)
     {
         var viewType = view.GetType();

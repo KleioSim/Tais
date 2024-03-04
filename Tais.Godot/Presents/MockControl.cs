@@ -1,7 +1,7 @@
-﻿using Tais.Interfaces;
+﻿//using Tais.Interfaces;
 
-public abstract partial class MockControl<TView> : MockControl<TView, ISession>
-    where TView : ViewControl
-{
+//public abstract partial class MockControl<TView> : MockControl<TView, ISession>
+//    where TView : ViewControl
+//{
 
-}
+//}

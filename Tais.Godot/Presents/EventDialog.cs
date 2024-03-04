@@ -1,7 +1,7 @@
 ﻿using Godot;
 using Tais.Interfaces;
 
-public partial class EventDialogPresent : PresentControl<EventDialog>
+public partial class EventDialogPresent : PresentControl<EventDialog, ISession>
 {
     protected override void Initialize(EventDialog view, ISession model)
     {

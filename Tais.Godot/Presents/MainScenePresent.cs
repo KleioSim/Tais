@@ -2,7 +2,7 @@
 using Tais.Commands;
 using Tais.Interfaces;
 
-public partial class MainScenePresent : PresentControl<MainScene>
+public partial class MainScenePresent : PresentControl<MainScene, ISession>
 {
     protected override void Initialize(MainScene view, ISession model)
     {

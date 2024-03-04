@@ -7,10 +7,10 @@ public abstract partial class PresentControl<TView, TModel> : PresentBase
 {
     public TModel Model
     {
-        get => PresentManager.Model as TModel;
+        get => PresentBase.Model as TModel;
         set
         {
-            PresentManager.Model = value;
+            PresentBase.Model = value;
         }
     }
 
@@ -90,5 +90,4 @@ public abstract partial class PresentControl<TView, TModel> : PresentBase
 
     protected abstract void Initialize(TView view, TModel model);
     protected abstract void Update(TView view, TModel model);
-    protected abstract void SendCommand(object command);
 }
