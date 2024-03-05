@@ -13,6 +13,8 @@ public class SessionMock : ISession
     public IFinance Finance => finance;
     public IEnumerable<ICity> Cities => cities;
 
+    public ICentralGov CentralGov => throw new NotImplementedException();
+
     internal FinanceMock finance = new FinanceMock();
     internal List<TaskMock> tasks = new List<TaskMock>();
     internal List<CityMock> cities = new List<CityMock>();

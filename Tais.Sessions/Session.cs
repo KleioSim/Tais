@@ -6,19 +6,29 @@ namespace Tais.Sessions;
 
 class Session : ISession
 {
-    public IEvent CurrEvent { get; private set; }
+    public IEvent? CurrEvent { get; private set; }
 
     public IEnumerable<ITask> Tasks => tasks;
     public IFinance Finance => finance;
     public IEnumerable<ICity> Cities => cities;
+    public ICentralGov CentralGov => centralGov;
 
     internal Finance finance = new Finance();
     internal List<Task> tasks = new List<Task>();
     internal List<City> cities = new List<City>();
 
+    internal CentralGov centralGov = new CentralGov();
+
     public void OnCommand(ICommand command)
     {
-        throw new NotImplementedException();
+        switch (command)
+        {
+            case Cmd_NextTurn:
+                finance.OnNextTurn();
+                break;
+            default:
+                throw new Exception($"Not support cmd type {command.GetType()}");
+        }
     }
 
     public Session()
@@ -34,16 +44,48 @@ class Session : ISession
                 finance.incomes.Remove(city.PopTax);
             }
         };
+
+        finance.spends.Add(centralGov.RequestTax);
+    }
+}
+
+class CentralGov : ICentralGov
+{
+    public IRequestTax RequestTax => requestTax;
+
+    public float InitTaxValue { get; internal set; }
+
+    public RequestTax requestTax;
+
+    public CentralGov()
+    {
+        requestTax = new RequestTax(this);
+    }
+}
+
+class RequestTax : IRequestTax
+{
+    public float BaseValue => centralGov.InitTaxValue;
+
+    public IEnumerable<IEffect> Effects => effects;
+
+    private List<Effect> effects = new List<Effect>();
+
+    private CentralGov centralGov;
+
+    public RequestTax(CentralGov centralGov)
+    {
+        this.centralGov = centralGov;
     }
 }
 
 class Event : IEvent
 {
-    public static Action OnSelected;
+    public static Action? OnSelected;
 
     public void OnSelect()
     {
-        OnSelected.Invoke();
+        OnSelected?.Invoke();
     }
 }
 
@@ -54,7 +96,7 @@ class Task : ITask
 
 class City : ICity
 {
-    public static Action<bool, City> OnOwnerChanged;
+    public static Action<bool, City>? OnOwnerChanged;
 
     public IEffectValue PopTax => popTax;
 
@@ -66,7 +108,7 @@ class City : ICity
         set
         {
             isOwned = value;
-            OnOwnerChanged.Invoke(isOwned, this);
+            OnOwnerChanged?.Invoke(isOwned, this);
         }
     }
 
@@ -88,9 +130,9 @@ class PopTax : IEffectValue
 
     public IEnumerable<IEffect> Effects => effects;
 
-    public List<Effect> effects = new List<Effect>();
+    private List<Effect> effects = new List<Effect>();
 
-    public ICity from;
+    private ICity from;
 
     public PopTax(ICity city)
     {
@@ -111,19 +153,10 @@ class Finance : IFinance
     public HashSet<IEffectValue> incomes = new HashSet<IEffectValue>();
     public HashSet<IEffectValue> spends = new HashSet<IEffectValue>();
 
-    internal void NextTurn()
+    internal void OnNextTurn()
     {
         Current += Surplus;
     }
-}
-
-class EffectValue : IEffectValue
-{
-    public float BaseValue { get; set; }
-
-    public IEnumerable<IEffect> Effects => effects;
-
-    public List<Effect> effects = new List<Effect>();
 }
 
 class Effect : IEffect

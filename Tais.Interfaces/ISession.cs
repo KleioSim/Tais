@@ -10,5 +10,7 @@ public interface ISession
     IEnumerable<ICity> Cities { get; }
     IEnumerable<ITask> Tasks { get; }
 
+    ICentralGov CentralGov { get; }
+
     void OnCommand(ICommand command);
 }
