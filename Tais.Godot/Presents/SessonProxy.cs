@@ -11,10 +11,11 @@ public class SessionMock : ISession
 
     public IEnumerable<ITask> Tasks => tasks;
     public IFinance Finance => finance;
-    public IEnumerable<ICity> Cities => throw new NotImplementedException();
+    public IEnumerable<ICity> Cities => cities;
 
     internal FinanceMock finance = new FinanceMock();
     internal List<TaskMock> tasks = new List<TaskMock>();
+    internal List<CityMock> cities = new List<CityMock>();
 
     public void OnCommand(object command)
     {
@@ -39,6 +40,14 @@ public class SessionMock : ISession
         }
     }
 
+    internal CityMock GenerateCity(int popCount, bool isOwned)
+    {
+        var city = new CityMock() { PopCount = popCount, IsOwned = isOwned };
+        cities.Add(city);
+
+        return city;
+    }
+
     public SessionMock()
     {
         EventMock.OnSelected = () =>
@@ -46,6 +55,15 @@ public class SessionMock : ISession
             CurrEvent = null;
         };
     }
+}
+
+public class CityMock : ICity
+{
+    public int PopCount { get; set; }
+
+    public IEffectValue PopTax { get; } = new EffectValueMock();
+
+    public bool IsOwned { get; set; }
 }
 
 public class EventMock : IEvent

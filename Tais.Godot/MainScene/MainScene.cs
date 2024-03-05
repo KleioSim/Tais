@@ -6,8 +6,10 @@ public partial class MainScene : ViewControl
     internal Button CreateEvent { get; }
     internal Button NextTurn => GetNode<Button>("NextTurn");
 
-    internal Label FinanceCurrent => GetNode<Label>("Finance/HBoxContainer/Current");
-    internal Label FinanceSurplus => GetNode<Label>("Finance/HBoxContainer/Surplus");
+    internal Label FinanceCurrent => GetNode<Label>("TopInfo/Finance/HBoxContainer/Current");
+    internal Label FinanceSurplus => GetNode<Label>("TopInfo/Finance/HBoxContainer/Surplus");
+    internal Label CityCount => GetNode<Label>("TopInfo/City/HBoxContainer/Count");
+    internal Label PopCount => GetNode<Label>("TopInfo/Pop/HBoxContainer/Count");
 
     internal InstancePlaceholder EventDialogHolder => GetNode<InstancePlaceholder>("EventDialog");
 

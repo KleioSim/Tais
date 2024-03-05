@@ -11,32 +11,81 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_52frr")
 
-[node name="Finance" type="PanelContainer" parent="."]
+[node name="TopInfo" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 180.0
+offset_right = 364.0
 offset_bottom = 40.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Finance"]
+[node name="City" type="PanelContainer" parent="TopInfo"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopInfo/City"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Type" type="Label" parent="Finance/HBoxContainer"]
+[node name="Type" type="Label" parent="TopInfo/City/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
-text = "Finance"
+text = "City"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Current" type="Label" parent="Finance/HBoxContainer"]
+[node name="Count" type="Label" parent="TopInfo/City/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "--"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Surplus" type="Label" parent="Finance/HBoxContainer"]
+[node name="Pop" type="PanelContainer" parent="TopInfo"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopInfo/Pop"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Type" type="Label" parent="TopInfo/Pop/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Pop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Count" type="Label" parent="TopInfo/Pop/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Finance" type="PanelContainer" parent="TopInfo"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopInfo/Finance"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Type" type="Label" parent="TopInfo/Finance/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Finance"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Current" type="Label" parent="TopInfo/Finance/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Surplus" type="Label" parent="TopInfo/Finance/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "--"
@@ -88,4 +137,5 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="EventDialog" parent="." instance_placeholder="res://MainScene/Events/EventDialog.tscn"]
+visible = false
 layout_mode = 1
