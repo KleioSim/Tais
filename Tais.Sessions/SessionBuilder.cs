@@ -8,7 +8,21 @@ public static class SessionBuilder
     {
         var session = new Session();
 
-        session.cities.AddRange(new[] { new City(10000, true), new City(1000, true), new City(100000, true) });
+        for (int i = 0; i < 3; i++)
+        {
+
+            var city = new City(
+                true,
+                new[]
+                {
+                    new Pop("P0", i*100, true),
+                    new Pop("P1", i*1000, true),
+                    new Pop("P2", i*10000, false)
+                });
+
+            session.cities.Add(city);
+        }
+
         session.centralGov.InitTaxValue = session.finance.incomes.Sum(x => x.CurrValue) * 0.8f;
 
         return session;

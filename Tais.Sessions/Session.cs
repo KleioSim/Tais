@@ -99,8 +99,7 @@ class City : ICity
     public static Action<bool, City>? OnOwnerChanged;
 
     public IEffectValue PopTax => popTax;
-
-    public int PopCount { get; private set; }
+    public IGroupValue PopCount => popCount;
 
     public bool IsOwned
     {
@@ -113,20 +112,47 @@ class City : ICity
     }
 
     private PopTax popTax;
-    private bool isOwned;
+    private GroupValue popCount;
 
-    public City(int popCount, bool isOwned)
+    private bool isOwned;
+    private List<Pop> pops = new List<Pop>();
+
+    public City(bool isOwned, IEnumerable<Pop> pops)
     {
         popTax = new PopTax(this);
-        PopCount = popCount;
+        popCount = new GroupValue();
+        popCount.Items = pops.Where(x => x.IsRegisted).Select(x => (x.Name, x.Count));
+
+        this.pops.AddRange(pops);
 
         IsOwned = isOwned;
     }
 }
 
+class GroupValue : IGroupValue
+{
+    public float Current => Items.Sum(x => x.count);
+
+    public IEnumerable<(string desc, float count)> Items { get; set; }
+}
+
+class Pop
+{
+    public string Name { get; }
+    public float Count { get; set; }
+    public bool IsRegisted { get; }
+
+    public Pop(string name, float count, bool isRegisted)
+    {
+        Name = name;
+        Count = count;
+        IsRegisted = isRegisted;
+    }
+}
+
 class PopTax : IEffectValue
 {
-    public float BaseValue => from.PopCount / 10000f;
+    public float BaseValue => from.PopCount.Current / 10000f;
 
     public IEnumerable<IEffect> Effects => effects;
 

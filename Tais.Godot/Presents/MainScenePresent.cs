@@ -23,7 +23,7 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
         view.FinanceCurrent.Text = model.Finance.Current.ToString();
         view.FinanceSurplus.Text = model.Finance.Surplus.ToString();
         view.CityCount.Text = model.Cities.Count(x => x.IsOwned).ToString();
-        view.PopCount.Text = model.Cities.Where(x => x.IsOwned).Sum(x=>x.PopCount).ToString();
+        view.PopCount.Text = model.Cities.Where(x => x.IsOwned).Sum(x => x.PopCount.Current).ToString();
 
         view.TaskContainer.Refresh(model.Tasks.OfType<object>().ToHashSet());
 

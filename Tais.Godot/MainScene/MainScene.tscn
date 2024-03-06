@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://diukb1qwff3oq"]
+[gd_scene load_steps=3 format=3 uid="uid://diukb1qwff3oq"]
 
 [ext_resource type="Script" path="res://MainScene/MainScene.cs" id="1_52frr"]
+[ext_resource type="PackedScene" uid="uid://dvtfgfqd3puvn" path="res://MainScene/LeftPanels/LeftPanel.tscn" id="2_31dac"]
 
 [node name="MainScene" type="Control"]
 layout_mode = 3
@@ -16,12 +17,16 @@ layout_mode = 0
 offset_right = 364.0
 offset_bottom = 40.0
 
-[node name="City" type="PanelContainer" parent="TopInfo"]
+[node name="City" type="Button" parent="TopInfo"]
+custom_minimum_size = Vector2(180, 40)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TopInfo/City"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+offset_left = 12.0
+offset_right = 192.0
+offset_bottom = 40.0
 theme_override_constants/separation = 10
 alignment = 1
 
@@ -91,6 +96,9 @@ size_flags_vertical = 1
 text = "--"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LeftPanel" parent="." instance=ExtResource("2_31dac")]
+layout_mode = 1
 
 [node name="CreateTask" type="Button" parent="."]
 layout_mode = 1
