@@ -2,9 +2,10 @@
 
 public interface ICity
 {
+    string Name { get; }
     IGroupValue PopCount { get; }
     IEffectValue PopTax { get; }
-    public bool IsOwned { get; }
+    bool IsOwned { get; }
 }
 
 public interface IGroupValue

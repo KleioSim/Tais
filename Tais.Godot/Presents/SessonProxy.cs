@@ -42,9 +42,10 @@ public class SessionMock : ISession
         }
     }
 
-    internal CityMock GenerateCity(int popCount, bool isOwned)
+    internal CityMock GenerateCity(string name, int popCount, bool isOwned)
     {
         var city = new CityMock();
+        city.Name = name;
         city.IsOwned = isOwned;
         city.popCount.Current = popCount;
 
@@ -68,6 +69,8 @@ public class CityMock : ICity
     public IEffectValue PopTax => popTax;
 
     public bool IsOwned { get; set; }
+
+    public string Name { get; set; }
 
     public EffectValueMock popTax = new EffectValueMock();
     public GroupValueMock popCount = new GroupValueMock();

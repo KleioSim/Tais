@@ -4,3 +4,13 @@ Vulkan API 1.2.175 - Forward+ - Using Vulkan Device #0: NVIDIA - NVIDIA GeForce 
 [V] DebugSession Ready
 [P] DebugSessionPresent Ready
 [M] DebugSessionMock Ready
+[P]Use DebugSessionPresent mock model
+[V] LeftPanel Ready
+[V] MainScene Ready
+[P] MainScenePresent Ready
+[M] MainSceneMock Ready
+[V] CityListPanel Ready
+[P] CityListPanelPresent Ready
+[V] CityListItem Ready
+[V] CityListItem Ready
+[V] CityListItem Ready

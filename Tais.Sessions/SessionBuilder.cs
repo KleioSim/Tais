@@ -11,7 +11,7 @@ public static class SessionBuilder
         for (int i = 0; i < 3; i++)
         {
 
-            var city = new City(
+            var city = new City($"CITY_{i}",
                 true,
                 new[]
                 {

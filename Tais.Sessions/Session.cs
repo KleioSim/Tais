@@ -98,6 +98,7 @@ class City : ICity
 {
     public static Action<bool, City>? OnOwnerChanged;
 
+    public string Name { get; }
     public IEffectValue PopTax => popTax;
     public IGroupValue PopCount => popCount;
 
@@ -117,8 +118,9 @@ class City : ICity
     private bool isOwned;
     private List<Pop> pops = new List<Pop>();
 
-    public City(bool isOwned, IEnumerable<Pop> pops)
+    public City(string name, bool isOwned, IEnumerable<Pop> pops)
     {
+        Name = name;
         popTax = new PopTax(this);
         popCount = new GroupValue();
         popCount.Items = pops.Where(x => x.IsRegisted).Select(x => (x.Name, x.Count));
