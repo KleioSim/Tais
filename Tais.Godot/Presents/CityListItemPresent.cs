@@ -1,10 +1,14 @@
-﻿using Tais.Interfaces;
+﻿using Godot;
+using Tais.Interfaces;
 
 public partial class CityListItemPresent : PresentControl<CityListItem, ISession>
 {
     protected override void Initialize(CityListItem view, ISession model)
     {
-
+        view.Button.Pressed += () =>
+        {
+            GD.Print("view.Button.Pressed");
+        };
     }
 
     protected override void Update(CityListItem view, ISession model)
