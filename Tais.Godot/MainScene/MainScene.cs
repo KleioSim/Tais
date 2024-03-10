@@ -27,7 +27,7 @@ public partial class MainScene : ViewControl
 
         City.Pressed += () =>
         {
-            LeftPanel.CreatePanel<CityListPanel>();
+            var cityListPanel = LeftPanel.ShowCityListPanel();
         };
     }
 }

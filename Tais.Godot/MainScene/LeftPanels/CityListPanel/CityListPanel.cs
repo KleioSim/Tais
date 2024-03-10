@@ -3,6 +3,9 @@ using System;
 
 public partial class CityListPanel : LeftContentPanel
 {
+    [Signal]
+    public delegate void ShowCityDetailEventHandler(CityListItem cityListItem);
+
     internal ItemContainer<CityListItem> ItemContainer;
 
     public override void _Ready()

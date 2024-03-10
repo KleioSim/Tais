@@ -22,5 +22,5 @@ layout_mode = 2
 [node name="1" type="PanelContainer" parent="."]
 layout_mode = 2
 
-[node name="CityDetailPanel" parent="1" instance_placeholder="res://MainScene/LeftPanels/CityListPanel/CityListPanel.tscn"]
+[node name="CityDetailPanel" parent="1" instance_placeholder="res://MainScene/LeftPanels/CityDetailPanel/CityDetailPanel.tscn"]
 layout_mode = 2

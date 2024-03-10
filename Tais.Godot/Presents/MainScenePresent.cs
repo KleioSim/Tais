@@ -15,6 +15,8 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
         {
             SendCommand(new Cmd_NextTurn { });
         };
+
+        
     }
 
 
