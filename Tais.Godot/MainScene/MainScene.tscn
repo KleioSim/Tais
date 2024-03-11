@@ -101,6 +101,8 @@ vertical_alignment = 1
 
 [node name="LeftPanel" parent="." instance=ExtResource("2_31dac")]
 layout_mode = 1
+offset_top = 400.0
+offset_bottom = 869.0
 
 [node name="CreateTask" type="Button" parent="."]
 layout_mode = 1

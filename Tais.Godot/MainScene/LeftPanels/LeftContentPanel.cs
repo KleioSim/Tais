@@ -2,7 +2,7 @@
 
 public partial class LeftContentPanel : ViewControl
 {
-    public Button CloseButton => GetNode<Button>("Close");
+    public virtual Button CloseButton => GetNode<Button>("Close");
 
     public override void _Ready()
     {

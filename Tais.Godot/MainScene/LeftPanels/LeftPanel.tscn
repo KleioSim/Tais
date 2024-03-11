@@ -3,17 +3,15 @@
 [ext_resource type="Script" path="res://MainScene/LeftPanels/LeftPanel.cs" id="1_3v60e"]
 
 [node name="LeftPanel" type="HBoxContainer"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -200.0
-offset_right = 304.0
-offset_bottom = 200.0
-grow_vertical = 2
+offset_right = 828.0
+offset_bottom = 469.0
+size_flags_horizontal = 0
 script = ExtResource("1_3v60e")
 
 [node name="0" type="PanelContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 mouse_filter = 1
 
 [node name="CityListPanel" parent="0" instance_placeholder="res://MainScene/LeftPanels/CityListPanel/CityListPanel.tscn"]
@@ -24,3 +22,4 @@ layout_mode = 2
 
 [node name="CityDetailPanel" parent="1" instance_placeholder="res://MainScene/LeftPanels/CityDetailPanel/CityDetailPanel.tscn"]
 layout_mode = 2
+size_flags_vertical = 0

@@ -84,16 +84,16 @@ public partial class LeftPanel : ViewControl
         return panel;
     }
 
-    private CityDetialPanel ShowCityDetailPanel(object id)
+    private CityDetailPanel ShowCityDetailPanel(object id)
     {
-        var panel = Panel1.GetChildren().OfType<CityDetialPanel>().SingleOrDefault();
+        var panel = Panel1.GetChildren().OfType<CityDetailPanel>().SingleOrDefault();
         if (panel != null)
         {
             return panel;
         }
 
         var placeHolder = Panel1.GetNodeOrNull<InstancePlaceholder>("CityDetailPanel");
-        panel = placeHolder.CreateInstance() as CityDetialPanel;
+        panel = placeHolder.CreateInstance() as CityDetailPanel;
         panel.Id = id;
 
         return panel;
