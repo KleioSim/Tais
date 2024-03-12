@@ -1,7 +1,7 @@
 ﻿using Godot;
 using System;
 
-public partial class CityListPanel : LeftContentPanel
+public partial class CityListPanel : LeftContentPanel0
 {
     [Signal]
     public delegate void ShowCityDetailEventHandler(CityListItem cityListItem);

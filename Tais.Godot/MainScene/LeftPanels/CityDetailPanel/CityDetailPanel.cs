@@ -1,11 +1,13 @@
-using Godot;
+﻿using Godot;
 using System;
 
-public partial class CityDetailPanel : LeftContentPanel
+public partial class CityDetailPanel : LeftContentPanel1
 {
     public object Id { get; internal set; }
 
     public override Button CloseButton => GetNode<Button>("HBoxContainer/VBoxContainer2/CityName/Close");
+
+    public Label CityName => GetNode<Label>("HBoxContainer/VBoxContainer2/CityName");
 
     public Button OperateButton => GetNode<Button>("HBoxContainer/VBoxContainer2/CityName/Operate");
 

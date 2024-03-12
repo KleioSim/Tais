@@ -36,6 +36,8 @@ public abstract partial class PresentControl<TView, TModel> : PresentBase
 
     public override void _Process(double delta)
     {
+        int f0 = Engine.GetFramesDrawn();
+
         if (!IsVisibleInTree())
         {
             IsDirty = true;

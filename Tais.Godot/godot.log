@@ -1,10 +1,12 @@
 Godot Engine v4.2.1.stable.mono.official.b09f793f5 - https://godotengine.org
-Vulkan API 1.3.236 - Forward+ - Using Vulkan Device #0: NVIDIA - NVIDIA GeForce GTX 1650
+Vulkan API 1.2.175 - Forward+ - Using Vulkan Device #0: NVIDIA - NVIDIA GeForce 940M
  
 [V] DebugSession Ready
 [P] DebugSessionPresent Ready
 [M] DebugSessionMock Ready
 [P]Use DebugSessionPresent mock model
+[V] CityDetailPanel Ready
+[P] CityDetailPanelPresent Ready
 [V] LeftPanel Ready
 [V] MainScene Ready
 [P] MainScenePresent Ready
@@ -17,3 +19,37 @@ Vulkan API 1.3.236 - Forward+ - Using Vulkan Device #0: NVIDIA - NVIDIA GeForce 
 [P] CityListItemPresent Ready
 [V] CityListItem Ready
 [P] CityListItemPresent Ready
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+view.Button.Pressed
+[V] CityListPanel Ready
+[P] CityListPanelPresent Ready
+[V] CityListItem Ready
+[P] CityListItemPresent Ready
+[V] CityListItem Ready
+[P] CityListItemPresent Ready
+[V] CityListItem Ready
+[P] CityListItemPresent Ready
+view.Button.Pressed

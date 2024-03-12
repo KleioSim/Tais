@@ -1,37 +1,37 @@
 ﻿using Godot;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 public partial class LeftPanel : ViewControl
 {
     internal Node Panel0 => GetNode("0");
     internal Node Panel1 => GetNode("1");
 
-    public void OnShowCityDetail(CityListItem cityListItem)
+    public override void _Ready()
     {
-        GD.Print("OnShowCityDetail");
+        base._Ready();
+
+        foreach (var panel in Panel1.GetChildren().OfType<LeftContentPanel1>())
+        {
+            panel.Visible = false;
+        }
     }
 
-    internal T CreatePanel<T>()
-        where T : LeftContentPanel
+    internal CityListPanel ShowCityListPanel()
     {
-        T panel = CreatePanel0<T>();
-        if (panel != null)
+        var panel = CreatePanel0<CityListPanel>();
+        panel.ShowCityDetail += (cityListItem) =>
         {
-            return panel;
-        }
+            var task = ShowPanel1Async<CityDetailPanel>();
+            task.ContinueWith(x => { x.Result.Id = cityListItem.Id; });
+        };
 
-        panel = CreatePanel1<T>();
-        if (panel != null)
-        {
-            return panel;
-        }
-
-        throw new Exception();
+        return panel;
     }
 
-    internal T CreatePanel0<T>()
-        where T : LeftContentPanel
+    private T CreatePanel0<T>()
+        where T : LeftContentPanel0
     {
         var panel = Panel0.GetChildren().OfType<T>().SingleOrDefault();
         if (panel != null)
@@ -39,63 +39,35 @@ public partial class LeftPanel : ViewControl
             return panel;
         }
 
-        var placeHolder = Panel0.GetNodeOrNull<InstancePlaceholder>($"{typeof(T).Name}");
-        return placeHolder == null ? null : placeHolder.CreateInstance() as T;
-    }
+        var placeHolder = Panel0.GetNode<InstancePlaceholder>($"{typeof(T).Name}");
 
-    internal T CreatePanel1<T>()
-        where T : LeftContentPanel
-    {
-        var panel = Panel1.GetChildren().OfType<T>().SingleOrDefault();
-        if (panel != null)
-        {
-            return panel;
-        }
-
-        var placeHolder = Panel1.GetNodeOrNull<InstancePlaceholder>($"{typeof(T).Name}");
-        return placeHolder == null ? null : placeHolder.CreateInstance() as T;
-    }
-
-    internal CityListPanel ShowCityListPanel()
-    {
-        var panel = Panel0.GetChildren().OfType<CityListPanel>().SingleOrDefault();
-        if (panel != null)
-        {
-            return panel;
-        }
-
-        var placeHolder = Panel0.GetNodeOrNull<InstancePlaceholder>("CityListPanel");
-        panel = placeHolder.CreateInstance() as CityListPanel;
-
-        panel.ShowCityDetail += (cityListItem) =>
-        {
-            ShowCityDetailPanel(cityListItem.Id);
-        };
-
+        panel = placeHolder.CreateInstance() as T;
         panel.CloseButton.Pressed += () =>
         {
-            var subPanel = Panel1.GetChildren().OfType<LeftContentPanel>().SingleOrDefault();
-            if (subPanel != null)
+            foreach (var panel in Panel1.GetChildren().OfType<LeftContentPanel1>())
             {
-                subPanel.QueueFree();
+                panel.Visible = false;
             }
         };
 
         return panel;
     }
 
-    private CityDetailPanel ShowCityDetailPanel(object id)
+    private async Task<T> ShowPanel1Async<T>()
+        where T : LeftContentPanel1
     {
-        var panel = Panel1.GetChildren().OfType<CityDetailPanel>().SingleOrDefault();
-        if (panel != null)
+        foreach (var panel in Panel1.GetChildren().OfType<LeftContentPanel1>())
         {
-            return panel;
+            panel.Visible = false;
         }
 
-        var placeHolder = Panel1.GetNodeOrNull<InstancePlaceholder>("CityDetailPanel");
-        panel = placeHolder.CreateInstance() as CityDetailPanel;
-        panel.Id = id;
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 
-        return panel;
+        var resultPanel = Panel1.GetChildren().OfType<T>().Single();
+        resultPanel.Visible = true;
+
+        return resultPanel;
     }
+
 }

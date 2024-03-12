@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-public partial class LeftContentPanel : ViewControl
+public partial class LeftContentPanel0 : ViewControl
 {
     public virtual Button CloseButton => GetNode<Button>("Close");
 

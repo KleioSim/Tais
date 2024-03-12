@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvtfgfqd3puvn"]
+[gd_scene load_steps=3 format=3 uid="uid://dvtfgfqd3puvn"]
 
 [ext_resource type="Script" path="res://MainScene/LeftPanels/LeftPanel.cs" id="1_3v60e"]
+[ext_resource type="PackedScene" uid="uid://cxpcgqciosy1c" path="res://MainScene/LeftPanels/CityDetailPanel/CityDetailPanel.tscn" id="2_ux03y"]
 
 [node name="LeftPanel" type="HBoxContainer"]
 offset_right = 828.0
@@ -20,6 +21,6 @@ layout_mode = 2
 [node name="1" type="PanelContainer" parent="."]
 layout_mode = 2
 
-[node name="CityDetailPanel" parent="1" instance_placeholder="res://MainScene/LeftPanels/CityDetailPanel/CityDetailPanel.tscn"]
+[node name="CityDetailPanel" parent="1" instance=ExtResource("2_ux03y")]
 layout_mode = 2
 size_flags_vertical = 0
