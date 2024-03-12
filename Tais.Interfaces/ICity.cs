@@ -6,6 +6,7 @@ public interface ICity
     IGroupValue PopCount { get; }
     IEffectValue PopTax { get; }
     bool IsOwned { get; }
+    IEnumerable<IPop> Pops { get; }
 }
 
 public interface IGroupValue

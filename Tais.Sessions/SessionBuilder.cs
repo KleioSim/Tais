@@ -15,9 +15,9 @@ public static class SessionBuilder
                 true,
                 new[]
                 {
-                    new Pop("P0", i*100, true),
-                    new Pop("P1", i*1000, true),
-                    new Pop("P2", i*10000, false)
+                    new Pop("P0", (i+1)*100, true),
+                    new Pop("P1", (i+1)*1000, true),
+                    new Pop("P2", (i+1)*10000, false)
                 });
 
             session.cities.Add(city);

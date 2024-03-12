@@ -101,6 +101,7 @@ class City : ICity
     public string Name { get; }
     public IEffectValue PopTax => popTax;
     public IGroupValue PopCount => popCount;
+    public IEnumerable<IPop> Pops => pops;
 
     public bool IsOwned
     {
@@ -138,7 +139,7 @@ class GroupValue : IGroupValue
     public IEnumerable<(string desc, float count)> Items { get; set; }
 }
 
-class Pop
+class Pop : IPop
 {
     public string Name { get; }
     public float Count { get; set; }
