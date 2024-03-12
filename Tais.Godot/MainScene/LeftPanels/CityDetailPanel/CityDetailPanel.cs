@@ -29,14 +29,6 @@ public partial class CityDetailPanel : LeftContentPanel1
         });
 
         PopDetailPanel.Visible = false;
-        PopContainer.OnAddedItem= (item) =>
-        {
-            item.Button.Pressed += () =>
-            {
-                PopDetailPanel.Visible = true;
-                PopDetailPanel.Id = item.Name;
-            };
-        };
 
         OperatePanel.Visible = OperateButton.ButtonPressed;
         OperateButton.Toggled += (flag) =>
