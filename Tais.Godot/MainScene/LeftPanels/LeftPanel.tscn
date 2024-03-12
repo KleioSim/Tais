@@ -23,4 +23,3 @@ layout_mode = 2
 
 [node name="CityDetailPanel" parent="1" instance=ExtResource("2_ux03y")]
 layout_mode = 2
-size_flags_vertical = 0

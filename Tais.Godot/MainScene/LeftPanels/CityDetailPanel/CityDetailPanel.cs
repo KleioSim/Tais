@@ -15,6 +15,8 @@ public partial class CityDetailPanel : LeftContentPanel1
 
     public Control OperatePanel => GetNode<Control>("HBoxContainer/VBoxContainer");
 
+    public PopDetailPanel PopDetailPanel => GetNode<PopDetailPanel>("HBoxContainer/VBoxContainer2/VBoxContainer/Pops/PopDetailPanel");
+
     public ItemContainer<PopItem> PopContainer;
 
     public override void _Ready()
@@ -25,6 +27,16 @@ public partial class CityDetailPanel : LeftContentPanel1
         {
             return GetNode<InstancePlaceholder>("HBoxContainer/VBoxContainer2/VBoxContainer/Pops/FlowContainer/PopItem");
         });
+
+        PopDetailPanel.Visible = false;
+        PopContainer.OnAddedItem= (item) =>
+        {
+            item.Button.Pressed += () =>
+            {
+                PopDetailPanel.Visible = true;
+                PopDetailPanel.Id = item.Name;
+            };
+        };
 
         OperatePanel.Visible = OperateButton.ButtonPressed;
         OperateButton.Toggled += (flag) =>

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxpcgqciosy1c"]
+[gd_scene load_steps=3 format=3 uid="uid://cxpcgqciosy1c"]
 
 [ext_resource type="Script" path="res://MainScene/LeftPanels/CityDetailPanel/CityDetailPanel.cs" id="1_iky08"]
+[ext_resource type="PackedScene" uid="uid://8hlp2fy58v6q" path="res://MainScene/LeftPanels/CityDetailPanel/PopDetailPanel.tscn" id="2_wnihc"]
 
 [node name="PanelContainer" type="PanelContainer"]
 offset_right = 320.0
@@ -174,6 +175,9 @@ custom_minimum_size = Vector2(0, 245)
 layout_mode = 2
 
 [node name="PopItem" parent="HBoxContainer/VBoxContainer2/VBoxContainer/Pops/FlowContainer" instance_placeholder="res://MainScene/LeftPanels/CityDetailPanel/PopItem.tscn"]
+layout_mode = 2
+
+[node name="PopDetailPanel" parent="HBoxContainer/VBoxContainer2/VBoxContainer/Pops" instance=ExtResource("2_wnihc")]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
