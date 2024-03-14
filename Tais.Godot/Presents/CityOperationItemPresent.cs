@@ -1,4 +1,6 @@
 ﻿using Godot;
+using System.Linq;
+using Tais.Commands;
 using Tais.Interfaces;
 
 public partial class CityOperationItemPresent : PresentControl<CityOperationItem, ISession>
@@ -7,8 +9,7 @@ public partial class CityOperationItemPresent : PresentControl<CityOperationItem
     {
         view.Button.Pressed += () =>
         {
-            var def = view.Id as ICityTaskDef;
-            GD.Print($"Start Task {def.Name}");
+            SendCommand(new Cmd_TaskStart(view.Id, view.GetTarget()));
         };
     }
 
@@ -17,6 +18,7 @@ public partial class CityOperationItemPresent : PresentControl<CityOperationItem
         var def = view.Id as ICityTaskDef;
 
         view.Button.Text = def.Name;
-        view.Button.Disabled = !def.Condition.IsSatisfied(view.GetTarget() as ICity);
+        view.Button.Disabled = model.Tasks.Any(x => x.Target == view.GetTarget() && x.Def == def)
+            || !def.Condition.IsSatisfied(view.GetTarget() as ICity);
     }
 }

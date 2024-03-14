@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Intrinsics.X86;
+using System.Threading.Tasks;
 using Tais.Commands;
 using Tais.Interfaces;
 
@@ -29,6 +30,18 @@ class Session : ISession
         {
             case Cmd_NextTurn:
                 finance.OnNextTurn();
+                break;
+            case Cmd_TaskStart cmd_TaskStart:
+                {
+                    var task = new Task(cmd_TaskStart.Def as ICityTaskDef, cmd_TaskStart.Target);
+                    tasks.Add(task);
+                }
+                break;
+            case Cmd_TaskCancel cmd_TaskCancel:
+                {
+                    var task = cmd_TaskCancel.task as Task;
+                    tasks.Remove(task);
+                }
                 break;
             default:
                 throw new Exception($"Not support cmd type {command.GetType()}");
@@ -116,7 +129,14 @@ class Event : IEvent
 
 class Task : ITask
 {
+    public ICityTaskDef Def { get; }
+    public object Target { get; }
 
+    public Task(ICityTaskDef def, object target)
+    {
+        this.Def = def;
+        this.Target = target;
+    }
 }
 
 class City : ICity
