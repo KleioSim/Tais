@@ -13,11 +13,15 @@ class Session : ISession
     public IEnumerable<ICity> Cities => cities;
     public ICentralGov CentralGov => centralGov;
 
+    public IEnumerable<ICityTaskDef> CityTaskDefs => cityTaskDefs;
+
     internal Finance finance = new Finance();
     internal List<Task> tasks = new List<Task>();
     internal List<City> cities = new List<City>();
-
     internal CentralGov centralGov = new CentralGov();
+
+    internal List<CityTaskDef> cityTaskDefs = new List<CityTaskDef>();
+
 
     public void OnCommand(ICommand command)
     {
@@ -46,6 +50,27 @@ class Session : ISession
         };
 
         finance.spends.Add(centralGov.RequestTax);
+    }
+}
+
+class CityTaskDef : ICityTaskDef
+{
+    public string Name { get; internal set; }
+
+    public ICondition Condition { get; internal set; }
+
+    public CityTaskDef(string name, ICondition condition)
+    {
+        this.Name = name;
+        this.Condition = condition;
+    }
+}
+
+public class Condition : ICondition
+{
+    public bool IsSatisfied(ICity city)
+    {
+        return city.Name == "CITY_0";
     }
 }
 

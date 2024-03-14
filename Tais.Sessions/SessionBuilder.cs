@@ -25,6 +25,13 @@ public static class SessionBuilder
 
         session.centralGov.InitTaxValue = session.finance.incomes.Sum(x => x.CurrValue) * 0.8f;
 
+
+        for (int i = 0; i < 3; i++)
+        {
+            var cityTaskDef = new CityTaskDef($"CITY_{i}", new Condition());
+            session.cityTaskDefs.Add(cityTaskDef);
+        }
+
         return session;
     }
 }

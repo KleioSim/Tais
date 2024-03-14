@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnoytxbyfh5d3"]
+
+[ext_resource type="Script" path="res://MainScene/LeftPanels/CityDetailPanel/CityOperationList.cs" id="1_yrhq6"]
+
+[node name="CityOperationList" type="VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+script = ExtResource("1_yrhq6")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "Operation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Item" parent="." instance_placeholder="res://MainScene/LeftPanels/CityDetailPanel/CityOperationItem.tscn"]
+layout_mode = 2

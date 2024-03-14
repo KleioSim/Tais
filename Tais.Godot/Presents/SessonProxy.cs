@@ -12,8 +12,8 @@ public class SessionMock : ISession
     public IEnumerable<ITask> Tasks => tasks;
     public IFinance Finance => finance;
     public IEnumerable<ICity> Cities => cities;
-
     public ICentralGov CentralGov => throw new NotImplementedException();
+    public IEnumerable<ICityTaskDef> CityTaskDefs => throw new NotImplementedException();
 
     internal FinanceMock finance = new FinanceMock();
     internal List<TaskMock> tasks = new List<TaskMock>();
