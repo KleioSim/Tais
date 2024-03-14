@@ -11,3 +11,8 @@ public class Cmd_TaskStart : ICommand
         this.Target = target;
     }
 }
+
+public class Cmd_NextDay : ICommand
+{
+
+}

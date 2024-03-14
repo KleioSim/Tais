@@ -4,6 +4,8 @@ namespace Tais.Interfaces;
 
 public interface ISession
 {
+    IDate Date { get; }
+
     IEvent CurrEvent { get; }
 
     IFinance Finance { get; }

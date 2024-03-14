@@ -13,10 +13,20 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
 
         view.NextTurn.Pressed += () =>
         {
-            SendCommand(new Cmd_NextTurn { });
+            view.NextTurn.Disabled = true;
+            view.NextDayTimer.Start();
         };
 
-        
+        view.NextDayTimer.Timeout += () =>
+        {
+            SendCommand(new Cmd_NextDay());
+
+            if (model.Date.Day == 1 || model.Date.Day == 16)
+            {
+                view.NextTurn.Disabled = false;
+                view.NextDayTimer.Stop();
+            }
+        };
     }
 
 
@@ -27,6 +37,10 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
         view.CityCount.Text = model.Cities.Count(x => x.IsOwned).ToString();
         view.PopCount.Text = model.Cities.Where(x => x.IsOwned).Sum(x => x.PopCount.Current).ToString();
 
+        view.Year.Text = model.Date.Year.ToString();
+        view.Month.Text = model.Date.Month.ToString();
+        view.Day.Text = model.Date.Day.ToString();
+
         view.TaskContainer.Refresh(model.Tasks.OfType<object>().ToHashSet());
 
         if (model.CurrEvent != null)
@@ -34,7 +48,5 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
             var dialog = view.EventDialogHolder.CreateInstance() as EventDialog;
             dialog.Object = model.CurrEvent;
         }
-
-        view.NextTurn.Disabled = model.CurrEvent != null;
     }
 }

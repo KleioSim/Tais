@@ -12,6 +12,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_52frr")
 
+[node name="NextDayTimer" type="Timer" parent="."]
+
 [node name="TopInfo" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 364.0
@@ -96,6 +98,69 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 1
 text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Date" type="PanelContainer" parent="TopInfo"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopInfo/Date"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Year" type="HBoxContainer" parent="TopInfo/Date/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Value" type="Label" parent="TopInfo/Date/HBoxContainer/Year"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="TopInfo/Date/HBoxContainer/Year"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Y"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Month" type="HBoxContainer" parent="TopInfo/Date/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Value" type="Label" parent="TopInfo/Date/HBoxContainer/Month"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="TopInfo/Date/HBoxContainer/Month"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Day" type="HBoxContainer" parent="TopInfo/Date/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Value" type="Label" parent="TopInfo/Date/HBoxContainer/Day"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="TopInfo/Date/HBoxContainer/Day"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "D"
 horizontal_alignment = 1
 vertical_alignment = 1
 

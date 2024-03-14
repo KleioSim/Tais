@@ -8,6 +8,7 @@ namespace Tais.Sessions;
 class Session : ISession
 {
     public IEvent? CurrEvent { get; private set; }
+    public IDate Date => date;
 
     public IEnumerable<ITask> Tasks => tasks;
     public IFinance Finance => finance;
@@ -16,6 +17,7 @@ class Session : ISession
 
     public IEnumerable<ICityTaskDef> CityTaskDefs => cityTaskDefs;
 
+    internal Date date = new Date();
     internal Finance finance = new Finance();
     internal List<Task> tasks = new List<Task>();
     internal List<City> cities = new List<City>();
@@ -41,6 +43,11 @@ class Session : ISession
                 {
                     var task = cmd_TaskCancel.task as Task;
                     tasks.Remove(task);
+                }
+                break;
+            case Cmd_NextDay:
+                {
+                    date.DaysInc();
                 }
                 break;
             default:
@@ -238,4 +245,37 @@ class Effect : IEffect
     public string Desc { get; set; }
 
     public float Percent { get; set; }
+}
+
+class Date : IDate
+{
+    public int Year { get; private set; }
+
+    public int Month { get; private set; }
+
+    public int Day { get; private set; }
+
+    public Date()
+    {
+        Year = 1;
+        Month = 1;
+        Day = 1;
+    }
+
+    public void DaysInc()
+    {
+        Day++;
+
+        if (Day > 30)
+        {
+            Month += 1;
+            Day = 1;
+        }
+
+        if (Month > 12)
+        {
+            Year += 1;
+            Month = 1;
+        }
+    }
 }

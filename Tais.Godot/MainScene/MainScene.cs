@@ -13,8 +13,14 @@ public partial class MainScene : ViewControl
     internal Label FinanceSurplus => GetNode<Label>("TopInfo/Finance/HBoxContainer/Surplus");
     internal Label PopCount => GetNode<Label>("TopInfo/Pop/HBoxContainer/Count");
 
+    internal Label Year => GetNode<Label>("TopInfo/Date/HBoxContainer/Year/Value");
+    internal Label Month => GetNode<Label>("TopInfo/Date/HBoxContainer/Month/Value");
+    internal Label Day => GetNode<Label>("TopInfo/Date/HBoxContainer/Day/Value");
+
     internal LeftPanel LeftPanel => GetNode<LeftPanel>("LeftPanel");
     internal InstancePlaceholder EventDialogHolder => GetNode<InstancePlaceholder>("EventDialog");
+
+    internal Timer NextDayTimer => GetNode<Timer>("NextDayTimer");
 
     internal ItemContainer<TaskItem> TaskContainer;
 
