@@ -28,7 +28,7 @@ public static class SessionBuilder
 
         for (int i = 0; i < 3; i++)
         {
-            var cityTaskDef = new CityTaskDef($"CITY_{i}", new Condition());
+            var cityTaskDef = new CityTaskDef($"CITY_{i}", 5, new Condition(), new Operation());
             session.cityTaskDefs.Add(cityTaskDef);
         }
 

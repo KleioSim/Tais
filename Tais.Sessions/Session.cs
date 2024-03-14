@@ -48,6 +48,13 @@ class Session : ISession
             case Cmd_NextDay:
                 {
                     date.DaysInc();
+
+                    foreach (var task in tasks)
+                    {
+                        task.OnDaysInc(date);
+                    }
+
+                    tasks.RemoveAll(x => x.Progress >= 100);
                 }
                 break;
             default:
@@ -75,14 +82,29 @@ class Session : ISession
 
 class CityTaskDef : ICityTaskDef
 {
-    public string Name { get; internal set; }
+    public string Name { get; }
 
-    public ICondition Condition { get; internal set; }
+    public ICondition Condition { get; }
 
-    public CityTaskDef(string name, ICondition condition)
+    public float Speed { get; }
+
+    public IOperation Operation { get; }
+
+    public CityTaskDef(string name, float speed, ICondition condition, IOperation operation)
     {
         this.Name = name;
         this.Condition = condition;
+        this.Speed = speed;
+        this.Operation = operation;
+    }
+}
+
+public class Operation : IOperation
+{
+    public void Do(object target)
+    {
+        var city = target as City;
+        city.IsOwned = false;
     }
 }
 
@@ -139,10 +161,30 @@ class Task : ITask
     public ICityTaskDef Def { get; }
     public object Target { get; }
 
+    public float Progress
+    {
+        get => progress;
+        internal set
+        {
+            progress = value;
+            if (Progress >= 100)
+            {
+                Def.Operation.Do(Target);
+            }
+        }
+    }
+
+    private float progress;
+
     public Task(ICityTaskDef def, object target)
     {
         this.Def = def;
         this.Target = target;
+    }
+
+    internal void OnDaysInc(IDate date)
+    {
+        Progress += Def.Speed;
     }
 }
 

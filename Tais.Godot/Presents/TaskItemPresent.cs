@@ -13,6 +13,8 @@ public partial class TaskItemPresent : PresentControl<TaskItem, ISession>
 
     protected override void Update(TaskItem view, ISession model)
     {
+        var task = view.Id as ITask;
 
+        view.ProgressBar.Value = task.Progress;
     }
 }

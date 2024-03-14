@@ -105,6 +105,8 @@ public class TaskMock : ITask
     public ICityTaskDef Def => throw new NotImplementedException();
 
     public object Target => throw new NotImplementedException();
+
+    public float Progress => throw new NotImplementedException();
 }
 
 public class FinanceMock : IFinance
