@@ -21,5 +21,6 @@ public partial class PopItemPresent : PresentControl<PopItem, ISession>
             view.PopCount.Text = string.Join("", Enumerable.Range(0, view.PopCount.Text.Length).Select(_ => "*"));
         }
 
+        view.FamilyName.Text = popObj.Family == null ? "" : popObj.Family.Name;
     }
 }

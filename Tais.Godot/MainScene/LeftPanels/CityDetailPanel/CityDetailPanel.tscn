@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxpcgqciosy1c"]
 
 [ext_resource type="Script" path="res://MainScene/LeftPanels/CityDetailPanel/CityDetailPanel.cs" id="1_iky08"]
-[ext_resource type="PackedScene" path="res://MainScene/LeftPanels/CityDetailPanel/PopDetailPanel.tscn" id="2_wnihc"]
+[ext_resource type="PackedScene" uid="uid://dnn40omf6avxa" path="res://MainScene/LeftPanels/CityDetailPanel/PopDetailPanel.tscn" id="2_wnihc"]
 [ext_resource type="PackedScene" uid="uid://cnoytxbyfh5d3" path="res://MainScene/LeftPanels/CityDetailPanel/CityOperationList.tscn" id="3_xqrgn"]
 
 [node name="PanelContainer" type="PanelContainer"]

@@ -2,7 +2,15 @@
 
 public interface IPop
 {
-    public string Name { get; }
-    public float Count { get; set; }
-    public bool IsRegisted { get; }
+    string Name { get; }
+    float Count { get; set; }
+    bool IsRegisted { get; }
+
+    IFamily Family { get; }
+}
+
+public interface IFamily
+{
+    string Name { get; }
+    IGroupValue Attitude { get; }
 }

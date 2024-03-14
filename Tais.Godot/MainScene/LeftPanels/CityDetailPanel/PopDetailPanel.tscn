@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://8hlp2fy58v6q"]
+[gd_scene load_steps=5 format=3 uid="uid://dnn40omf6avxa"]
 
 [ext_resource type="Script" path="res://MainScene/LeftPanels/CityDetailPanel/PopDetailPanel.cs" id="1_tnehs"]
 
@@ -121,11 +121,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="PopCount" type="Panel" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer"]
+[node name="PopTax" type="Panel" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer"]
 custom_minimum_size = Vector2(80, 35)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer/PopCount"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer/PopTax"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -134,26 +134,26 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer/PopCount/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer/PopTax/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-text = "Pop:"
+text = "Tax:"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer/PopCount/HBoxContainer"]
+[node name="Value" type="Label" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer/PopTax/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "1000"
 vertical_alignment = 1
 
-[node name="PopCount2" type="Panel" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer"]
+[node name="Attitude" type="Panel" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer"]
 custom_minimum_size = Vector2(80, 35)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer/PopCount2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer/Attitude"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -162,15 +162,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer/PopCount2/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer/Attitude/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-text = "Pop:"
+text = "Atti:"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer/PopCount2/HBoxContainer"]
+[node name="Value" type="Label" parent="Panel/PanelContainer/HBoxContainer/PanelContainer/HFlowContainer/Attitude/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
