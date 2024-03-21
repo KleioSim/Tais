@@ -8,7 +8,7 @@ public interface IPop
 
     IFamily Family { get; }
 
-    //IEnumerable<ITaskDef> TaskDefs { get; }
+    IEnumerable<ITaskDef> TaskDefs { get; }
 }
 
 public interface IFamily

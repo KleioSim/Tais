@@ -77,7 +77,7 @@ class Session : ISession
     }
 }
 
-class CityTaskDef : ITaskDef
+class TaskDef : ITaskDef
 {
     public string Name { get; }
 
@@ -87,7 +87,7 @@ class CityTaskDef : ITaskDef
 
     public IOperation Operation { get; }
 
-    public CityTaskDef(string name, float speed, ICondition condition, IOperation operation)
+    public TaskDef(string name, float speed, ICondition condition, IOperation operation)
     {
         this.Name = name;
         this.Condition = condition;
@@ -117,6 +117,37 @@ public class CityNameCondition : ICondition
     public bool IsSatisfied(object obj)
     {
         return ((ICity)obj).Name == cityName;
+    }
+}
+
+public class SetPopCountDec : IOperation
+{
+    private float percent;
+
+    public SetPopCountDec(float percent)
+    {
+        this.percent = percent;
+    }
+
+    public void Do(object target)
+    {
+        var pop = target as Pop;
+        pop.Count -= pop.Count * percent;
+    }
+}
+
+public class PopMinCountCondition : ICondition
+{
+    private int minCount;
+
+    public PopMinCountCondition(int minCount)
+    {
+        this.minCount = minCount;
+    }
+
+    public bool IsSatisfied(object obj)
+    {
+        return ((int)((IPop)obj).Count) >= minCount;
     }
 }
 
@@ -249,10 +280,14 @@ class Pop : IPop
 
     public IFamily Family => family;
 
+    public IEnumerable<ITaskDef> TaskDefs { get; }
+
     private Family family;
 
-    public Pop(string name, float count, bool isRegisted, Family family)
+    public Pop(IEnumerable<ITaskDef> taskDefs, string name, float count, bool isRegisted, Family family)
     {
+        TaskDefs = taskDefs;
+
         Name = name;
         Count = count;
         IsRegisted = isRegisted;

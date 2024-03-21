@@ -11,6 +11,11 @@ public partial class CityOperationListPresent : PresentControl<CityOperationList
     {
         var city = view.GetTarget() as ICity;
 
-        view.OperationContainer.Refresh(city.TaskDefs.Select(x => (object)x).ToHashSet());
+        var itemObjs = city.TaskDefs.Select(x => (object)(x, (object)city))
+            .Concat(city.Pops.Select(pop => pop.TaskDefs.Select(def => (object)(def, (object)pop)))
+            .SelectMany(x => x))
+        .ToHashSet();
+
+        view.OperationContainer.Refresh(itemObjs);
     }
 }

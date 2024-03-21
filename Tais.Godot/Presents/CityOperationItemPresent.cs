@@ -9,16 +9,18 @@ public partial class CityOperationItemPresent : PresentControl<CityOperationItem
     {
         view.Button.Pressed += () =>
         {
-            SendCommand(new Cmd_TaskStart(view.Id, view.GetTarget()));
+            var itemObj = ((ITaskDef def, object target))view.Id;
+
+            SendCommand(new Cmd_TaskStart(itemObj.def, itemObj.target));
         };
     }
 
     protected override void Update(CityOperationItem view, ISession model)
     {
-        var def = view.Id as ITaskDef;
+        var itemObj = ((ITaskDef def, object target))view.Id;
 
-        view.Button.Text = def.Name;
-        view.Button.Disabled = model.Tasks.Any(x => x.Target == view.GetTarget() && x.Def == def)
-            || !def.Condition.IsSatisfied(view.GetTarget() as ICity);
+        view.Button.Text = itemObj.def.Name;
+        view.Button.Disabled = model.Tasks.Any(x => x.Target == itemObj.target && x.Def == itemObj.def)
+            || !itemObj.def.Condition.IsSatisfied(itemObj.target);
     }
 }
