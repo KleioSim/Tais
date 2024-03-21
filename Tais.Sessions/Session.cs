@@ -134,6 +134,11 @@ public class SetPopCountDec : IOperation
         var pop = target as Pop;
         pop.Count -= pop.Count * percent;
     }
+
+    public override string ToString()
+    {
+        return $"SetPopCountDec -{percent * 100}%";
+    }
 }
 
 public class PopMinCountCondition : ICondition
@@ -148,6 +153,11 @@ public class PopMinCountCondition : ICondition
     public bool IsSatisfied(object obj)
     {
         return ((int)((IPop)obj).Count) >= minCount;
+    }
+
+    public override string ToString()
+    {
+        return $"PopCount more or equal {minCount}";
     }
 }
 

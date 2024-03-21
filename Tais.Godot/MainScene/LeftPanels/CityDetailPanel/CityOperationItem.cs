@@ -8,4 +8,6 @@ public partial class CityOperationItem : ViewControl, IItemView
     public Func<object> GetTarget { get; set; }
 
     public Button Button => GetNode<Button>("Button");
+
+    public TooltipTrigger TooltipTrigger => GetNode<TooltipTrigger>("TooltipTrigger");
 }
