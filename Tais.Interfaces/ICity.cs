@@ -7,6 +7,8 @@ public interface ICity
     IEffectValue PopTax { get; }
     bool IsOwned { get; }
     IEnumerable<IPop> Pops { get; }
+
+    IEnumerable<ICityTaskDef> TaskDefs { get; }
 }
 
 public interface IGroupValue

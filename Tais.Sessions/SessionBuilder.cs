@@ -8,10 +8,12 @@ public static class SessionBuilder
     {
         var session = new Session();
 
+        var cityTaskDefs = Enumerable.Range(0, 3).Select(x => new CityTaskDef($"CITY_{x}", 5, new Condition(), new Operation())).ToArray();
+
         for (int i = 0; i < 3; i++)
         {
 
-            var city = new City($"CITY_{i}",
+            var city = new City(cityTaskDefs, $"CITY_{i}",
                 true,
                 new[]
                 {
@@ -26,11 +28,7 @@ public static class SessionBuilder
         session.centralGov.InitTaxValue = session.finance.incomes.Sum(x => x.CurrValue) * 0.8f;
 
 
-        for (int i = 0; i < 3; i++)
-        {
-            var cityTaskDef = new CityTaskDef($"CITY_{i}", 5, new Condition(), new Operation());
-            session.cityTaskDefs.Add(cityTaskDef);
-        }
+
 
         return session;
     }

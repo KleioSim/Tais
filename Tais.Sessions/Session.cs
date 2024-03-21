@@ -16,15 +16,11 @@ class Session : ISession
     public IEnumerable<ICity> Cities => cities;
     public ICentralGov CentralGov => centralGov;
 
-    public IEnumerable<ICityTaskDef> CityTaskDefs => cityTaskDefs;
-
     internal Date date = new Date();
     internal Finance finance = new Finance();
     internal List<Task> tasks = new List<Task>();
     internal List<City> cities = new List<City>();
     internal CentralGov centralGov = new CentralGov();
-
-    internal List<CityTaskDef> cityTaskDefs = new List<CityTaskDef>();
 
 
     public void OnCommand(ICommand command)
@@ -208,14 +204,18 @@ class City : ICity
         }
     }
 
+    public IEnumerable<ICityTaskDef> TaskDefs { get; }
+
     private PopTax popTax;
     private GroupValue popCount;
 
     private bool isOwned;
     private List<Pop> pops = new List<Pop>();
 
-    public City(string name, bool isOwned, IEnumerable<Pop> pops)
+    public City(IEnumerable<ICityTaskDef> taskDefs, string name, bool isOwned, IEnumerable<Pop> pops)
     {
+        TaskDefs = taskDefs;
+
         Name = name;
         popTax = new PopTax(this);
         popCount = new GroupValue();

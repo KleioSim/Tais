@@ -9,6 +9,8 @@ public partial class CityOperationListPresent : PresentControl<CityOperationList
 
     protected override void Update(CityOperationList view, ISession model)
     {
-        view.OperationContainer.Refresh(model.CityTaskDefs.Select(x => (object)x).ToHashSet());
+        var city = view.GetTarget() as ICity;
+
+        view.OperationContainer.Refresh(city.TaskDefs.Select(x => (object)x).ToHashSet());
     }
 }

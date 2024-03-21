@@ -14,7 +14,5 @@ public interface ISession
 
     ICentralGov CentralGov { get; }
 
-    IEnumerable<ICityTaskDef> CityTaskDefs { get; }
-
     void OnCommand(ICommand command);
 }

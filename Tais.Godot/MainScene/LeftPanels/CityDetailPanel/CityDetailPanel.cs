@@ -31,10 +31,7 @@ public partial class CityDetailPanel : LeftContentPanel1
 
         PopDetailPanel.Visible = false;
 
-        OperationList.OperationContainer.OnAddedItem = (item) =>
-        {
-            item.GetTarget = () => Id;
-        };
+        OperationList.GetTarget = () => Id;
 
         OperationList.Visible = OperateButton.ButtonPressed;
         OperateButton.Toggled += (flag) =>
