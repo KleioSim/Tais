@@ -9,5 +9,5 @@ public partial class CityOperationItem : ViewControl, IItemView
 
     public Button Button => GetNode<Button>("Button");
 
-    public TooltipTrigger TooltipTrigger => GetNode<TooltipTrigger>("TooltipTrigger");
+    public TooltipTrigger TooltipTrigger => Button.GetNode<TooltipTrigger>("TooltipTrigger");
 }

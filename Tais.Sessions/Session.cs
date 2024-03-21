@@ -284,25 +284,38 @@ class GroupValue : IGroupValue
 
 class Pop : IPop
 {
-    public string Name { get; }
+    public string Name => def.Name;
     public float Count { get; set; }
-    public bool IsRegisted { get; }
+    public bool IsRegisted => def.IsRegisted;
 
     public IFamily Family => family;
 
-    public IEnumerable<ITaskDef> TaskDefs { get; }
+    public IEnumerable<ITaskDef> TaskDefs => def.TaskDefs;
 
     private Family family;
 
-    public Pop(IEnumerable<ITaskDef> taskDefs, string name, float count, bool isRegisted, Family family)
-    {
-        TaskDefs = taskDefs;
+    private IPopDef def;
 
-        Name = name;
-        Count = count;
-        IsRegisted = isRegisted;
-        this.family = family;
+    public Pop(IPopDef def, IPopInitData popInitData)
+    {
+        this.def = def;
+        this.Count = popInitData.Count;
+
+        if (def.HasFamily)
+        {
+            family = new Family(popInitData.familyName, new[] { ("Test", 10f) });
+        }
     }
+
+    //public Pop(IEnumerable<ITaskDef> taskDefs, string name, float count, bool isRegisted, Family family)
+    //{
+    //    TaskDefs = taskDefs;
+
+    //    Name = name;
+    //    Count = count;
+    //    IsRegisted = isRegisted;
+    //    this.family = family;
+    //}
 }
 
 class Family : IFamily
@@ -414,4 +427,22 @@ class Date : IDate
             Month = 1;
         }
     }
+}
+
+public class PopDef : IPopDef
+{
+    public string Name { get; init; }
+
+    public bool IsRegisted { get; init; }
+
+    public bool HasFamily { get; init; }
+
+    public IEnumerable<ITaskDef> TaskDefs { get; init; }
+}
+
+public class PopInitData : IPopInitData
+{
+    public int Count { get; init; }
+
+    public string familyName { get; init; }
 }
