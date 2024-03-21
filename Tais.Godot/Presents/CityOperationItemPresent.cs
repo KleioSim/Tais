@@ -7,15 +7,17 @@ public partial class CityOperationItemPresent : PresentControl<CityOperationItem
 {
     protected override void Initialize(CityOperationItem view, ISession model)
     {
-        var itemObj = ((ITaskDef def, object target))view.Id;
-
         view.Button.Pressed += () =>
         {
+            var itemObj = ((ITaskDef def, object target))view.Id;
+
             SendCommand(new Cmd_TaskStart(itemObj.def, itemObj.target));
         };
 
         view.TooltipTrigger.funcGetToolTipString = () =>
         {
+            var itemObj = ((ITaskDef def, object target))view.Id;
+
             var desc = itemObj.def.Operation.ToString();
 
             if (!itemObj.def.Condition.IsSatisfied(itemObj.target))

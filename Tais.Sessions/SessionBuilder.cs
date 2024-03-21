@@ -11,9 +11,6 @@ public static class SessionBuilder
 
         var cityTaskDefs = Enumerable.Range(0, 3).Select(x => new TaskDef($"CITY_{x}", 5, new CityNameCondition($"CITY_{x}"), new SetCityNotControledOperation())).ToArray();
 
-        //var popTaskDefs0 = Enumerable.Range(0, 1).Select(x => new TaskDef($"P0_{x}", 10, new PopMinCountCondition(100), new SetPopCountDec(0.1f))).ToArray();
-        //var popTaskDefs1 = Enumerable.Range(0, 2).Select(x => new TaskDef($"P1_{x}", 15, new PopMinCountCondition((x + 1) * 500), new SetPopCountDec(0.01f))).ToArray();
-        //var popTaskDefs2 = Enumerable.Range(0, 3).Select(x => new TaskDef($"P2_{x}", 20, new PopMinCountCondition((x + 1) * 5000), new SetPopCountDec(0.02f))).ToArray();
 
         var popDefs = Enumerable.Range(0, 3).Select(x =>
         {
@@ -32,9 +29,10 @@ public static class SessionBuilder
             };
         }).ToArray();
 
-        var initDatas = Enumerable.Range(0, 3).Select(x => new PopInitData()
+        var initDatas = Enumerable.Range(0, 6).Select(x => new PopInitData()
         {
-            Count = (int)Math.Pow(10, x + 1) * 10,
+            familyName = $"FM_{x}",
+            Count = (int)Math.Pow(10, x % 3 + 1) * 10,
 
         }).ToArray();
 

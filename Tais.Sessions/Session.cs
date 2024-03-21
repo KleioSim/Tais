@@ -103,6 +103,11 @@ public class SetCityNotControledOperation : IOperation
         var city = target as City;
         city.IsOwned = false;
     }
+
+    public override string ToString()
+    {
+        return $"set city controled flag false";
+    }
 }
 
 public class CityNameCondition : ICondition
@@ -117,6 +122,11 @@ public class CityNameCondition : ICondition
     public bool IsSatisfied(object obj)
     {
         return ((ICity)obj).Name == cityName;
+    }
+
+    public override string ToString()
+    {
+        return $"city name equal {cityName}";
     }
 }
 
