@@ -7,6 +7,8 @@ public interface IPop
     bool IsRegisted { get; }
 
     IFamily Family { get; }
+
+    //IEnumerable<ITaskDef> TaskDefs { get; }
 }
 
 public interface IFamily

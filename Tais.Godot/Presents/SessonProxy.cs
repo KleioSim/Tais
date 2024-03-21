@@ -13,7 +13,7 @@ public class SessionMock : ISession
     public IFinance Finance => finance;
     public IEnumerable<ICity> Cities => cities;
     public ICentralGov CentralGov => throw new NotImplementedException();
-    public IEnumerable<ICityTaskDef> CityTaskDefs => throw new NotImplementedException();
+    public IEnumerable<ITaskDef> CityTaskDefs => throw new NotImplementedException();
 
     public IDate Date => throw new NotImplementedException();
 
@@ -76,7 +76,7 @@ public class CityMock : ICity
 
     public IEnumerable<IPop> Pops => throw new NotImplementedException();
 
-    public IEnumerable<ICityTaskDef> TaskDefs => throw new NotImplementedException();
+    public IEnumerable<ITaskDef> TaskDefs => throw new NotImplementedException();
 
     public EffectValueMock popTax = new EffectValueMock();
     public GroupValueMock popCount = new GroupValueMock();
@@ -104,7 +104,7 @@ public class EventMock : IEvent
 
 public class TaskMock : ITask
 {
-    public ICityTaskDef Def => throw new NotImplementedException();
+    public ITaskDef Def => throw new NotImplementedException();
 
     public object Target => throw new NotImplementedException();
 

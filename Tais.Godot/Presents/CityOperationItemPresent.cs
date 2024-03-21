@@ -15,7 +15,7 @@ public partial class CityOperationItemPresent : PresentControl<CityOperationItem
 
     protected override void Update(CityOperationItem view, ISession model)
     {
-        var def = view.Id as ICityTaskDef;
+        var def = view.Id as ITaskDef;
 
         view.Button.Text = def.Name;
         view.Button.Disabled = model.Tasks.Any(x => x.Target == view.GetTarget() && x.Def == def)

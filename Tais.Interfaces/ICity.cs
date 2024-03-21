@@ -8,7 +8,7 @@ public interface ICity
     bool IsOwned { get; }
     IEnumerable<IPop> Pops { get; }
 
-    IEnumerable<ICityTaskDef> TaskDefs { get; }
+    IEnumerable<ITaskDef> TaskDefs { get; }
 }
 
 public interface IGroupValue

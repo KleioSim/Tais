@@ -8,7 +8,7 @@ public static class SessionBuilder
     {
         var session = new Session();
 
-        var cityTaskDefs = Enumerable.Range(0, 3).Select(x => new CityTaskDef($"CITY_{x}", 5, new Condition(), new Operation())).ToArray();
+        var cityTaskDefs = Enumerable.Range(0, 3).Select(x => new CityTaskDef($"CITY_{x}", 5, new CityNameCondition($"CITY_{x}"), new SetCityNotControledOperation())).ToArray();
 
         for (int i = 0; i < 3; i++)
         {

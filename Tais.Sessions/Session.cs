@@ -32,7 +32,7 @@ class Session : ISession
                 break;
             case Cmd_TaskStart cmd_TaskStart:
                 {
-                    var task = new Task(cmd_TaskStart.Def as ICityTaskDef, cmd_TaskStart.Target);
+                    var task = new Task(cmd_TaskStart.Def as ITaskDef, cmd_TaskStart.Target);
                     tasks.Add(task);
                 }
                 break;
@@ -77,7 +77,7 @@ class Session : ISession
     }
 }
 
-class CityTaskDef : ICityTaskDef
+class CityTaskDef : ITaskDef
 {
     public string Name { get; }
 
@@ -96,7 +96,7 @@ class CityTaskDef : ICityTaskDef
     }
 }
 
-public class Operation : IOperation
+public class SetCityNotControledOperation : IOperation
 {
     public void Do(object target)
     {
@@ -105,11 +105,18 @@ public class Operation : IOperation
     }
 }
 
-public class Condition : ICondition
+public class CityNameCondition : ICondition
 {
-    public bool IsSatisfied(ICity city)
+    private string cityName;
+
+    public CityNameCondition(string cityName)
     {
-        return city.Name == "CITY_0";
+        this.cityName = cityName;
+    }
+
+    public bool IsSatisfied(object obj)
+    {
+        return ((ICity)obj).Name == cityName;
     }
 }
 
@@ -155,7 +162,7 @@ class Event : IEvent
 
 class Task : ITask
 {
-    public ICityTaskDef Def { get; }
+    public ITaskDef Def { get; }
     public object Target { get; }
 
     public float Progress
@@ -173,7 +180,7 @@ class Task : ITask
 
     private float progress;
 
-    public Task(ICityTaskDef def, object target)
+    public Task(ITaskDef def, object target)
     {
         this.Def = def;
         this.Target = target;
@@ -204,7 +211,7 @@ class City : ICity
         }
     }
 
-    public IEnumerable<ICityTaskDef> TaskDefs { get; }
+    public IEnumerable<ITaskDef> TaskDefs { get; }
 
     private PopTax popTax;
     private GroupValue popCount;
@@ -212,7 +219,7 @@ class City : ICity
     private bool isOwned;
     private List<Pop> pops = new List<Pop>();
 
-    public City(IEnumerable<ICityTaskDef> taskDefs, string name, bool isOwned, IEnumerable<Pop> pops)
+    public City(IEnumerable<ITaskDef> taskDefs, string name, bool isOwned, IEnumerable<Pop> pops)
     {
         TaskDefs = taskDefs;
 

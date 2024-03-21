@@ -2,7 +2,7 @@
 
 public interface ITask
 {
-    ICityTaskDef Def { get; }
+    ITaskDef Def { get; }
     object Target { get; }
 
     float Progress { get; }
