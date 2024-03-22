@@ -20,7 +20,7 @@ public interface IFamily
 
 public interface IPopDef
 {
-    string Name { get; }
+    string PopName { get; }
     bool IsRegisted { get; }
     bool HasFamily { get; }
 
@@ -30,6 +30,7 @@ public interface IPopDef
 
 public interface IPopInitData
 {
+    string PopName { get; }
     int Count { get; }
-    string familyName { get; }
+    string FamilyName { get; }
 }

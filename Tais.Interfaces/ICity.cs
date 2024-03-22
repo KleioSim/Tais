@@ -16,3 +16,14 @@ public interface IGroupValue
     float Current { get; }
     IEnumerable<(string desc, float count)> Items { get; }
 }
+
+public interface ICityInitData
+{
+    string CityName { get; }
+    bool IsControlled { get; }
+}
+
+public interface ICityDef
+{
+    public IEnumerable<ITaskDef> TaskDefs { get; }
+}

@@ -1,52 +1,86 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using Tais.Interfaces;
 
 namespace Tais.Sessions;
 
 public static class SessionBuilder
 {
-    public static ISession Build()
+    public static ISession Build(InitialData initialData)
     {
         var session = new Session();
 
-        var cityTaskDefs = Enumerable.Range(0, 3).Select(x => new TaskDef($"CITY_{x}", 5, new CityNameCondition($"CITY_{x}"), new SetCityNotControledOperation())).ToArray();
 
-
-        var popDefs = Enumerable.Range(0, 3).Select(x =>
+        var popDefs = new List<PopDef>()
         {
-            var index = x + 1;
-            return new PopDef()
+            new PopDef()
             {
-                Name = $"POP{x}",
-                IsRegisted = x != 2,
-                HasFamily = x == 0,
-                TaskDefs = Enumerable.Range(0, index)
-                    .Select(y => new TaskDef($"POP{x}_{y}",
-                                            index * 5,
-                                            new PopMinCountCondition(index * (int)Math.Pow(10, x + 1) * 10),
-                                            new SetPopCountDec(index * (float)Math.Pow(0.1, x + 1))))
-                    .ToArray()
-            };
-        }).ToArray();
+                PopName = "HAO",
+                IsRegisted = true,
+                HasFamily = true,
+                TaskDefs = new ITaskDef[]{
+                    new TaskDef(
+                        $"HAO_POP_VISIT",
+                        10,
+                        new PopMinCountCondition(100),
+                        new SetPopCountDec(0.1f)
+                    )
+                }
+            },
+            new PopDef()
+            {
+                PopName = "MIN",
+                IsRegisted = true,
+                HasFamily = true,
+                TaskDefs = new ITaskDef[]{
+                    new TaskDef(
+                        $"MIN_POP_VISIT",
+                        10,
+                        new PopMinCountCondition(1200),
+                        new SetPopCountDec(0.1f)
+                    )
+                }
+            },
+            new PopDef()
+            {
+                PopName = "YIN",
+                IsRegisted = true,
+                HasFamily = true,
+                TaskDefs = new ITaskDef[]{
+                    new TaskDef(
+                        $"YIN_POP_VISIT",
+                        10,
+                        new PopMinCountCondition(12000),
+                        new SetPopCountDec(0.1f)
+                    )
+                }
+            }
+        }.ToDictionary(k => k.PopName, v => v);
 
-        var initDatas = Enumerable.Range(0, 6).Select(x => new PopInitData()
+
+        var cityDef = new CityDef()
         {
-            familyName = $"FM_{x}",
-            Count = (int)Math.Pow(10, x % 3 + 1) * 10,
+            TaskDefs = new ITaskDef[]
+            {
+                new TaskDef(
+                    $"SET_CITY0_NO_CONTROLLED",
+                    5,
+                    new CityNameCondition($"CITY_0"),
+                    new SetCityNotControledOperation()
+                ),
+                new TaskDef(
+                    $"SET_CITY1_NO_CONTROLLED",
+                    5,
+                    new CityNameCondition($"CITY_1"),
+                    new SetCityNotControledOperation()
+                )
+            }
+        };
 
-        }).ToArray();
-
-        for (int i = 0; i < 3; i++)
+        foreach (var cityInitData in initialData.CityInitDatas)
         {
-
-            var city = new City(cityTaskDefs, $"CITY_{i}",
-                true,
-                new[]
-                {
-                    new Pop(popDefs[0], initDatas[0]),
-                    new Pop(popDefs[1], initDatas[1]),
-                    new Pop(popDefs[2], initDatas[2])
-                });
+            var pops = initialData.City2PopInitDatas[cityInitData.CityName].Select(popInit => new Pop(popDefs[popInit.PopName], popInit));
+            var city = new City(cityDef, cityInitData, pops);
 
             session.cities.Add(city);
         }
@@ -54,8 +88,25 @@ public static class SessionBuilder
         session.centralGov.InitTaxValue = session.finance.incomes.Sum(x => x.CurrValue) * 0.8f;
 
 
-
-
         return session;
     }
+}
+
+public class InitialData
+{
+    public IEnumerable<ICityInitData> CityInitDatas { get; init; }
+
+    public Dictionary<string, IEnumerable<IPopInitData>> City2PopInitDatas { get; init; }
+}
+
+public class CityInitData : ICityInitData
+{
+    public string CityName { get; init; }
+
+    public bool IsControlled { get; init; }
+}
+
+public class CityDef : ICityDef
+{
+    public IEnumerable<ITaskDef> TaskDefs { get; init; }
 }

@@ -262,7 +262,7 @@ class City : ICity
         }
     }
 
-    public IEnumerable<ITaskDef> TaskDefs { get; }
+    public IEnumerable<ITaskDef> TaskDefs => def.TaskDefs;
 
     private PopTax popTax;
     private GroupValue popCount;
@@ -270,18 +270,36 @@ class City : ICity
     private bool isOwned;
     private List<Pop> pops = new List<Pop>();
 
-    public City(IEnumerable<ITaskDef> taskDefs, string name, bool isOwned, IEnumerable<Pop> pops)
-    {
-        TaskDefs = taskDefs;
+    private ICityDef def;
 
-        Name = name;
+    //public City(IEnumerable<ITaskDef> taskDefs, string name, bool isOwned, IEnumerable<Pop> pops)
+    //{
+    //    TaskDefs = taskDefs;
+
+    //    Name = name;
+    //    popTax = new PopTax(this);
+    //    popCount = new GroupValue();
+    //    popCount.Items = pops.Where(x => x.IsRegisted).Select(x => (x.Name, x.Count));
+
+    //    this.pops.AddRange(pops);
+
+    //    IsOwned = isOwned;
+    //}
+
+    public City(ICityDef def, ICityInitData initData, IEnumerable<Pop> pops)
+    {
+        this.def = def;
+
+        Name = initData.CityName;
+        IsOwned = initData.IsControlled;
+
         popTax = new PopTax(this);
         popCount = new GroupValue();
         popCount.Items = pops.Where(x => x.IsRegisted).Select(x => (x.Name, x.Count));
 
         this.pops.AddRange(pops);
 
-        IsOwned = isOwned;
+
     }
 }
 
@@ -294,7 +312,7 @@ class GroupValue : IGroupValue
 
 class Pop : IPop
 {
-    public string Name => def.Name;
+    public string Name => def.PopName;
     public float Count { get; set; }
     public bool IsRegisted => def.IsRegisted;
 
@@ -313,7 +331,7 @@ class Pop : IPop
 
         if (def.HasFamily)
         {
-            family = new Family(popInitData.familyName, new[] { ("Test", 10f) });
+            family = new Family(popInitData.FamilyName, new[] { ("Test", 10f) });
         }
     }
 
@@ -441,7 +459,7 @@ class Date : IDate
 
 public class PopDef : IPopDef
 {
-    public string Name { get; init; }
+    public string PopName { get; init; }
 
     public bool IsRegisted { get; init; }
 
@@ -454,5 +472,7 @@ public class PopInitData : IPopInitData
 {
     public int Count { get; init; }
 
-    public string familyName { get; init; }
+    public string FamilyName { get; init; }
+
+    public string PopName { get; init; }
 }
