@@ -5,6 +5,10 @@ Vulkan API 1.2.175 - Forward+ - Using Vulkan Device #0: NVIDIA - NVIDIA GeForce 
 [P] DebugSessionPresent Ready
 [M] DebugSessionMock Ready
 [P]Use DebugSessionPresent mock model
+[V] PopDetailPanel Ready
+[P] PopDetailPanelPresent Ready
+[V] CityOperationList Ready
+[P] CityOperationListPresent Ready
 [V] CityDetailPanel Ready
 [P] CityDetailPanelPresent Ready
 [V] LeftPanel Ready
@@ -20,36 +24,25 @@ Vulkan API 1.2.175 - Forward+ - Using Vulkan Device #0: NVIDIA - NVIDIA GeForce 
 [V] CityListItem Ready
 [P] CityListItemPresent Ready
 view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-view.Button.Pressed
-[V] CityListPanel Ready
-[P] CityListPanelPresent Ready
-[V] CityListItem Ready
-[P] CityListItemPresent Ready
-[V] CityListItem Ready
-[P] CityListItemPresent Ready
-[V] CityListItem Ready
-[P] CityListItemPresent Ready
-view.Button.Pressed
+[V] PopItem Ready
+[P] PopItemPresent Ready
+[V] PopItem Ready
+[P] PopItemPresent Ready
+[V] PopItem Ready
+[P] PopItemPresent Ready
+[V] CityOperationItem Ready
+[P] CityOperationItemPresent Ready
+[V] CityOperationItem Ready
+[P] CityOperationItemPresent Ready
+[V] CityOperationItem Ready
+[P] CityOperationItemPresent Ready
+[V] CityOperationItem Ready
+[P] CityOperationItemPresent Ready
+[V] CityOperationItem Ready
+[P] CityOperationItemPresent Ready
+[V] CityOperationItem Ready
+[P] CityOperationItemPresent Ready
+OnUICommand:Tais.Commands.Cmd_TaskStart
+[V] TaskItem Ready
+[P] TaskItemPresent Ready
+OnUICommand:Tais.Commands.Cmd_NextDay

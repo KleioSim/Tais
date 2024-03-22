@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Runtime.Intrinsics.X86;
-using System.Threading.Tasks;
+﻿using System;
 using Tais.Commands;
 using Tais.Interfaces;
 
@@ -49,6 +47,11 @@ class Session : ISession
                     foreach (var task in tasks)
                     {
                         task.OnDaysInc(date);
+                    }
+
+                    foreach (var city in cities)
+                    {
+                        city.OnDaysInc(date);
                     }
 
                     tasks.RemoveAll(x => x.Progress >= 100);
@@ -127,6 +130,42 @@ public class CityNameCondition : ICondition
     public override string ToString()
     {
         return $"city name equal {cityName}";
+    }
+}
+
+public class FamilyAttitudeMin : ICondition
+{
+    private float minValue;
+
+    public FamilyAttitudeMin(float minValue)
+    {
+        this.minValue = minValue;
+    }
+
+    public bool IsSatisfied(object target)
+    {
+        var city = target as ICity;
+        var pop = city.Pops.Single(x => x.Family != null);
+
+        return pop.Family.Attitude.Current > minValue;
+    }
+}
+
+public class FamilyAttitudeMax : ICondition
+{
+    private float maxValue;
+
+    public FamilyAttitudeMax(float maxValue)
+    {
+        this.maxValue = maxValue;
+    }
+
+    public bool IsSatisfied(object target)
+    {
+        var city = target as ICity;
+        var pop = city.Pops.Single(x => x.Family != null);
+
+        return pop.Family.Attitude.Current < maxValue;
     }
 }
 
@@ -282,6 +321,8 @@ class City : ICity
     public IEffectValue PopTax => popTax;
     public IGroupValue PopCount => popCount;
     public IEnumerable<IPop> Pops => pops;
+    public IEnumerable<IBuffer> Buffers => buffers;
+    public IEnumerable<IEffect> Effects => buffers.SelectMany(x => x.Effects);
 
     public bool IsOwned
     {
@@ -295,27 +336,15 @@ class City : ICity
 
     public IEnumerable<ITaskDef> TaskDefs => def.TaskDefs;
 
+
     private PopTax popTax;
     private GroupValue popCount;
 
     private bool isOwned;
     private List<Pop> pops = new List<Pop>();
+    private List<Buffer> buffers = new List<Buffer>();
 
     private ICityDef def;
-
-    //public City(IEnumerable<ITaskDef> taskDefs, string name, bool isOwned, IEnumerable<Pop> pops)
-    //{
-    //    TaskDefs = taskDefs;
-
-    //    Name = name;
-    //    popTax = new PopTax(this);
-    //    popCount = new GroupValue();
-    //    popCount.Items = pops.Where(x => x.IsRegisted).Select(x => (x.Name, x.Count));
-
-    //    this.pops.AddRange(pops);
-
-    //    IsOwned = isOwned;
-    //}
 
     public City(ICityDef def, ICityInitData initData, IEnumerable<Pop> pops)
     {
@@ -329,8 +358,34 @@ class City : ICity
         popCount.Items = pops.Where(x => x.IsRegisted).Select(x => (x.Name, x.Count));
 
         this.pops.AddRange(pops);
+    }
 
+    internal void OnDaysInc(Date date)
+    {
+        buffers.RemoveAll(x => x.def.InvalidCondition.IsSatisfied(this));
 
+        var needAdds = def.BufferDefs.Except(buffers.Select(x => x.def))
+            .Where(x => x.ValidCondition.IsSatisfied(this))
+            .ToArray();
+
+        foreach (var bufferDef in needAdds)
+        {
+            buffers.Add(new Buffer(bufferDef));
+        }
+    }
+}
+
+class Buffer : IBuffer
+{
+    public IBufferDef def { get; }
+
+    public string Name => def.BufferName;
+
+    public IEnumerable<IEffect> Effects => def.Effects;
+
+    public Buffer(IBufferDef def)
+    {
+        this.def = def;
     }
 }
 
@@ -351,7 +406,7 @@ class Pop : IPop
 
     public IEnumerable<ITaskDef> TaskDefs => def.TaskDefs;
 
-    private Family family;
+    private Family? family;
 
     private IPopDef def;
 
@@ -365,16 +420,6 @@ class Pop : IPop
             family = new Family(popInitData.FamilyName, new[] { ("Test", 10f) });
         }
     }
-
-    //public Pop(IEnumerable<ITaskDef> taskDefs, string name, float count, bool isRegisted, Family family)
-    //{
-    //    TaskDefs = taskDefs;
-
-    //    Name = name;
-    //    Count = count;
-    //    IsRegisted = isRegisted;
-    //    this.family = family;
-    //}
 }
 
 class Family : IFamily
@@ -417,9 +462,7 @@ class PopTax : IEffectValue
 {
     public float BaseValue => from.PopCount.Current / 10000f;
 
-    public IEnumerable<IEffect> Effects => effects;
-
-    private List<Effect> effects = new List<Effect>();
+    public IEnumerable<IEffect> Effects => from.Effects.OfType<PopTaxChangePercentEffect>();
 
     private ICity from;
 
@@ -506,4 +549,16 @@ public class PopInitData : IPopInitData
     public string FamilyName { get; init; }
 
     public string PopName { get; init; }
+}
+
+public class PopTaxChangePercentEffect : IEffect
+{
+    public string Desc => "PopTaxChangePercent";
+
+    public float Percent { get; init; }
+
+    public PopTaxChangePercentEffect(float percent)
+    {
+        Percent = percent;
+    }
 }

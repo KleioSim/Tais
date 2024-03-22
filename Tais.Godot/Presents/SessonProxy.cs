@@ -78,6 +78,10 @@ public class CityMock : ICity
 
     public IEnumerable<ITaskDef> TaskDefs => throw new NotImplementedException();
 
+    public IEnumerable<IBuffer> Buffers => throw new NotImplementedException();
+
+    public IEnumerable<IEffect> Effects => throw new NotImplementedException();
+
     public EffectValueMock popTax = new EffectValueMock();
     public GroupValueMock popCount = new GroupValueMock();
 }

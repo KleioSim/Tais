@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcwyi1fd440tg"]
+
+[ext_resource type="Script" path="res://MainScene/LeftPanels/CityDetailPanel/BufferItem.cs" id="1_vq04g"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(45, 45)
+text = "--"
+script = ExtResource("1_vq04g")

@@ -18,7 +18,7 @@ public partial class CityDetailPanel : LeftContentPanel1
 
 
     public ItemContainer<PopItem> PopContainer;
-
+    public ItemContainer<BufferItem> BufferContainer;
 
     public override void _Ready()
     {
@@ -27,6 +27,11 @@ public partial class CityDetailPanel : LeftContentPanel1
         PopContainer = new ItemContainer<PopItem>(() =>
         {
             return GetNode<InstancePlaceholder>("HBoxContainer/VBoxContainer2/VBoxContainer/Pops/FlowContainer/PopItem");
+        });
+
+        BufferContainer = new ItemContainer<BufferItem>(() =>
+        {
+            return GetNode<InstancePlaceholder>("HBoxContainer/VBoxContainer2/VBoxContainer/Buffers/HFlowContainer/BufferItem");
         });
 
         PopDetailPanel.Visible = false;

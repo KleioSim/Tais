@@ -30,5 +30,6 @@ public partial class CityDetailPanelPresent : PresentControl<CityDetailPanel, IS
         view.PopTax.Text = cityObj.PopTax.CurrValue.ToString();
 
         view.PopContainer.Refresh(cityObj.Pops.Select(x => (object)x).ToHashSet());
+        view.BufferContainer.Refresh(cityObj.Buffers.Select(x => (object)x).ToHashSet());
     }
 }

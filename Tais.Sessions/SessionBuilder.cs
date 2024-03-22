@@ -37,7 +37,7 @@ public static class SessionBuilder
             {
                 PopName = "MIN",
                 IsRegisted = true,
-                HasFamily = true,
+                HasFamily = false,
                 TaskDefs = new ITaskDef[]{
                     new TaskDef(
                         $"MIN_POP_DEC",
@@ -50,8 +50,8 @@ public static class SessionBuilder
             new PopDef()
             {
                 PopName = "YIN",
-                IsRegisted = true,
-                HasFamily = true,
+                IsRegisted = false,
+                HasFamily = false,
                 TaskDefs = new ITaskDef[]{
                     new TaskDef(
                         $"YIN_POP_DEC",
@@ -80,6 +80,19 @@ public static class SessionBuilder
                     new CityNameCondition($"CITY_1"),
                     new SetCityNotControledOperation()
                 )
+            },
+            BufferDefs = new IBufferDef[]
+            {
+                new BufferDef()
+                {
+                    BufferName = "HAO_ATTITUDE_HELP",
+                    ValidCondition = new FamilyAttitudeMin(20),
+                    InvalidCondition = new FamilyAttitudeMax(10),
+                    Effects = new IEffect[]
+                    {
+                        new PopTaxChangePercentEffect(0.15f)
+                    }
+                }
             }
         };
 
@@ -115,4 +128,16 @@ public class CityInitData : ICityInitData
 public class CityDef : ICityDef
 {
     public IEnumerable<ITaskDef> TaskDefs { get; init; }
+    public IEnumerable<IBufferDef> BufferDefs { get; init; }
+}
+
+public class BufferDef : IBufferDef
+{
+    public string BufferName { get; init; }
+
+    public ICondition ValidCondition { get; init; }
+
+    public ICondition InvalidCondition { get; init; }
+
+    public IEnumerable<IEffect> Effects { get; init; }
 }
