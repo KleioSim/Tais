@@ -90,7 +90,7 @@ public static class SessionBuilder
                     InvalidCondition = new FamilyAttitudeMax(10),
                     Effects = new IEffect[]
                     {
-                        new PopTaxChangePercentEffect(0.15f)
+                        new PopTaxChangePercentEffect("HAO_ATTITUDE_HELP", 0.15f)
                     }
                 }
             }

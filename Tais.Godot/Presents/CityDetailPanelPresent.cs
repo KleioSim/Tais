@@ -19,6 +19,12 @@ public partial class CityDetailPanelPresent : PresentControl<CityDetailPanel, IS
                 };
             };
         };
+
+        view.PopTaxToolTipTrigger.funcGetToolTipString = () =>
+        {
+            var cityObj = view.Id as ICity;
+            return cityObj.PopTax.ToString();
+        };
     }
 
     protected override void Update(CityDetailPanel view, ISession model)

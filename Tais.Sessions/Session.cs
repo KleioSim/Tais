@@ -470,6 +470,11 @@ class PopTax : IEffectValue
     {
         this.from = city;
     }
+
+    public override string ToString()
+    {
+        return $"BaseValue  {BaseValue}" + "\n" + String.Join("\n", Effects.Select(x => $"{x.Desc}  {(x.Percent < 0 ? "" : "+")}{x.Percent * 100}%"));
+    }
 }
 
 class Finance : IFinance
@@ -553,12 +558,13 @@ public class PopInitData : IPopInitData
 
 public class PopTaxChangePercentEffect : IEffect
 {
-    public string Desc => "PopTaxChangePercent";
+    public string Desc { get; init; }
 
     public float Percent { get; init; }
 
-    public PopTaxChangePercentEffect(float percent)
+    public PopTaxChangePercentEffect(string from, float percent)
     {
+        Desc = from;
         Percent = percent;
     }
 }

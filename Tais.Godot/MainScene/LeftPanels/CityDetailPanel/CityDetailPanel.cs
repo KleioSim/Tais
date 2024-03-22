@@ -9,7 +9,9 @@ public partial class CityDetailPanel : LeftContentPanel1
 
     public Label CityName => GetNode<Label>("HBoxContainer/VBoxContainer2/CityName");
     public Label PopCount => GetNode<Label>("HBoxContainer/VBoxContainer2/VBoxContainer/Infos/MarginContainer/HFlowContainer/PopCount/HBoxContainer/Value");
+
     public Label PopTax => GetNode<Label>("HBoxContainer/VBoxContainer2/VBoxContainer/Infos/MarginContainer/HFlowContainer/PopTax/HBoxContainer/Value");
+    public TooltipTrigger PopTaxToolTipTrigger => PopTax.GetNode<TooltipTrigger>("TooltipTrigger");
 
     public Button OperateButton => GetNode<Button>("HBoxContainer/VBoxContainer2/CityName/Operate");
     public CityOperationList OperationList => GetNode<CityOperationList>("HBoxContainer/CityOperationList");
