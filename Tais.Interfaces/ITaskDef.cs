@@ -11,7 +11,7 @@ public interface ITaskDef
 
 public interface IOperation
 {
-    void Do(object target);
+    void Do(string desc, object target);
 }
 
 public interface ICondition

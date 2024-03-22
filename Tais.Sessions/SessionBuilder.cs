@@ -20,10 +20,16 @@ public static class SessionBuilder
                 HasFamily = true,
                 TaskDefs = new ITaskDef[]{
                     new TaskDef(
-                        $"HAO_POP_VISIT",
+                        $"HAO_POP_DEC",
                         10,
                         new PopMinCountCondition(100),
                         new SetPopCountDec(0.1f)
+                    ),
+                    new TaskDef(
+                        $"HAO_VISIT_FAMILY",
+                        10,
+                        new TrueCondition(),
+                        new ChangeFamilyAttitude(10f)
                     )
                 }
             },
@@ -34,7 +40,7 @@ public static class SessionBuilder
                 HasFamily = true,
                 TaskDefs = new ITaskDef[]{
                     new TaskDef(
-                        $"MIN_POP_VISIT",
+                        $"MIN_POP_DEC",
                         10,
                         new PopMinCountCondition(1200),
                         new SetPopCountDec(0.1f)
@@ -48,7 +54,7 @@ public static class SessionBuilder
                 HasFamily = true,
                 TaskDefs = new ITaskDef[]{
                     new TaskDef(
-                        $"YIN_POP_VISIT",
+                        $"YIN_POP_DEC",
                         10,
                         new PopMinCountCondition(12000),
                         new SetPopCountDec(0.1f)

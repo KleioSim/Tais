@@ -98,7 +98,7 @@ class TaskDef : ITaskDef
 
 public class SetCityNotControledOperation : IOperation
 {
-    public void Do(object target)
+    public void Do(string desc, object target)
     {
         var city = target as City;
         city.IsOwned = false;
@@ -139,7 +139,7 @@ public class SetPopCountDec : IOperation
         this.percent = percent;
     }
 
-    public void Do(object target)
+    public void Do(string desc, object target)
     {
         var pop = target as Pop;
         pop.Count -= pop.Count * percent;
@@ -148,6 +148,29 @@ public class SetPopCountDec : IOperation
     public override string ToString()
     {
         return $"SetPopCountDec -{percent * 100}%";
+    }
+}
+
+public class ChangeFamilyAttitude : IOperation
+{
+    private float value;
+
+    public ChangeFamilyAttitude(float value)
+    {
+        this.value = value;
+    }
+
+    public void Do(string desc, object target)
+    {
+        var pop = target as Pop;
+
+        var attitude = pop.Family.Attitude as Attitude;
+        attitude.items.Add(new Attitude.Item(desc, value));
+    }
+
+    public override string ToString()
+    {
+        return $"FamilyAttitude Change {(value < 0 ? "-" : "+")}{value}";
     }
 }
 
@@ -168,6 +191,14 @@ public class PopMinCountCondition : ICondition
     public override string ToString()
     {
         return $"PopCount more or equal {minCount}";
+    }
+}
+
+public class TrueCondition : ICondition
+{
+    public bool IsSatisfied(object target)
+    {
+        return true;
     }
 }
 
@@ -224,7 +255,7 @@ class Task : ITask
             progress = value;
             if (Progress >= 100)
             {
-                Def.Operation.Do(Target);
+                Def.Operation.Do(Def.Name, Target);
             }
         }
     }
