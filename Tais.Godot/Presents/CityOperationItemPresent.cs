@@ -18,7 +18,10 @@ public partial class CityOperationItemPresent : PresentControl<CityOperationItem
         {
             var itemObj = ((ITaskDef def, object target))view.Id;
 
-            var desc = itemObj.def.Operation.ToString();
+            var desc = itemObj.def.Operation.ToString() + "\n";
+
+            desc += "\n";
+            desc += $"Request Player Engine {itemObj.def.RequestActionPoint}" + "\n";
 
             if (!itemObj.def.Condition.IsSatisfied(itemObj.target))
             {
@@ -35,6 +38,7 @@ public partial class CityOperationItemPresent : PresentControl<CityOperationItem
 
         view.Button.Text = itemObj.def.Name;
         view.Button.Disabled = model.Tasks.Any(x => x.Target == itemObj.target && x.Def == itemObj.def)
+            || itemObj.def.RequestActionPoint > model.Player.FreeActionPoints
             || !itemObj.def.Condition.IsSatisfied(itemObj.target);
     }
 }

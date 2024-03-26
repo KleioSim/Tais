@@ -14,6 +14,7 @@ class Session : ISession
     public IEnumerable<ICity> Cities => cities;
     public ICentralGov CentralGov => centralGov;
     public IList<IToast> Toasts => toasts;
+    public IPlayer Player => player;
 
     internal Date date = new Date();
     internal Finance finance = new Finance();
@@ -21,6 +22,7 @@ class Session : ISession
     internal List<City> cities = new List<City>();
     internal CentralGov centralGov = new CentralGov();
     internal List<IToast> toasts = new List<IToast>();
+    internal Player player = new Player();
 
     public void OnCommand(ICommand command)
     {
@@ -62,6 +64,7 @@ class Session : ISession
 
     public Session()
     {
+        City.OnOwnerChanged = null;
         City.OnOwnerChanged += (flag, city) =>
         {
             if (flag)
@@ -74,14 +77,21 @@ class Session : ISession
             }
         };
 
+        City.OnBufferAdded = null;
         City.OnBufferAdded += (buff, city) =>
         {
             toasts.Add(new Toast() { Desc = $"Add Buff {buff.GetType().Name} to {city.Name}" });
         };
 
+        City.OnBufferRemoved = null;
         City.OnBufferRemoved += (buff, city) =>
         {
             toasts.Add(new Toast() { Desc = $"Remove Buff {buff.GetType().Name} from {city.Name}" });
+        };
+
+        player.CalcUsedEngine = () =>
+        {
+            return tasks.Sum(x => x.Def.RequestActionPoint);
         };
 
         finance.spends.Add(centralGov.RequestTax);
@@ -95,20 +105,19 @@ class Toast : IToast
 
 class TaskDef : ITaskDef
 {
-    public string Name { get; }
+    public string Name { get; init; }
 
-    public ICondition Condition { get; }
+    public ICondition Condition { get; init; }
 
-    public float Speed { get; }
+    public float Speed { get; init; }
 
-    public IOperation Operation { get; }
+    public IOperation Operation { get; init; }
 
-    public TaskDef(string name, float speed, ICondition condition, IOperation operation)
+    public int RequestActionPoint { get; init; }
+
+    public TaskDef()
     {
-        this.Name = name;
-        this.Condition = condition;
-        this.Speed = speed;
-        this.Operation = operation;
+
     }
 }
 
@@ -564,6 +573,21 @@ class Date : IDate
         }
     }
 }
+
+class Player : IPlayer
+{
+    internal Func<int> CalcUsedEngine { get; set; }
+
+    public int FreeActionPoints => TotalActionPoints - CalcUsedEngine();
+
+    public int TotalActionPoints { get; private set; }
+
+    internal void Initialize(IPlayerInitData initData)
+    {
+        TotalActionPoints = 10;
+    }
+}
+
 
 public class PopDef : IPopDef
 {

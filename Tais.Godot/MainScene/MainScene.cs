@@ -29,6 +29,9 @@ public partial class MainScene : ViewControl
 
     internal Timer NextDayTimer => GetNode<Timer>("NextDayTimer");
 
+    internal Label FreeActionPoint => GetNode<Label>("TopInfo/Player/ActionPoint/Free");
+    internal Label TotalActionPoint => GetNode<Label>("TopInfo/Player/ActionPoint/Total");
+
     internal ItemContainer<TaskItem> TaskContainer;
     internal ItemContainer<ToastItem> ToastContainer;
 

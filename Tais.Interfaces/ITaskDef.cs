@@ -2,6 +2,8 @@
 
 public interface ITaskDef
 {
+    int RequestActionPoint { get; }
+
     string Name { get; }
     float Speed { get; }
 

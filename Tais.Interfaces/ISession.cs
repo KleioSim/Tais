@@ -4,6 +4,7 @@ namespace Tais.Interfaces;
 
 public interface ISession
 {
+    IPlayer Player { get; }
     IDate Date { get; }
 
     IEvent CurrEvent { get; }

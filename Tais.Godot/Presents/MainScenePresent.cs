@@ -44,6 +44,9 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
         view.Month.Text = model.Date.Month.ToString();
         view.Day.Text = model.Date.Day.ToString();
 
+        view.FreeActionPoint.Text = model.Player.FreeActionPoints.ToString();
+        view.TotalActionPoint.Text = model.Player.TotalActionPoints.ToString();
+
         view.TaskContainer.Refresh(model.Tasks.OfType<object>().ToHashSet());
         view.ToastContainer.Refresh(model.Toasts.OfType<object>().ToHashSet());
 

@@ -10,7 +10,6 @@ public static class SessionBuilder
     {
         var session = new Session();
 
-
         var popDefs = new List<PopDef>()
         {
             new PopDef()
@@ -19,18 +18,22 @@ public static class SessionBuilder
                 IsRegisted = true,
                 HasFamily = true,
                 TaskDefs = new ITaskDef[]{
-                    new TaskDef(
-                        $"HAO_POP_DEC",
-                        10,
-                        new PopMinCountCondition(100),
-                        new SetPopCountDec(0.1f)
-                    ),
-                    new TaskDef(
-                        $"HAO_VISIT_FAMILY",
-                        10,
-                        new TrueCondition(),
-                        new ChangeFamilyAttitude(10f)
-                    )
+                    new TaskDef()
+                    {
+                        Name = $"HAO_POP_DEC",
+                        RequestActionPoint = 2,
+                        Speed = 10,
+                        Condition = new PopMinCountCondition(100),
+                        Operation = new SetPopCountDec(0.1f)
+                    },
+                    new TaskDef()
+                    {
+                        Name = $"HAO_VISIT_FAMILY",
+                        RequestActionPoint = 3,
+                        Speed = 10,
+                        Condition = new TrueCondition(),
+                        Operation = new ChangeFamilyAttitude(5.0f)
+                    }
                 }
             },
             new PopDef()
@@ -39,12 +42,14 @@ public static class SessionBuilder
                 IsRegisted = true,
                 HasFamily = false,
                 TaskDefs = new ITaskDef[]{
-                    new TaskDef(
-                        $"MIN_POP_DEC",
-                        10,
-                        new PopMinCountCondition(1200),
-                        new SetPopCountDec(0.1f)
-                    )
+                    new TaskDef()
+                    {
+                        Name = $"MIN_POP_DEC",
+                        RequestActionPoint = 1,
+                        Speed = 10,
+                        Condition = new PopMinCountCondition(1200),
+                        Operation = new SetPopCountDec(0.1f)
+                    }
                 }
             },
             new PopDef()
@@ -53,12 +58,14 @@ public static class SessionBuilder
                 IsRegisted = false,
                 HasFamily = false,
                 TaskDefs = new ITaskDef[]{
-                    new TaskDef(
-                        $"YIN_POP_DEC",
-                        10,
-                        new PopMinCountCondition(12000),
-                        new SetPopCountDec(0.1f)
-                    )
+                    new TaskDef()
+                    {
+                        Name = $"YIN_POP_DEC",
+                        RequestActionPoint = 3,
+                        Speed = 10,
+                        Condition = new PopMinCountCondition(12000),
+                        Operation = new SetPopCountDec(0.1f)
+                    }
                 }
             }
         }.ToDictionary(k => k.PopName, v => v);
@@ -68,18 +75,22 @@ public static class SessionBuilder
         {
             TaskDefs = new ITaskDef[]
             {
-                new TaskDef(
-                    $"SET_CITY0_NO_CONTROLLED",
-                    5,
-                    new CityNameCondition($"CITY_0"),
-                    new SetCityNotControledOperation()
-                ),
-                new TaskDef(
-                    $"SET_CITY1_NO_CONTROLLED",
-                    5,
-                    new CityNameCondition($"CITY_1"),
-                    new SetCityNotControledOperation()
-                )
+                new TaskDef()
+                {
+                    Name = $"SET_CITY0_NO_CONTROLLED",
+                    RequestActionPoint = 4,
+                    Speed = 5,
+                    Condition = new CityNameCondition($"CITY_0"),
+                    Operation = new SetCityNotControledOperation()
+                },
+                new TaskDef()
+                {
+                    Name = $"SET_CITY1_NO_CONTROLLED",
+                    RequestActionPoint = 5,
+                    Speed = 5,
+                    Condition = new CityNameCondition($"CITY_1"),
+                    Operation = new SetCityNotControledOperation()
+                }
             },
             BufferDefs = new IBufferDef[]
             {
@@ -96,6 +107,8 @@ public static class SessionBuilder
             }
         };
 
+        session.player.Initialize(initialData.PlayerInitData);
+
         foreach (var cityInitData in initialData.CityInitDatas)
         {
             var pops = initialData.City2PopInitDatas[cityInitData.CityName].Select(popInit => new Pop(popDefs[popInit.PopName], popInit));
@@ -106,7 +119,6 @@ public static class SessionBuilder
 
         session.centralGov.InitTaxValue = session.finance.incomes.Sum(x => x.CurrValue) * 0.8f;
 
-
         return session;
     }
 }
@@ -116,6 +128,7 @@ public class InitialData
     public IEnumerable<ICityInitData> CityInitDatas { get; init; }
 
     public Dictionary<string, IEnumerable<IPopInitData>> City2PopInitDatas { get; init; }
+    public IPlayerInitData PlayerInitData { get; init; }
 }
 
 public class CityInitData : ICityInitData

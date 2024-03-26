@@ -19,9 +19,40 @@ layout_mode = 0
 offset_right = 364.0
 offset_bottom = 40.0
 
+[node name="Player" type="VBoxContainer" parent="TopInfo"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="TopInfo/Player"]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+
+[node name="ActionPoint" type="HBoxContainer" parent="TopInfo/Player"]
+layout_mode = 2
+
+[node name="Free" type="Label" parent="TopInfo/Player/ActionPoint"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "--"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Slash" type="Label" parent="TopInfo/Player/ActionPoint"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "/"
+
+[node name="Total" type="Label" parent="TopInfo/Player/ActionPoint"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "--"
+vertical_alignment = 1
+
 [node name="City" type="Button" parent="TopInfo"]
 custom_minimum_size = Vector2(180, 40)
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TopInfo/City"]
 custom_minimum_size = Vector2(180, 0)
@@ -49,7 +80,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Pop" type="PanelContainer" parent="TopInfo"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TopInfo/Pop"]
 custom_minimum_size = Vector2(180, 0)
@@ -72,7 +105,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Finance" type="PanelContainer" parent="TopInfo"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TopInfo/Finance"]
 custom_minimum_size = Vector2(180, 0)
@@ -102,7 +137,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Date" type="PanelContainer" parent="TopInfo"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TopInfo/Date"]
 custom_minimum_size = Vector2(180, 0)

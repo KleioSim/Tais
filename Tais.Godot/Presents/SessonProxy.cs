@@ -18,7 +18,7 @@ public class SessionMock : ISession
 
     public IDate Date => throw new NotImplementedException();
 
-
+    public IPlayer Player => throw new NotImplementedException();
 
     internal FinanceMock finance = new FinanceMock();
     internal List<TaskMock> tasks = new List<TaskMock>();
