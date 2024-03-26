@@ -13,20 +13,22 @@ class Session : ISession
     public IFinance Finance => finance;
     public IEnumerable<ICity> Cities => cities;
     public ICentralGov CentralGov => centralGov;
+    public IEnumerable<IToast> Toasts => toasts;
 
     internal Date date = new Date();
     internal Finance finance = new Finance();
     internal List<Task> tasks = new List<Task>();
     internal List<City> cities = new List<City>();
     internal CentralGov centralGov = new CentralGov();
-
+    internal List<Toast> toasts = new List<Toast>();
 
     public void OnCommand(ICommand command)
     {
         switch (command)
         {
             case Cmd_NextTurn:
-                finance.OnNextTurn();
+                toasts.Clear();
+                //finance.OnNextTurn();
                 break;
             case Cmd_TaskStart cmd_TaskStart:
                 {
@@ -76,8 +78,23 @@ class Session : ISession
             }
         };
 
+        City.OnBufferAdded += (buff, city) =>
+        {
+            toasts.Add(new Toast() { Desc = $"Add Buff {buff.GetType().Name} to {city.Name}" });
+        };
+
+        City.OnBufferRemoved += (buff, city) =>
+        {
+            toasts.Add(new Toast() { Desc = $"Remove Buff {buff.GetType().Name} from {city.Name}" });
+        };
+
         finance.spends.Add(centralGov.RequestTax);
     }
+}
+
+class Toast : IToast
+{
+    public string Desc { get; init; }
 }
 
 class TaskDef : ITaskDef
@@ -316,6 +333,8 @@ class Task : ITask
 class City : ICity
 {
     public static Action<bool, City>? OnOwnerChanged;
+    public static Action<IBuffer, ICity>? OnBufferAdded;
+    public static Action<IBuffer, ICity>? OnBufferRemoved;
 
     public string Name { get; }
     public IEffectValue PopTax => popTax;
@@ -362,15 +381,34 @@ class City : ICity
 
     internal void OnDaysInc(Date date)
     {
-        buffers.RemoveAll(x => x.def.InvalidCondition.IsSatisfied(this));
-
-        var needAdds = def.BufferDefs.Except(buffers.Select(x => x.def))
-            .Where(x => x.ValidCondition.IsSatisfied(this))
-            .ToArray();
-
-        foreach (var bufferDef in needAdds)
+        for (int i = buffers.Count - 1; i >= 0; i--)
         {
-            buffers.Add(new Buffer(bufferDef));
+            var currBuff = buffers[i];
+            if (currBuff.def.InvalidCondition.IsSatisfied(this))
+            {
+
+                buffers.Remove(currBuff);
+
+                OnBufferRemoved?.Invoke(currBuff, this);
+            }
+        }
+
+        foreach (var def in def.BufferDefs)
+        {
+            if (buffers.Any(x => x.def == def))
+            {
+                continue;
+            }
+
+            if (!def.ValidCondition.IsSatisfied(this))
+            {
+                continue;
+            }
+
+            var newBuff = new Buffer(def);
+            buffers.Add(newBuff);
+
+            OnBufferAdded?.Invoke(newBuff, this);
         }
     }
 }

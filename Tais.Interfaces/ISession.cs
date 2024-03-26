@@ -11,6 +11,7 @@ public interface ISession
     IFinance Finance { get; }
     IEnumerable<ICity> Cities { get; }
     IEnumerable<ITask> Tasks { get; }
+    IEnumerable<IToast> Toasts { get; }
 
     ICentralGov CentralGov { get; }
 

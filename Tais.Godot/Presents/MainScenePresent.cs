@@ -13,6 +13,8 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
 
         view.NextTurn.Pressed += () =>
         {
+            SendCommand(new Cmd_NextTurn());
+
             view.NextTurn.Disabled = true;
             view.NextDayTimer.Start();
         };
@@ -29,7 +31,6 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
         };
     }
 
-
     protected override void Update(MainScene view, ISession model)
     {
         view.FinanceCurrent.Text = model.Finance.Current.ToString();
@@ -42,6 +43,7 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
         view.Day.Text = model.Date.Day.ToString();
 
         view.TaskContainer.Refresh(model.Tasks.OfType<object>().ToHashSet());
+        view.ToastContainer.Refresh(model.Toasts.OfType<object>().ToHashSet());
 
         if (model.CurrEvent != null)
         {

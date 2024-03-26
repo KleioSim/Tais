@@ -23,12 +23,18 @@ public partial class MainScene : ViewControl
     internal Timer NextDayTimer => GetNode<Timer>("NextDayTimer");
 
     internal ItemContainer<TaskItem> TaskContainer;
+    internal ItemContainer<ToastItem> ToastContainer;
 
     public override void _Ready()
     {
         TaskContainer = new ItemContainer<TaskItem>(() =>
         {
-            return GetNode<InstancePlaceholder>("VBoxContainer/TaskItem");
+            return GetNode<InstancePlaceholder>("RightPanel/TaskContainer/TaskItem");
+        });
+
+        ToastContainer = new ItemContainer<ToastItem>(() =>
+        {
+            return GetNode<InstancePlaceholder>("RightPanel/ToastContainer/ToastItem");
         });
 
         City.Pressed += () =>
