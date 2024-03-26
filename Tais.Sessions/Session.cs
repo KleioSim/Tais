@@ -470,11 +470,6 @@ class PopTax : IEffectValue
     {
         this.from = city;
     }
-
-    public override string ToString()
-    {
-        return $"BaseValue  {BaseValue}" + "\n" + String.Join("\n", Effects.Select(x => $"{x.Desc}  {(x.Percent < 0 ? "" : "+")}{x.Percent * 100}%"));
-    }
 }
 
 class Finance : IFinance

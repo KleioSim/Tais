@@ -23,7 +23,8 @@ public partial class CityDetailPanelPresent : PresentControl<CityDetailPanel, IS
         view.PopTaxToolTipTrigger.funcGetToolTipString = () =>
         {
             var cityObj = view.Id as ICity;
-            return cityObj.PopTax.ToString();
+
+            return $"BaseValue  {cityObj.PopTax.BaseValue}" + "\n" + string.Join("\n", cityObj.PopTax.Effects.Select(x => $"{x.Desc}  {x.Percent.ToString("+0%;-#%")}"));
         };
     }
 

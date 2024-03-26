@@ -1,8 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcwyi1fd440tg"]
+[gd_scene load_steps=3 format=3 uid="uid://bcwyi1fd440tg"]
 
 [ext_resource type="Script" path="res://MainScene/LeftPanels/CityDetailPanel/BufferItem.cs" id="1_vq04g"]
+[ext_resource type="Script" path="res://addons/TooltipTrigger/TooltipTrigger.cs" id="2_dwg0j"]
 
 [node name="Button" type="Button"]
 custom_minimum_size = Vector2(45, 45)
 text = "--"
 script = ExtResource("1_vq04g")
+
+[node name="TooltipTrigger" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_dwg0j")
