@@ -11,7 +11,7 @@ public partial class CityOperationList : ViewControl
     {
         OperationContainer = new ItemContainer<CityOperationItem>(() =>
         {
-            return GetNode<InstancePlaceholder>("Item");
+            return GetNode<InstancePlaceholder>("PanelContainer/VBoxContainer/Item");
         });
 
         OperationContainer.OnAddedItem = (item) =>

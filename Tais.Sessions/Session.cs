@@ -13,23 +13,19 @@ class Session : ISession
     public IFinance Finance => finance;
     public IEnumerable<ICity> Cities => cities;
     public ICentralGov CentralGov => centralGov;
-    public IEnumerable<IToast> Toasts => toasts;
+    public IList<IToast> Toasts => toasts;
 
     internal Date date = new Date();
     internal Finance finance = new Finance();
     internal List<Task> tasks = new List<Task>();
     internal List<City> cities = new List<City>();
     internal CentralGov centralGov = new CentralGov();
-    internal List<Toast> toasts = new List<Toast>();
+    internal List<IToast> toasts = new List<IToast>();
 
     public void OnCommand(ICommand command)
     {
         switch (command)
         {
-            case Cmd_NextTurn:
-                toasts.Clear();
-                //finance.OnNextTurn();
-                break;
             case Cmd_TaskStart cmd_TaskStart:
                 {
                     var task = new Task(cmd_TaskStart.Def as ITaskDef, cmd_TaskStart.Target);

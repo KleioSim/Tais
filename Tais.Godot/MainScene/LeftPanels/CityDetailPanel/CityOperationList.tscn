@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnoytxbyfh5d3"]
+[gd_scene load_steps=3 format=3 uid="uid://cnoytxbyfh5d3"]
 
 [ext_resource type="Script" path="res://MainScene/LeftPanels/CityDetailPanel/CityOperationList.cs" id="1_yrhq6"]
+[ext_resource type="Script" path="res://MainScene/RunMaskPanel.cs" id="2_fklpq"]
 
 [node name="CityOperationList" type="VBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
@@ -13,5 +14,15 @@ text = "Operation"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Item" parent="." instance_placeholder="res://MainScene/LeftPanels/CityDetailPanel/CityOperationItem.tscn"]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Item" parent="PanelContainer/VBoxContainer" instance_placeholder="res://MainScene/LeftPanels/CityDetailPanel/CityOperationItem.tscn"]
+layout_mode = 2
+
+[node name="RunMaskPanel" type="Panel" parent="PanelContainer"]
+layout_mode = 2
+script = ExtResource("2_fklpq")

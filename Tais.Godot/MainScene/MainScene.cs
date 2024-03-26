@@ -1,7 +1,14 @@
 ﻿using Godot;
+using System;
 
 public partial class MainScene : ViewControl
 {
+    [Signal]
+    public delegate void NextTurnStartedEventHandler();
+
+    [Signal]
+    public delegate void NextTurnFinishedEventHandler();
+
     internal Button CreateTask => GetNode<Button>("CreateTask");
     internal Button CreateEvent { get; }
     internal Button NextTurn => GetNode<Button>("NextTurn");
@@ -40,6 +47,26 @@ public partial class MainScene : ViewControl
         City.Pressed += () =>
         {
             var cityListPanel = LeftPanel.ShowCityListPanel();
+        };
+
+        NextTurnStarted += () =>
+        {
+            NextTurn.Visible = false;
+
+            foreach (var maskPanel in RunMaskPanel.Panels)
+            {
+                maskPanel.Visible = true;
+            }
+        };
+
+        NextTurnFinished += () =>
+        {
+            NextTurn.Visible = true;
+
+            foreach (var maskPanel in RunMaskPanel.Panels)
+            {
+                maskPanel.Visible = false;
+            }
         };
     }
 }

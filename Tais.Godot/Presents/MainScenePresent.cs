@@ -13,9 +13,10 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
 
         view.NextTurn.Pressed += () =>
         {
-            SendCommand(new Cmd_NextTurn());
+            view.EmitSignal(MainScene.SignalName.NextTurnStarted);
 
-            view.NextTurn.Disabled = true;
+            model.Toasts.Clear();
+
             view.NextDayTimer.Start();
         };
 
@@ -25,8 +26,9 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
 
             if (model.Date.Day == 1 || model.Date.Day == 16)
             {
-                view.NextTurn.Disabled = false;
                 view.NextDayTimer.Stop();
+
+                view.EmitSignal(MainScene.SignalName.NextTurnFinished);
             }
         };
     }
