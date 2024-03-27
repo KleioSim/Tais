@@ -39,7 +39,7 @@ class Session : ISession
                 break;
             case Cmd_TaskCancel cmd_TaskCancel:
                 {
-                    var task = cmd_TaskCancel.task as Task;
+                    var task = cmd_TaskCancel.Target as Task;
                     tasks.Remove(task);
                 }
                 break;
@@ -169,7 +169,17 @@ class Task : ITask
             progress = value;
             if (Progress >= 100)
             {
-                Def.Operation.Do(Def.Name, Target);
+                if (Def.Command != null)
+                {
+                    Def.Command.Target = Target;
+                    Def.Command.Reason = Def.Name;
+
+                    CommandSender.Send(Def.Command);
+                }
+                else
+                {
+                    Def.Operation.Do(Def.Name, Target);
+                }
             }
         }
     }

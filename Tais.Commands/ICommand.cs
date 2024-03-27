@@ -2,5 +2,11 @@
 
 public interface ICommand
 {
+    string Reason { get; set; }
+    object Target { get; set; }
+}
 
+public static class CommandSender
+{
+    public static Action<ICommand> Send { get; set; }
 }

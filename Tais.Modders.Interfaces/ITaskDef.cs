@@ -1,4 +1,6 @@
-﻿namespace Tais.Modders.Interfaces;
+﻿using Tais.Commands;
+
+namespace Tais.Modders.Interfaces;
 
 public interface ITaskDef
 {
@@ -9,4 +11,5 @@ public interface ITaskDef
 
     ICondition Condition { get; }
     IOperation Operation { get; }
+    ICommand Command { get; }
 }

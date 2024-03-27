@@ -10,7 +10,6 @@ public static class SessionBuilder
     public static ISession Build(InitialData initialData, IModder modder)
     {
         var session = new Session();
-        modder.SendCommand = session.OnCommand;
 
         session.player.Initialize(initialData.PlayerInitData);
 

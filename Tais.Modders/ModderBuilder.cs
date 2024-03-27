@@ -1,4 +1,5 @@
-﻿using Tais.Effects;
+﻿using Tais.Commands;
+using Tais.Effects;
 using Tais.Modders.Conditions;
 using Tais.Modders.Interfaces;
 using Tais.Modders.Operations;
@@ -33,6 +34,7 @@ public class ModderBuilder
                             RequestActionPoint = 3,
                             Speed = 10,
                             Condition = new TrueCondition(),
+                            Command = new Cmd_ChangeFamilyAttitude(){Value  = 5.0f},
                             Operation = new ChangeFamilyAttitude(5.0f)
                         }
                     }
