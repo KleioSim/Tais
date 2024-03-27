@@ -1,4 +1,6 @@
-﻿namespace Tais.Interfaces;
+﻿using Tais.Modders.Interfaces;
+
+namespace Tais.Interfaces;
 
 public interface ITask
 {

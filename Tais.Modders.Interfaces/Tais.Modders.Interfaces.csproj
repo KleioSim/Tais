@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Tais.Commands\Tais.Commands.csproj" />
-    <ProjectReference Include="..\Tais.Modders.Interfaces\Tais.Modders.Interfaces.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -1,4 +1,6 @@
-﻿namespace Tais.Interfaces;
+﻿using Tais.Modders.Interfaces;
+
+namespace Tais.Interfaces;
 
 public interface IPop
 {
@@ -15,17 +17,6 @@ public interface IFamily
 {
     string Name { get; }
     IGroupValue Attitude { get; }
-}
-
-
-public interface IPopDef
-{
-    string PopName { get; }
-    bool IsRegisted { get; }
-    bool HasFamily { get; }
-
-    IEnumerable<ITaskDef> TaskDefs { get; }
-
 }
 
 public interface IPopInitData

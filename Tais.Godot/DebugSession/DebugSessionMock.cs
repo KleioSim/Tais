@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Tais.Interfaces;
+using Tais.Modders;
 using Tais.Sessions;
 
 public partial class DebugSessionMock : MockControl<DebugSession, ISession>
@@ -101,7 +102,9 @@ public partial class DebugSessionMock : MockControl<DebugSession, ISession>
                 }
             };
 
-            return SessionBuilder.Build(initData);
+            var modder = ModderBuilder.Build();
+
+            return SessionBuilder.Build(initData, modder);
         }
     }
 }

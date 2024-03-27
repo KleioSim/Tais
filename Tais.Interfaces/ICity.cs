@@ -1,4 +1,6 @@
-﻿namespace Tais.Interfaces;
+﻿using Tais.Modders.Interfaces;
+
+namespace Tais.Interfaces;
 
 public interface ICity
 {
@@ -24,24 +26,8 @@ public interface ICityInitData
     bool IsControlled { get; }
 }
 
-public interface ICityDef
-{
-    IEnumerable<ITaskDef> TaskDefs { get; }
-    IEnumerable<IBufferDef> BufferDefs { get; }
-}
-
 public interface IBuffer
 {
     string Name { get; }
-    IEnumerable<IEffect> Effects { get; }
-}
-
-public interface IBufferDef
-{
-    string BufferName { get; }
-
-    ICondition ValidCondition { get; }
-    ICondition InvalidCondition { get; }
-
     IEnumerable<IEffect> Effects { get; }
 }

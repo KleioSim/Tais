@@ -1,4 +1,4 @@
-﻿namespace Tais.Interfaces;
+﻿namespace Tais.Modders.Interfaces;
 
 public interface ITaskDef
 {
@@ -9,14 +9,4 @@ public interface ITaskDef
 
     ICondition Condition { get; }
     IOperation Operation { get; }
-}
-
-public interface IOperation
-{
-    void Do(string desc, object target);
-}
-
-public interface ICondition
-{
-    bool IsSatisfied(object target);
 }

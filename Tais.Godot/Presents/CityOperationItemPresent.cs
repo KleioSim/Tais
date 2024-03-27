@@ -2,6 +2,7 @@
 using System.Linq;
 using Tais.Commands;
 using Tais.Interfaces;
+using Tais.Modders.Interfaces;
 
 public partial class CityOperationItemPresent : PresentControl<CityOperationItem, ISession>
 {

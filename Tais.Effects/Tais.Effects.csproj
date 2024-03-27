@@ -2,15 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Tais.Citys\Tais.Citys.csproj" />
-    <ProjectReference Include="..\Tais.Effects\Tais.Effects.csproj" />
     <ProjectReference Include="..\Tais.Interfaces\Tais.Interfaces.csproj" />
-    <ProjectReference Include="..\Tais.Pops\Tais.Pops.csproj" />
   </ItemGroup>
 
 </Project>

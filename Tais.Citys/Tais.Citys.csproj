@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tais.Buffers\Tais.Buffers.csproj" />
+    <ProjectReference Include="..\Tais.Effects\Tais.Effects.csproj" />
+    <ProjectReference Include="..\Tais.Interfaces\Tais.Interfaces.csproj" />
+
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>Tais.Sessions</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>Tais.Modders</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+
+</Project>
