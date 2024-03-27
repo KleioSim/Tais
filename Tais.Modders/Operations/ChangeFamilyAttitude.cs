@@ -1,4 +1,5 @@
-﻿using Tais.Modders.Interfaces;
+﻿using Tais.Commands;
+using Tais.Modders.Interfaces;
 using Tais.Pops;
 
 namespace Tais.Modders.Operations;
@@ -14,10 +15,7 @@ public class ChangeFamilyAttitude : IOperation
 
     public void Do(string desc, object target)
     {
-        var pop = target as Pop;
-
-        var attitude = pop.Family.Attitude as Attitude;
-        attitude.items.Add(new Attitude.Item(desc, value));
+        CommandSender.Send(new Cmd_ChangeFamilyAttitude() { Reason = desc, Target = target, Value = value });
     }
 
     public override string ToString()

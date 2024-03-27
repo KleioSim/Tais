@@ -16,3 +16,10 @@ public class Cmd_NextDay : ICommand
 {
 
 }
+
+public class Cmd_ChangeFamilyAttitude : ICommand
+{
+    public string Reason { get; set; }
+    public float Value { get; set; }
+    public object Target { get; set; }
+}

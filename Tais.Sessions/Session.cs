@@ -60,6 +60,15 @@ class Session : ISession
                     tasks.RemoveAll(x => x.Progress >= 100);
                 }
                 break;
+            case Cmd_ChangeFamilyAttitude cmd_ChangeFamilyAttitude:
+                {
+                    var pop = cmd_ChangeFamilyAttitude.Target as Pop;
+
+                    var attitude = pop.Family.Attitude as Attitude;
+
+                    attitude.items.Add(new Attitude.Item(cmd_ChangeFamilyAttitude.Reason, cmd_ChangeFamilyAttitude.Value));
+                }
+                break;
             default:
                 throw new Exception($"Not support cmd type {command.GetType()}");
         }
