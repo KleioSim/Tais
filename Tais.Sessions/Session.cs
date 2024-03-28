@@ -169,17 +169,10 @@ class Task : ITask
             progress = value;
             if (Progress >= 100)
             {
-                if (Def.Command != null)
-                {
-                    Def.Command.Target = Target;
-                    Def.Command.Reason = Def.Name;
+                Def.Command.Target = Target;
+                Def.Command.Reason = Def.Name;
 
-                    CommandSender.Send(Def.Command);
-                }
-                else
-                {
-                    Def.Operation.Do(Def.Name, Target);
-                }
+                CommandSender.Send(Def.Command);
             }
         }
     }

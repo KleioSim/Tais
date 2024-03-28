@@ -12,9 +12,7 @@ public partial class Initialize : Node
             {
                 GD.Print($"OnUICommand:{command.GetType()}");
 
-                var session = PresentBase.Model as ISession;
-
-                session.OnCommand(command as ICommand);
+                CommandSender.Send?.Invoke(command as ICommand);
             }
         };
     }

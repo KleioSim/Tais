@@ -11,8 +11,6 @@ class TaskDef : ITaskDef
 
     public float Speed { get; init; }
 
-    public IOperation Operation { get; init; }
-
     public int RequestActionPoint { get; init; }
 
     public ICommand Command { get; init; }

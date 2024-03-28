@@ -1,9 +1,8 @@
 ﻿namespace Tais.Commands;
 
-public class Cmd_TaskCancel : ICommand
+public class Cmd_TaskCancel : AbsCommand
 {
-    public object Target { get; set; }
-    public string Reason { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public override string Desc { get; }
 
     public Cmd_TaskCancel(object task)
     {

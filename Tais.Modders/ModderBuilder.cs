@@ -2,7 +2,6 @@
 using Tais.Effects;
 using Tais.Modders.Conditions;
 using Tais.Modders.Interfaces;
-using Tais.Modders.Operations;
 
 namespace Tais.Modders;
 
@@ -19,14 +18,14 @@ public class ModderBuilder
                     PopName = "HAO",
                     IsRegisted = true,
                     HasFamily = true,
-                    TaskDefs = new ITaskDef[]{
+                    TaskDefs = new ITaskDef[] {
                         new TaskDef()
                         {
                             Name = $"HAO_POP_DEC",
                             RequestActionPoint = 2,
                             Speed = 10,
                             Condition = new PopMinCountCondition(100),
-                            Operation = new SetPopCountDec(0.1f)
+                            Command = new Cmd_ChangePopCount() { Value = 0.1f },
                         },
                         new TaskDef()
                         {
@@ -34,8 +33,7 @@ public class ModderBuilder
                             RequestActionPoint = 3,
                             Speed = 10,
                             Condition = new TrueCondition(),
-                            Command = new Cmd_ChangeFamilyAttitude(){Value  = 5.0f},
-                            Operation = new ChangeFamilyAttitude(5.0f)
+                            Command = new Cmd_ChangeFamilyAttitude() { Value = 5.0f },
                         }
                     }
                 },
@@ -44,14 +42,14 @@ public class ModderBuilder
                     PopName = "MIN",
                     IsRegisted = true,
                     HasFamily = false,
-                    TaskDefs = new ITaskDef[]{
+                    TaskDefs = new ITaskDef[] {
                         new TaskDef()
                         {
                             Name = $"MIN_POP_DEC",
                             RequestActionPoint = 1,
                             Speed = 10,
                             Condition = new PopMinCountCondition(1200),
-                            Operation = new SetPopCountDec(0.1f)
+                            Command = new Cmd_ChangePopCount() { Value = 0.1f },
                         }
                     }
                 },
@@ -60,14 +58,14 @@ public class ModderBuilder
                     PopName = "YIN",
                     IsRegisted = false,
                     HasFamily = false,
-                    TaskDefs = new ITaskDef[]{
+                    TaskDefs = new ITaskDef[] {
                         new TaskDef()
                         {
                             Name = $"YIN_POP_DEC",
                             RequestActionPoint = 3,
                             Speed = 10,
                             Condition = new PopMinCountCondition(12000),
-                            Operation = new SetPopCountDec(0.1f)
+                            Command = new Cmd_ChangePopCount() { Value = 0.1f },
                         }
                     }
                 }
@@ -83,7 +81,7 @@ public class ModderBuilder
                         RequestActionPoint = 4,
                         Speed = 5,
                         Condition = new CityNameCondition($"CITY_0"),
-                        Operation = new SetCityNotControledOperation()
+                        Command = new Cmd_ChangeCityIsControlFlag(){Value = false},
                     },
                     new TaskDef()
                     {
@@ -91,7 +89,7 @@ public class ModderBuilder
                         RequestActionPoint = 5,
                         Speed = 5,
                         Condition = new CityNameCondition($"CITY_1"),
-                        Operation = new SetCityNotControledOperation()
+                        Command = new Cmd_ChangeCityIsControlFlag(){Value = false},
                     }
                 },
                 BufferDefs = new IBufferDef[]

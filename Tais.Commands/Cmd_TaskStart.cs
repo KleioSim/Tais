@@ -1,10 +1,10 @@
 ﻿namespace Tais.Commands;
 
-public class Cmd_TaskStart : ICommand
+public class Cmd_TaskStart : AbsCommand
 {
     public object Def { get; }
-    public object Target { get; set; }
-    public string Reason { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    public override string Desc { get; }
 
     public Cmd_TaskStart(object def, object target)
     {
@@ -13,16 +13,28 @@ public class Cmd_TaskStart : ICommand
     }
 }
 
-public class Cmd_NextDay : ICommand
+public class Cmd_NextDay : AbsCommand
 {
-    public object Target { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-    public string Reason { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public override string Desc { get; }
 }
 
-public class Cmd_ChangeFamilyAttitude : ICommand
+public class Cmd_ChangeFamilyAttitude : AbsCommand
 {
-    public string Reason { get; set; }
+    public override string Desc => $"{nameof(Cmd_ChangeFamilyAttitude)} {Value.ToString("+0;-#")}";
+
     public float Value { get; set; }
-    public object Target { get; set; }
+}
+
+public class Cmd_ChangePopCount : AbsCommand
+{
+    public override string Desc => $"{nameof(Cmd_ChangePopCount)} {Value.ToString("+0%;-#%")}";
+
+    public float Value { get; set; }
+}
+
+public class Cmd_ChangeCityIsControlFlag : AbsCommand
+{
+    public override string Desc => $"{nameof(Cmd_ChangeCityIsControlFlag)} {Value}";
+
+    public bool Value { get; set; }
 }

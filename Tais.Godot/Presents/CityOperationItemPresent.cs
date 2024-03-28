@@ -19,7 +19,7 @@ public partial class CityOperationItemPresent : PresentControl<CityOperationItem
         {
             var itemObj = ((ITaskDef def, object target))view.Id;
 
-            var desc = itemObj.def.Operation.ToString() + "\n";
+            var desc = itemObj.def.Command.Desc + "\n";
 
             desc += "\n";
             desc += $"Request Player Engine {itemObj.def.RequestActionPoint}" + "\n";
