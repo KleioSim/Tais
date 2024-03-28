@@ -1,6 +1,8 @@
 ﻿using Godot;
+using System;
 using System.Linq;
 using Tais.Commands;
+using Tais.Godot.Utilities.UBBCodes;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
 
@@ -19,15 +21,15 @@ public partial class CityOperationItemPresent : PresentControl<CityOperationItem
         {
             var itemObj = ((ITaskDef def, object target))view.Id;
 
-            var desc = itemObj.def.Command.Desc + "\n";
+            var def = itemObj.def;
+
+            var desc = def.Command.Desc + "\n";
 
             desc += "\n";
-            desc += $"Request Player Engine {itemObj.def.RequestActionPoint}" + "\n";
+            desc += UBB.Core($"Request ActionPoint {def.RequestActionPoint}")
+                .Color(def.RequestActionPoint < model.Player.FreeActionPoints ? UBBColor.RED : UBBColor.GREEN) + "\n";
 
-            if (!itemObj.def.Condition.IsSatisfied(itemObj.target))
-            {
-                desc += "\n" + itemObj.def.Condition.ToString();
-            }
+            desc += "\n" + itemObj.def.Condition.ToString();
 
             return desc;
         };
