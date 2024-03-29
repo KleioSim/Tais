@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://btg6r4v8lji4k"]
 
 [ext_resource type="Script" path="res://MainScene/LeftPanels/CityDetailPanel/CityOperationItem.cs" id="1_17ops"]
-[ext_resource type="Script" path="res://addons/TooltipTrigger/TooltipTrigger.cs" id="2_mn55o"]
+[ext_resource type="PackedScene" uid="uid://c4ec77j7g1k1i" path="res://Utilities/TooltipPanel/TooltipTriggerEx.tscn" id="2_pg5aw"]
 
 [node name="Item" type="Panel"]
 custom_minimum_size = Vector2(0, 40)
@@ -21,12 +21,6 @@ grow_vertical = 2
 text = "--"
 text_overrun_behavior = 1
 
-[node name="TooltipTrigger" type="Control" parent="Button"]
+[node name="TooltipTriggerEx" parent="Button" instance=ExtResource("2_pg5aw")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 mouse_filter = 1
-script = ExtResource("2_mn55o")

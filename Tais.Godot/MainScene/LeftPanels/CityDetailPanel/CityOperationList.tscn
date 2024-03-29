@@ -24,5 +24,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="RunMaskPanel" type="Panel" parent="PanelContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("2_fklpq")

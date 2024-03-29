@@ -27,7 +27,7 @@ public partial class CityOperationItemPresent : PresentControl<CityOperationItem
 
             desc += "\n";
             desc += UBB.Core($"Request ActionPoint {def.RequestActionPoint}")
-                .Color(def.RequestActionPoint < model.Player.FreeActionPoints ? UBBColor.RED : UBBColor.GREEN) + "\n";
+                .Color(def.RequestActionPoint < model.Player.FreeActionPoints ? UBBColor.GREEN : UBBColor.RED) + "\n";
 
             desc += "\n" + itemObj.def.Condition.ToString();
 

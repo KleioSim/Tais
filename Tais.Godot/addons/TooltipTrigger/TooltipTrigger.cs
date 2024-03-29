@@ -7,6 +7,6 @@ public partial class TooltipTrigger : Control
 
     public override string _GetTooltip(Vector2 atPosition)
     {
-        return funcGetToolTipString != null ? funcGetToolTipString() : base._GetTooltip(atPosition);
+        return funcGetToolTipString != null ? funcGetToolTipString() : this.TooltipText;
     }
 }
