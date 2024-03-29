@@ -11,7 +11,7 @@ public class PopInitData : IPopInitData
     public string PopName { get; init; }
 }
 
-public class InitialData
+public class InitialData : IInitialData
 {
     public IEnumerable<ICityInitData> CityInitDatas { get; init; }
 

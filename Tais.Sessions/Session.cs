@@ -1,6 +1,7 @@
 ﻿using Tais.Citys;
 using Tais.Commands;
 using Tais.Effects;
+using Tais.InitialDatas.Interfaces;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
 using Tais.Pops;
