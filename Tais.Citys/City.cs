@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Tais.Effects;
 using Tais.Modders.Interfaces;
+using Tais.InitialDatas.Interfaces;
 
 namespace Tais.Citys;
 

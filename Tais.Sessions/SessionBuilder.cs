@@ -1,4 +1,5 @@
 ﻿using Tais.Citys;
+using Tais.InitialDatas.Interfaces;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
 using Tais.Pops;
@@ -7,7 +8,7 @@ namespace Tais.Sessions;
 
 public static class SessionBuilder
 {
-    public static ISession Build(InitialData initialData, IModder modder)
+    public static ISession Build(IInitialData initialData, IModder modder)
     {
         var session = new Session();
 
@@ -27,17 +28,3 @@ public static class SessionBuilder
     }
 }
 
-public class InitialData
-{
-    public IEnumerable<ICityInitData> CityInitDatas { get; init; }
-
-    public Dictionary<string, IEnumerable<IPopInitData>> City2PopInitDatas { get; init; }
-    public IPlayerInitData PlayerInitData { get; init; }
-}
-
-public class CityInitData : ICityInitData
-{
-    public string CityName { get; init; }
-
-    public bool IsControlled { get; init; }
-}

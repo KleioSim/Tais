@@ -7,6 +7,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tais.Commands\Tais.Commands.csproj" />
+    <ProjectReference Include="..\Tais.InitialDatas\Tais.InitialDatas.csproj" />
     <ProjectReference Include="..\Tais.Modders\Tais.Modders.csproj" />
     <ProjectReference Include="..\Tais.Sessions\Tais.Sessions.csproj" />
   </ItemGroup>

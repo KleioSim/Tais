@@ -19,9 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.Effects", "..\Tais.Eff
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.Buffers", "..\Tais.Buffers\Tais.Buffers.csproj", "{FA827DDC-88E7-4189-A85B-0944CA75E60B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tais.Modders", "..\Tais.Modders\Tais.Modders.csproj", "{20B97D38-8A56-4469-B11A-DC217ED4E1FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.Modders", "..\Tais.Modders\Tais.Modders.csproj", "{20B97D38-8A56-4469-B11A-DC217ED4E1FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tais.Modders.Interfaces", "..\Tais.Modders.Interfaces\Tais.Modders.Interfaces.csproj", "{CDE47BDA-9E82-4757-BBAF-A88BB7F76B7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.Modders.Interfaces", "..\Tais.Modders.Interfaces\Tais.Modders.Interfaces.csproj", "{CDE47BDA-9E82-4757-BBAF-A88BB7F76B7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tais.InitialDatas", "..\Tais.InitialDatas\Tais.InitialDatas.csproj", "{827AA774-17CC-4925-8069-649D3E9671B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tais.InitialDatas.Interfaces", "..\Tais.InitialDatas.Interfaces\Tais.InitialDatas.Interfaces.csproj", "{7D9C2412-4806-4A22-A28A-7158D5579C6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +115,22 @@ Global
 		{CDE47BDA-9E82-4757-BBAF-A88BB7F76B7B}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
 		{CDE47BDA-9E82-4757-BBAF-A88BB7F76B7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDE47BDA-9E82-4757-BBAF-A88BB7F76B7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{827AA774-17CC-4925-8069-649D3E9671B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{827AA774-17CC-4925-8069-649D3E9671B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{827AA774-17CC-4925-8069-649D3E9671B6}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{827AA774-17CC-4925-8069-649D3E9671B6}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{827AA774-17CC-4925-8069-649D3E9671B6}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{827AA774-17CC-4925-8069-649D3E9671B6}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
+		{827AA774-17CC-4925-8069-649D3E9671B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{827AA774-17CC-4925-8069-649D3E9671B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D9C2412-4806-4A22-A28A-7158D5579C6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D9C2412-4806-4A22-A28A-7158D5579C6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D9C2412-4806-4A22-A28A-7158D5579C6C}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D9C2412-4806-4A22-A28A-7158D5579C6C}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{7D9C2412-4806-4A22-A28A-7158D5579C6C}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{7D9C2412-4806-4A22-A28A-7158D5579C6C}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
+		{7D9C2412-4806-4A22-A28A-7158D5579C6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D9C2412-4806-4A22-A28A-7158D5579C6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

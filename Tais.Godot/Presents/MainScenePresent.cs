@@ -4,6 +4,17 @@ using Tais.Interfaces;
 
 public partial class MainScenePresent : PresentControl<MainScene, ISession>
 {
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+
+        if (!IsMock)
+        {
+            var global = GetNode<Initialize>("/root/Global");
+            Model = global.session;
+        }
+    }
+
     protected override void Initialize(MainScene view, ISession model)
     {
         view.CreateTask.Pressed += () =>

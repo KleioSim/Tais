@@ -5,8 +5,3 @@ public interface IPlayer
     int FreeActionPoints { get; }
     int TotalActionPoints { get; }
 }
-
-public interface IPlayerInitData
-{
-
-}

@@ -223,14 +223,3 @@ class Player : IPlayer
         TotalActionPoints = 10;
     }
 }
-
-
-
-public class PopInitData : IPopInitData
-{
-    public int Count { get; init; }
-
-    public string FamilyName { get; init; }
-
-    public string PopName { get; init; }
-}
