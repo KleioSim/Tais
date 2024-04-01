@@ -67,4 +67,14 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
             dialog.Object = model.CurrEvent;
         }
     }
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+        if (Model.Player.IsRevoked || Model.Player.IsDead)
+        {
+            View.GMFailedEvent.Visible = true;
+        }
+    }
 }

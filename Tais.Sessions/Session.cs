@@ -1,4 +1,5 @@
-﻿using Tais.Citys;
+﻿using System.Numerics;
+using Tais.Citys;
 using Tais.Commands;
 using Tais.Effects;
 using Tais.InitialDatas.Interfaces;
@@ -70,6 +71,18 @@ class Session : ISession
                     attitude.items.Add(new Attitude.Item(cmd_ChangeFamilyAttitude.Reason, cmd_ChangeFamilyAttitude.Value));
                 }
                 break;
+            case Cmd_ChangePopCount cmd_ChangePopCount:
+                {
+                    var pop = cmd_ChangePopCount.Target as Pop;
+                    pop.Count += cmd_ChangePopCount.Value;
+                }
+                break;
+            case Cmd_ChangeCityIsControlFlag cmd_ChangeCityIsControlFlag:
+                {
+                    var city = cmd_ChangeCityIsControlFlag.Target as City;
+                    city.IsOwned = cmd_ChangeCityIsControlFlag.Value;
+                }
+                break;
             default:
                 throw new Exception($"Not support cmd type {command.GetType()}");
         }
@@ -106,6 +119,16 @@ class Session : ISession
         {
             return tasks.Sum(x => x.Def.RequestActionPoint);
         };
+
+        //player.OnRevokeTitle = () =>
+        //{
+        //    CurrEvent = new PlayerTitleRevokedEvent();
+        //};
+
+        //player.OnDead = () =>
+        //{
+        //    CurrEvent = new PlayerDeadEvent();
+        //};
 
         finance.spends.Add(centralGov.RequestTax);
     }
@@ -219,8 +242,28 @@ class Player : IPlayer
 
     public int TotalActionPoints { get; private set; }
 
+    public bool IsRevoked { get; internal set; }
+
+    public bool IsDead { get; internal set; }
+
     internal void Initialize(IPlayerInitData initData)
     {
         TotalActionPoints = 10;
+    }
+}
+
+public class PlayerTitleRevokedEvent : IEvent
+{
+    public void OnSelect()
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class PlayerDeadEvent : IEvent
+{
+    public void OnSelect()
+    {
+        throw new NotImplementedException();
     }
 }

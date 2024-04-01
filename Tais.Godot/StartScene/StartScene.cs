@@ -1,18 +1,22 @@
 ﻿using Godot;
+using System;
 using Tais.Modders;
 
 public partial class StartScene : Control
 {
+    public static Action OnNewGame { get; set; }
+
+    public Button Start => GetNode<Button>("VBoxContainer/Start");
+
+    static StartScene()
+    {
+        OnNewGame += () => GD.Print("StartScene OnNewGame");
+    }
+
     public override void _Ready()
     {
         base._Ready();
 
-        var global = GetNode<Initialize>("/root/Global");
-        global.modder = ModderBuilder.Build();
-    }
-
-    public void OnNew()
-    {
-        GetTree().ChangeSceneToFile("res://InitializeScene/InitializeScene.tscn");
+        Start.Pressed += () => OnNewGame?.Invoke();
     }
 }

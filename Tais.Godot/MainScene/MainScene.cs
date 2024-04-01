@@ -3,6 +3,9 @@ using System;
 
 public partial class MainScene : ViewControl
 {
+    public static Action OnGMFailed;
+    public static Action OnGMSuccessed;
+
     [Signal]
     public delegate void NextTurnStartedEventHandler();
 
@@ -34,6 +37,8 @@ public partial class MainScene : ViewControl
 
     internal ItemContainer<TaskItem> TaskContainer;
     internal ItemContainer<ToastItem> ToastContainer;
+
+    internal GMFailedEvent GMFailedEvent => GetNode<GMFailedEvent>("GMFailedEvent");
 
     public override void _Ready()
     {
@@ -70,6 +75,11 @@ public partial class MainScene : ViewControl
             {
                 maskPanel.Visible = false;
             }
+        };
+
+        GMFailedEvent.Confirm.Pressed += () =>
+        {
+            OnGMFailed?.Invoke();
         };
     }
 }
