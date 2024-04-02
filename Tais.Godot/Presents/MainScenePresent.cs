@@ -10,7 +10,7 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
 
         if (!IsMock)
         {
-            var global = GetNode<Initialize>("/root/Global");
+            var global = GetNode<Global>("/root/Global");
             Model = global.session;
         }
     }
