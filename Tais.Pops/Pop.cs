@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Tais.Entities;
 using Tais.InitialDatas.Interfaces;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
 
 namespace Tais.Pops;
 
-internal class Pop : IPop
+internal class Pop : Entity, IPop
 {
     public string Name => def.PopName;
     public float Count { get; set; }

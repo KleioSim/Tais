@@ -2,7 +2,7 @@
 
 namespace Tais.Interfaces;
 
-public interface ICity
+public interface ICity : IEntity
 {
     string Name { get; }
     IGroupValue PopCount { get; }
@@ -24,4 +24,9 @@ public interface IBuffer
 {
     string Name { get; }
     IEnumerable<IEffect> Effects { get; }
+}
+
+public interface IEntity
+{
+    string Id { get; }
 }

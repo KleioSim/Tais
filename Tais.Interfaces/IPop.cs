@@ -2,7 +2,7 @@
 
 namespace Tais.Interfaces;
 
-public interface IPop
+public interface IPop : IEntity
 {
     string Name { get; }
     float Count { get; set; }

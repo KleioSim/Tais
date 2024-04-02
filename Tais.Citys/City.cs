@@ -5,10 +5,11 @@ using System.Linq;
 using Tais.Effects;
 using Tais.Modders.Interfaces;
 using Tais.InitialDatas.Interfaces;
+using Tais.Entities;
 
 namespace Tais.Citys;
 
-internal class City : ICity
+internal class City : Entity, ICity
 {
     public static Action<bool, City>? OnOwnerChanged;
     public static Action<IBuffer, ICity>? OnBufferAdded;

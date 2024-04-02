@@ -85,6 +85,8 @@ public class CityMock : ICity
 
     public IEnumerable<IEffect> Effects => throw new NotImplementedException();
 
+    public string Id => throw new NotImplementedException();
+
     public EffectValueMock popTax = new EffectValueMock();
     public GroupValueMock popCount = new GroupValueMock();
 }
