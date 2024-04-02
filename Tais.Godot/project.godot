@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Initialize="*res://AutoLoads/Initialize.cs"
+ScenceSwitch="*res://AutoLoads/ScenceSwitch.cs"
 
 [display]
 
