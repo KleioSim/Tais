@@ -25,7 +25,7 @@ public class ModderBuilder
                             RequestActionPoint = 2,
                             Speed = 10,
                             Condition = new PopMinCountCondition(100),
-                            Command = new Cmd_ChangePopCount() { Value = 0.1f },
+                            Command = new Cmd_ChangePopCount(0.1f),
                         },
                         new TaskDef()
                         {
@@ -33,7 +33,7 @@ public class ModderBuilder
                             RequestActionPoint = 3,
                             Speed = 10,
                             Condition = new TrueCondition(),
-                            Command = new Cmd_ChangeFamilyAttitude() { Value = 5.0f },
+                            Command = new Cmd_ChangeFamilyAttitude(5.0f),
                         }
                     }
                 },
@@ -49,7 +49,7 @@ public class ModderBuilder
                             RequestActionPoint = 1,
                             Speed = 10,
                             Condition = new PopMinCountCondition(1200),
-                            Command = new Cmd_ChangePopCount() { Value = 0.1f },
+                            Command = new Cmd_ChangePopCount(0.1f),
                         }
                     }
                 },
@@ -65,7 +65,7 @@ public class ModderBuilder
                             RequestActionPoint = 3,
                             Speed = 10,
                             Condition = new PopMinCountCondition(12000),
-                            Command = new Cmd_ChangePopCount() { Value = 0.1f },
+                            Command = new Cmd_ChangePopCount(0.1f),
                         }
                     }
                 }
@@ -81,7 +81,7 @@ public class ModderBuilder
                         RequestActionPoint = 4,
                         Speed = 5,
                         Condition = new CityNameCondition($"CITY_0"),
-                        Command = new Cmd_ChangeCityIsControlFlag(){Value = false},
+                        Command = new Cmd_ChangeCityIsControlFlag(false),
                     },
                     new TaskDef()
                     {
@@ -89,7 +89,7 @@ public class ModderBuilder
                         RequestActionPoint = 5,
                         Speed = 5,
                         Condition = new CityNameCondition($"CITY_1"),
-                        Command = new Cmd_ChangeCityIsControlFlag(){Value = false},
+                        Command = new Cmd_ChangeCityIsControlFlag(false),
                     }
                 },
                 BufferDefs = new IBufferDef[]

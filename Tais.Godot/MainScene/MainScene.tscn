@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://diukb1qwff3oq"]
+[gd_scene load_steps=6 format=3 uid="uid://diukb1qwff3oq"]
 
 [ext_resource type="Script" path="res://MainScene/MainScene.cs" id="1_52frr"]
 [ext_resource type="PackedScene" uid="uid://dvtfgfqd3puvn" path="res://MainScene/LeftPanels/LeftPanel.tscn" id="2_31dac"]
 [ext_resource type="Script" path="res://MainScene/GMFailedEvent.cs" id="3_5imvs"]
+[ext_resource type="Script" path="res://addons/godot-console/scripts/console_container.gd" id="4_0mic0"]
+[ext_resource type="Script" path="res://MainScene/Console/CheatCommand.cs" id="5_6ghos"]
 
 [node name="MainScene" type="Control"]
 layout_mode = 3
@@ -325,3 +327,12 @@ alignment = 1
 
 [node name="TaskItem" parent="RightPanel/TaskContainer" instance_placeholder="res://MainScene/Tasks/TaskItem.tscn"]
 layout_mode = 2
+
+[node name="ConsoleContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 544.0
+offset_bottom = 349.0
+script = ExtResource("4_0mic0")
+
+[node name="Node" type="Node" parent="ConsoleContainer"]
+script = ExtResource("5_6ghos")
