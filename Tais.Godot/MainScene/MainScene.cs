@@ -35,6 +35,8 @@ public partial class MainScene : ViewControl
     internal Label FreeActionPoint => GetNode<Label>("TopInfo/Player/ActionPoint/Free");
     internal Label TotalActionPoint => GetNode<Label>("TopInfo/Player/ActionPoint/Total");
 
+    internal Control ConsolePanel => GetNode<Control>("ConsolePanel");
+
     internal ItemContainer<TaskItem> TaskContainer;
     internal ItemContainer<ToastItem> ToastContainer;
 
@@ -81,5 +83,15 @@ public partial class MainScene : ViewControl
         {
             OnGMFailed?.Invoke();
         };
+    }
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+        if (Input.IsActionJustReleased("cheat_switch"))
+        {
+            ConsolePanel.Visible = !ConsolePanel.Visible;
+        }
     }
 }

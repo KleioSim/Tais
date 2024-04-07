@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://diukb1qwff3oq"]
+[gd_scene load_steps=7 format=3 uid="uid://diukb1qwff3oq"]
 
 [ext_resource type="Script" path="res://MainScene/MainScene.cs" id="1_52frr"]
 [ext_resource type="PackedScene" uid="uid://dvtfgfqd3puvn" path="res://MainScene/LeftPanels/LeftPanel.tscn" id="2_31dac"]
 [ext_resource type="Script" path="res://MainScene/GMFailedEvent.cs" id="3_5imvs"]
 [ext_resource type="Script" path="res://addons/godot-console/scripts/console_container.gd" id="4_0mic0"]
 [ext_resource type="Script" path="res://MainScene/Console/CheatCommand.cs" id="5_6ghos"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ojxui"]
+bg_color = Color(0, 0, 0, 0.392157)
 
 [node name="MainScene" type="Control"]
 layout_mode = 3
@@ -328,11 +331,21 @@ alignment = 1
 [node name="TaskItem" parent="RightPanel/TaskContainer" instance_placeholder="res://MainScene/Tasks/TaskItem.tscn"]
 layout_mode = 2
 
-[node name="ConsoleContainer" type="VBoxContainer" parent="."]
+[node name="ConsolePanel" type="Panel" parent="."]
+visible = false
 layout_mode = 0
-offset_right = 544.0
-offset_bottom = 349.0
+offset_right = 645.0
+offset_bottom = 355.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ojxui")
+
+[node name="ConsoleContainer" type="VBoxContainer" parent="ConsolePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("4_0mic0")
 
-[node name="Node" type="Node" parent="ConsoleContainer"]
+[node name="Node" type="Node" parent="ConsolePanel/ConsoleContainer"]
 script = ExtResource("5_6ghos")

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Godot;
+using System.Linq;
 using Tais.Commands;
 using Tais.Interfaces;
 
@@ -77,4 +78,5 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
             View.GMFailedEvent.Visible = true;
         }
     }
+
 }
