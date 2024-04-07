@@ -105,12 +105,11 @@ public partial class DebugSessionMock : MockControl<DebugSession, ISession>
                 }
             };
 
-            var modder = ModderBuilder.Build();
-            var session = SessionBuilder.Build(initData, modder);
+            var global = GetNode<Global>("/root/Global");
+            global.modder = ModderBuilder.Build();
+            global.session = SessionBuilder.Build(initData, global.modder);
 
-            CommandSender.Send = session.OnCommand;
-
-            return session;
+            return global.session;
         }
     }
 }
