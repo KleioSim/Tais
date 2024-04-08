@@ -45,12 +45,16 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
 
         foreach (var eventObj in session.OnDaysInc())
         {
+            PresentBase.SendCommand(new Cmd_UIRefresh());
+
             var dialog = view.EventDialogHolder.CreateInstance() as EventDialog;
             dialog.Object = eventObj;
             dialog.Visible = true;
 
             await ToSignal(dialog, EventDialog.SignalName.TreeExited);
         }
+
+        PresentBase.SendCommand(new Cmd_UIRefresh());
 
         if (session.Date.Day == 1 || session.Date.Day == 16)
         {

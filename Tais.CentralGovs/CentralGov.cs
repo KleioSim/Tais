@@ -1,4 +1,5 @@
 ﻿using Tais.Interfaces;
+using Tais.Modders.Interfaces;
 
 namespace Tais.CentralGovs;
 
@@ -10,28 +11,68 @@ class CentralGov : ICentralGov
 
     public RequestTax requestTax;
 
+    private IEnumerable<IEventDef> eventDefs = new IEventDef[]
+    {
+        new EventDef() { VaildDate = new VaildDate() { Day = 1 } },
+        new EventDef() { VaildDate = new VaildDate() { Day = 1, Month = 1} },
+    };
+
     public CentralGov()
     {
         requestTax = new RequestTax(this);
     }
 
-    internal IEnumerable<IEvent> OnDaysInc(IDate date)
+    internal IEnumerable<IEventDef> OnDaysInc(IDate date)
     {
-        var eventObj = new Event();
-        yield return eventObj;
+        foreach (var def in eventDefs)
+        {
+            if (!def.VaildDate.Check(date))
+            {
+                continue;
+            }
 
-
-        eventObj = new Event();
-        yield return eventObj;
+            if (def.isTrigger(this))
+            {
+                yield return def;
+            }
+        }
     }
 }
 
-public class Event : IEvent
+internal class EventDef : IEventDef
 {
-    public Action OnSelected;
+    public IVaildDate VaildDate { get; set; }
 
-    public void OnSelect()
+    public bool isTrigger(object obj)
     {
-        OnSelected?.Invoke();
+        return true;
     }
 }
+
+public class VaildDate : IVaildDate
+{
+    public int? Year { get; init; }
+    public int? Month { get; init; }
+    public int? Day { get; init; }
+
+    public bool Check(object target)
+    {
+        var date = (IDate)target;
+
+        if (Year != null && Year != date.Year)
+        {
+            return false;
+        }
+        if (Month != null && Month != date.Month)
+        {
+            return false;
+        }
+        if (Day != null && Day != date.Day)
+        {
+            return false;
+        }
+
+        return true;
+    }
+}
+

@@ -85,9 +85,9 @@ class Session : ISession
 
         tasks.RemoveAll(x => x.Progress >= 100);
 
-        foreach (var eventObject in centralGov.OnDaysInc(date))
+        foreach (var eventDef in centralGov.OnDaysInc(date))
         {
-            yield return eventObject;
+            yield return new Event(eventDef, centralGov);
         }
 
         date.DaysInc();
@@ -148,6 +148,15 @@ class Toast : IToast
 class Event : IEvent
 {
     public static Action? OnSelected;
+
+    private IEventDef def;
+    private object target;
+
+    public Event(IEventDef def, object target)
+    {
+        this.def = def;
+        this.target = target;
+    }
 
     public void OnSelect()
     {
