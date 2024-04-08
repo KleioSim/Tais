@@ -17,4 +17,5 @@ public interface ISession
     ICentralGov CentralGov { get; }
 
     void OnCommand(ICommand command);
+    IEnumerable<IEvent> OnDaysInc();
 }

@@ -1,4 +1,5 @@
 ﻿using Godot;
+using System.Collections.Generic;
 using System.Linq;
 using Tais.Commands;
 using Tais.Interfaces;
@@ -34,15 +35,31 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
 
         view.NextDayTimer.Timeout += () =>
         {
-            SendCommand(new Cmd_NextDay());
-
-            if (model.Date.Day == 1 || model.Date.Day == 16)
-            {
-                view.NextDayTimer.Stop();
-
-                view.EmitSignal(MainScene.SignalName.NextTurnFinished);
-            }
+            StartCoroutine(view, model);
         };
+    }
+
+    public async void StartCoroutine(MainScene view, ISession session)
+    {
+        view.NextDayTimer.Stop();
+
+        foreach (var eventObj in session.OnDaysInc())
+        {
+            var dialog = view.EventDialogHolder.CreateInstance() as EventDialog;
+            dialog.Object = eventObj;
+            dialog.Visible = true;
+
+            await ToSignal(dialog, EventDialog.SignalName.TreeExited);
+        }
+
+        if (session.Date.Day == 1 || session.Date.Day == 16)
+        {
+            view.EmitSignal(MainScene.SignalName.NextTurnFinished);
+        }
+        else
+        {
+            view.NextDayTimer.Start();
+        }
     }
 
     protected override void Update(MainScene view, ISession model)

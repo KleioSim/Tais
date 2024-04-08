@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using Tais.Citys;
+﻿using Tais.Citys;
 using Tais.Commands;
 using Tais.Effects;
 using Tais.InitialDatas.Interfaces;
@@ -45,23 +44,6 @@ class Session : ISession
                     tasks.Remove(task);
                 }
                 break;
-            case Cmd_NextDay:
-                {
-                    date.DaysInc();
-
-                    foreach (var task in tasks)
-                    {
-                        task.OnDaysInc(date);
-                    }
-
-                    foreach (var city in cities)
-                    {
-                        city.OnDaysInc(date);
-                    }
-
-                    tasks.RemoveAll(x => x.Progress >= 100);
-                }
-                break;
             case Cmd_ChangeFamilyAttitude cmd_ChangeFamilyAttitude:
                 {
                     var pop = cmd_ChangeFamilyAttitude.Target as Pop;
@@ -85,6 +67,41 @@ class Session : ISession
                 break;
             default:
                 throw new Exception($"Not support cmd type {command.GetType()}");
+        }
+    }
+
+    public IEnumerable<IEvent> OnDaysInc()
+    {
+        foreach (var task in tasks)
+        {
+            task.OnDaysInc(date);
+        }
+
+        foreach (var city in cities)
+        {
+            city.OnDaysInc(date);
+        }
+
+        tasks.RemoveAll(x => x.Progress >= 100);
+
+        var eventObj = new Event();
+        yield return eventObj;
+
+
+        eventObj = new Event();
+        yield return eventObj;
+
+        date.DaysInc();
+
+    }
+
+    public class Event : IEvent
+    {
+        public Action OnSelected;
+
+        public void OnSelect()
+        {
+            OnSelected?.Invoke();
         }
     }
 
@@ -130,7 +147,7 @@ class Session : ISession
         //    CurrEvent = new PlayerDeadEvent();
         //};
 
-        finance.spends.Add(centralGov.RequestTax);
+        //finance.spends.Add(centralGov.RequestTax);
     }
 }
 

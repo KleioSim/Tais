@@ -13,11 +13,6 @@ public class Cmd_TaskStart : AbsCommand
     }
 }
 
-public class Cmd_NextDay : AbsCommand
-{
-    public override string Desc { get; }
-}
-
 public class Cmd_ChangeFamilyAttitude : AbsCommand
 {
     public override string Desc => $"{nameof(Cmd_ChangeFamilyAttitude)} {Value.ToString("+0;-#")}";

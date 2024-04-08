@@ -59,6 +59,11 @@ public class SessionMock : ISession
         return city;
     }
 
+    public IEnumerable<IEvent> OnDaysInc()
+    {
+        throw new NotImplementedException();
+    }
+
     public SessionMock()
     {
         EventMock.OnSelected = () =>
