@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.InitialDatas", "..\Tai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.InitialDatas.Interfaces", "..\Tais.InitialDatas.Interfaces\Tais.InitialDatas.Interfaces.csproj", "{7D9C2412-4806-4A22-A28A-7158D5579C6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tais.Entities", "..\Tais.Entities\Tais.Entities.csproj", "{FBCE6BCB-6A9E-47F9-9225-FA114B9F3EB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.Entities", "..\Tais.Entities\Tais.Entities.csproj", "{FBCE6BCB-6A9E-47F9-9225-FA114B9F3EB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tais.CentralGovs", "..\Tais.CentralGovs\Tais.CentralGovs.csproj", "{0CCAFB8D-5C23-485F-BF81-52E06065DA97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -141,6 +143,14 @@ Global
 		{FBCE6BCB-6A9E-47F9-9225-FA114B9F3EB8}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
 		{FBCE6BCB-6A9E-47F9-9225-FA114B9F3EB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBCE6BCB-6A9E-47F9-9225-FA114B9F3EB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CCAFB8D-5C23-485F-BF81-52E06065DA97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CCAFB8D-5C23-485F-BF81-52E06065DA97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CCAFB8D-5C23-485F-BF81-52E06065DA97}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CCAFB8D-5C23-485F-BF81-52E06065DA97}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{0CCAFB8D-5C23-485F-BF81-52E06065DA97}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{0CCAFB8D-5C23-485F-BF81-52E06065DA97}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
+		{0CCAFB8D-5C23-485F-BF81-52E06065DA97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CCAFB8D-5C23-485F-BF81-52E06065DA97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

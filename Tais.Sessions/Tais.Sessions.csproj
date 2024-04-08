@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tais.CentralGovs\Tais.CentralGovs.csproj" />
     <ProjectReference Include="..\Tais.Citys\Tais.Citys.csproj" />
     <ProjectReference Include="..\Tais.Effects\Tais.Effects.csproj" />
     <ProjectReference Include="..\Tais.InitialDatas.Interfaces\Tais.InitialDatas.Interfaces.csproj" />

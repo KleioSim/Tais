@@ -1,4 +1,5 @@
-﻿using Tais.Citys;
+﻿using Tais.CentralGovs;
+using Tais.Citys;
 using Tais.Commands;
 using Tais.Effects;
 using Tais.InitialDatas.Interfaces;
@@ -84,25 +85,13 @@ class Session : ISession
 
         tasks.RemoveAll(x => x.Progress >= 100);
 
-        var eventObj = new Event();
-        yield return eventObj;
-
-
-        eventObj = new Event();
-        yield return eventObj;
+        foreach (var eventObject in centralGov.OnDaysInc(date))
+        {
+            yield return eventObject;
+        }
 
         date.DaysInc();
 
-    }
-
-    public class Event : IEvent
-    {
-        public Action OnSelected;
-
-        public void OnSelect()
-        {
-            OnSelected?.Invoke();
-        }
     }
 
     public Session()
@@ -154,37 +143,6 @@ class Session : ISession
 class Toast : IToast
 {
     public string Desc { get; init; }
-}
-
-
-class CentralGov : ICentralGov
-{
-    public IRequestTax RequestTax => requestTax;
-
-    public float InitTaxValue { get; internal set; }
-
-    public RequestTax requestTax;
-
-    public CentralGov()
-    {
-        requestTax = new RequestTax(this);
-    }
-}
-
-class RequestTax : IRequestTax
-{
-    public float BaseValue => centralGov.InitTaxValue;
-
-    public IEnumerable<IEffect> Effects => effects;
-
-    private List<Effect> effects = new List<Effect>();
-
-    private CentralGov centralGov;
-
-    public RequestTax(CentralGov centralGov)
-    {
-        this.centralGov = centralGov;
-    }
 }
 
 class Event : IEvent
