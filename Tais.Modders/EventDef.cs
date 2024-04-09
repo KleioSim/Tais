@@ -1,11 +1,14 @@
-﻿using Tais.Interfaces;
+﻿using Tais.Commands;
+using Tais.Interfaces;
 using Tais.Modders.Interfaces;
 
 namespace Tais.Modders;
 
 public class EventDef : IEventDef
 {
-    public IVaildDate VaildDate { get; set; }
+    public IVaildDate VaildDate { get; init; }
+
+    public ICommand Command { get; init; }
 
     public bool isTrigger(object obj)
     {

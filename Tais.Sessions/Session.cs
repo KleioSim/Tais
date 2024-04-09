@@ -152,8 +152,6 @@ class Toast : IToast
 
 class Event : IEvent
 {
-    public static Action? OnSelected;
-
     private IEventDef def;
     private object target;
 
@@ -165,7 +163,17 @@ class Event : IEvent
 
     public void OnSelect()
     {
-        OnSelected?.Invoke();
+        if (def.Command == null)
+        {
+            return;
+        }
+
+        if (def.Command is ICommandWithTarget commandWithTarget)
+        {
+            commandWithTarget.Target = target;
+        }
+
+        CommandSender.Send(def.Command);
     }
 }
 
