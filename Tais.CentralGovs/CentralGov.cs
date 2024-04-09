@@ -11,11 +11,7 @@ class CentralGov : ICentralGov
 
     public RequestTax requestTax;
 
-    private IEnumerable<IEventDef> eventDefs = new IEventDef[]
-    {
-        new EventDef() { VaildDate = new VaildDate() { Day = 1 } },
-        new EventDef() { VaildDate = new VaildDate() { Day = 1, Month = 1} },
-    };
+    private ICentralGovDef def;
 
     public CentralGov()
     {
@@ -24,55 +20,24 @@ class CentralGov : ICentralGov
 
     internal IEnumerable<IEventDef> OnDaysInc(IDate date)
     {
-        foreach (var def in eventDefs)
+        foreach (var eventDef in def.EventDefs)
         {
-            if (!def.VaildDate.Check(date))
+            if (!eventDef.VaildDate.Check(date))
             {
                 continue;
             }
 
-            if (def.isTrigger(this))
+            if (eventDef.isTrigger(this))
             {
-                yield return def;
+                yield return eventDef;
             }
         }
     }
-}
 
-internal class EventDef : IEventDef
-{
-    public IVaildDate VaildDate { get; set; }
-
-    public bool isTrigger(object obj)
+    internal void Initialize(ICentralGovDef def)
     {
-        return true;
+        this.def = def;
     }
 }
 
-public class VaildDate : IVaildDate
-{
-    public int? Year { get; init; }
-    public int? Month { get; init; }
-    public int? Day { get; init; }
-
-    public bool Check(object target)
-    {
-        var date = (IDate)target;
-
-        if (Year != null && Year != date.Year)
-        {
-            return false;
-        }
-        if (Month != null && Month != date.Month)
-        {
-            return false;
-        }
-        if (Day != null && Day != date.Day)
-        {
-            return false;
-        }
-
-        return true;
-    }
-}
 

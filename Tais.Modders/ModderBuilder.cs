@@ -105,6 +105,15 @@ public class ModderBuilder
                         }
                     }
                 }
+            },
+
+            CentralGovDef = new CentralGovDef
+            {
+                EventDefs = new IEventDef[]
+                {
+                    new EventDef() { VaildDate = new VaildDate() { Day = 1 } },
+                    new EventDef() { VaildDate = new VaildDate() { Day = 1, Month = 1} },
+                }
             }
         };
 
