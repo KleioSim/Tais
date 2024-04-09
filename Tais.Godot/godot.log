@@ -12,6 +12,3 @@ Vulkan API 1.2.175 - Forward+ - Using Vulkan Device #0: NVIDIA - NVIDIA GeForce 
 [V] CityDetailPanel Ready
 [P] CityDetailPanelPresent Ready
 [V] LeftPanel Ready
-[V] MainScene Ready
-[P] MainScenePresent Ready
-[M] MainSceneMock Ready

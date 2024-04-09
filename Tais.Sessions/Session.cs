@@ -66,6 +66,11 @@ class Session : ISession
                     city.IsOwned = cmd_ChangeCityIsControlFlag.Value;
                 }
                 break;
+            case Cmd_RevokePlayerTitle cmd_RevokePlayerTitle:
+                {
+                    player.IsRevoked = true;
+                }
+                break;
             default:
                 throw new Exception($"Not support cmd type {command.GetType()}");
         }
@@ -177,8 +182,12 @@ class Task : ITask
             progress = value;
             if (Progress >= 100)
             {
-                Def.Command.Target = Target;
                 Def.Command.Reason = Def.Name;
+
+                if (Def.Command is ICommandWithTarget commandWithTarget)
+                {
+                    commandWithTarget.Target = Target;
+                }
 
                 CommandSender.Send(Def.Command);
             }

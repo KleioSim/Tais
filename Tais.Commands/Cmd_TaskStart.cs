@@ -53,6 +53,19 @@ public class Cmd_ChangeCityIsControlFlag : AbsCommand
     }
 }
 
+[ExportCheatCommand]
+public class Cmd_RevokePlayerTitle : ICommand
+{
+    public string Desc => $"{nameof(Cmd_RevokePlayerTitle)}";
+
+    public string Reason { get; set; }
+
+    [CheatConstructors]
+    public Cmd_RevokePlayerTitle()
+    {
+    }
+}
+
 public class ExportCheatCommand : Attribute
 {
 

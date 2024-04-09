@@ -3,8 +3,12 @@
 public interface ICommand
 {
     string Reason { get; set; }
-    object Target { get; set; }
     string Desc { get; }
+}
+
+public interface ICommandWithTarget : ICommand
+{
+    object Target { get; set; }
 }
 
 public static class CommandSender

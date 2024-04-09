@@ -7,10 +7,11 @@ using System.Reflection;
 using Tais.Commands;
 using Tais.Entities;
 using Tais.Interfaces;
+using static CheatCommand;
 
 public partial class CheatCommand : Node
 {
-    Dictionary<string, Type> dictCommandType;
+    Dictionary<string, ConstructorInfo> dictCommandType;
 
     ISession Session
     {
@@ -26,15 +27,14 @@ public partial class CheatCommand : Node
         ConsoleMono.Print(a + " " + b);
     }
 
-    private void OnCheat(string p0, string p1)
+    private void OnCheat_2(string p0, string p1)
     {
         try
         {
             var commandName = ConsoleMono.GetPrevCommand().Split(" ")[0];
 
-            var type = dictCommandType[commandName];
+            var constructor = dictCommandType[commandName];
 
-            var constructor = type.GetConstructors().First();
             var param = constructor.GetParameters().First();
 
             var converter = TypeDescriptor.GetConverter(param.ParameterType);
@@ -43,9 +43,28 @@ public partial class CheatCommand : Node
                 throw new Exception();
             }
 
-            var cmd = Activator.CreateInstance(type, new[] { converter.ConvertFrom(p1) }) as ICommand;
+            var cmd = constructor.Invoke(new[] { converter.ConvertFrom(p1) }) as ICommandWithTarget;
             cmd.Target = Entity.GetById<IEntity>(p0);
 
+            CommandSender.Send(cmd);
+
+            PresentBase.SendCommand(new Cmd_UIRefresh());
+        }
+        catch (Exception e)
+        {
+            ConsoleMono.Print(e.ToString());
+        }
+    }
+
+    private void OnCheat_0()
+    {
+        try
+        {
+            var commandName = ConsoleMono.GetPrevCommand().Split(" ")[0];
+
+            var constructor = dictCommandType[commandName];
+
+            var cmd = constructor.Invoke(new object[] { }) as ICommand;
             CommandSender.Send(cmd);
 
             PresentBase.SendCommand(new Cmd_UIRefresh());
@@ -63,15 +82,44 @@ public partial class CheatCommand : Node
         dictCommandType = AppDomain.CurrentDomain.GetAssemblies()
             .Single(x => x.GetName().Name == "Tais.Commands").GetTypes()
             .Where(x => x.IsAssignableTo(typeof(ICommand)) && x.GetCustomAttribute<ExportCheatCommand>() != null)
-            .ToDictionary(x => x.Name, x => x);
+            .ToDictionary(
+                x => x.Name,
+                x => x.GetConstructors().Single(x => x.GetCustomAttribute<CheatConstructors>() != null));
 
         foreach (var pair in dictCommandType)
         {
-            ConsoleMono.CreateCommand(pair.Key, OnCheat);
+            switch (GetCommandParametersCount(pair.Value))
+            {
+                case 0:
+                    ConsoleMono.CreateCommand(pair.Key, OnCheat_0);
+                    break;
+                case 2:
+                    ConsoleMono.CreateCommand(pair.Key, OnCheat_2);
+                    break;
+                default:
+                    throw new Exception();
+            }
+
         }
 
         ConsoleMono.CreateCommand("foo", Foo); //You can pass method directly as delegate
         ConsoleMono.CreateCommand("foo2", this, MethodName.Foo); // Or you can pass target object and method name
                                                                  //ConsoleMono.CreateCommand("bar", Bar); //Exception: method is static
+    }
+
+    private int GetCommandParametersCount(ConstructorInfo constructor)
+    {
+        if (constructor.DeclaringType.IsAssignableTo(typeof(ICommandWithTarget)))
+        {
+            return constructor.GetParameters().Length + 1;
+        }
+
+        return constructor.GetParameters().Length;
+    }
+
+    public class CheatCommandItem
+    {
+        public Type CommandType { get; init; }
+        public ConstructorInfo Constructor { get; init; }
     }
 }
