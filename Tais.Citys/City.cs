@@ -47,12 +47,12 @@ internal class City : Entity, ICity
     {
         this.def = def;
 
-        Name = initData.CityName;
-        IsOwned = initData.IsControlled;
-
         popTax = new PopTax(this);
         popCount = new GroupValue();
         popCount.Items = pops.Where(x => x.IsRegisted).Select(x => (x.Name, x.Count));
+
+        Name = initData.CityName;
+        IsOwned = initData.IsControlled;
 
         this.pops.AddRange(pops);
     }
