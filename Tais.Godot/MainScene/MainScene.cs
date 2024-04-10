@@ -42,6 +42,20 @@ public partial class MainScene : ViewControl
 
     internal GMFailedEvent GMFailedEvent => GetNode<GMFailedEvent>("GMFailedEvent");
 
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+
+        CommandConsole.IsVaild = true;
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+
+        CommandConsole.IsVaild = false;
+    }
+
     public override void _Ready()
     {
         TaskContainer = new ItemContainer<TaskItem>(() =>

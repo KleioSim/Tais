@@ -20,8 +20,8 @@ config/icon="res://icon.svg"
 
 Global="*res://AutoLoads/Global.cs"
 ScenceSwitch="*res://AutoLoads/ScenceSwitch.cs"
-Console="*res://addons/godot-console/scripts/console.gd"
-ConsoleMono="*res://addons/godot-console/scripts/ConsoleMono.cs"
+CommandConsole="*res://addons/csharpConsole/CommandConsole.cs"
+CheatCommander="*res://AutoLoads/CheatCommander.cs"
 
 [display]
 
@@ -37,7 +37,7 @@ project/assembly_name="Tais.Godot"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-console/plugin.cfg")
+enabled=PackedStringArray("res://addons/csharpConsole/plugin.cfg")
 
 [input]
 
