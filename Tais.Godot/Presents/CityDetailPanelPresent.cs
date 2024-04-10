@@ -32,6 +32,7 @@ public partial class CityDetailPanelPresent : PresentControl<CityDetailPanel, IS
     {
         var cityObj = view.Id as ICity;
 
+        view.DebugID.Text = cityObj.Id;
         view.CityName.Text = cityObj.Name;
         view.PopCount.Text = cityObj.PopCount.Current.ToString();
         view.PopTax.Text = cityObj.PopTax.CurrValue.ToString();

@@ -14,6 +14,7 @@ public partial class PopDetailPanelPresent : PresentControl<PopDetailPanel, ISes
         var func = view.Id as Func<IPop>;
         var pop = func.Invoke();
 
+        view.DebugID.Text = pop.Id;
         view.PopName.Text = pop.Name;
 
         view.PopCount.Text = pop.Count.ToString();

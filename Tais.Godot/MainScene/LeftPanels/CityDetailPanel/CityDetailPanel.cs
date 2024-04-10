@@ -7,6 +7,7 @@ public partial class CityDetailPanel : LeftContentPanel1
 
     public override Button CloseButton => GetNode<Button>("HBoxContainer/VBoxContainer2/CityName/Close");
 
+    public Label DebugID => GetNode<Label>("HBoxContainer/VBoxContainer2/CityName/DebugID");
     public Label CityName => GetNode<Label>("HBoxContainer/VBoxContainer2/CityName");
     public Label PopCount => GetNode<Label>("HBoxContainer/VBoxContainer2/VBoxContainer/Infos/MarginContainer/HFlowContainer/PopCount/HBoxContainer/Value");
 
@@ -17,7 +18,6 @@ public partial class CityDetailPanel : LeftContentPanel1
     public CityOperationList OperationList => GetNode<CityOperationList>("HBoxContainer/CityOperationList");
 
     public PopDetailPanel PopDetailPanel => GetNode<PopDetailPanel>("HBoxContainer/VBoxContainer2/VBoxContainer/Pops/PopDetailPanel");
-
 
     public ItemContainer<PopItem> PopContainer;
     public ItemContainer<BufferItem> BufferContainer;

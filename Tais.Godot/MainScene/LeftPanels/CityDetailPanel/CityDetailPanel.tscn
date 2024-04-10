@@ -51,6 +51,14 @@ grow_vertical = 0
 toggle_mode = true
 text = "OP"
 
+[node name="DebugID" type="Label" parent="HBoxContainer/VBoxContainer2/CityName"]
+layout_mode = 1
+offset_right = 100.0
+offset_bottom = 40.0
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2

@@ -104,6 +104,10 @@ public partial class CheatCommander : Node
 
         var cmd = constructor.Invoke(new[] { converter.ConvertFrom(p1) }) as ICommandWithTarget;
         cmd.Target = Entity.GetById<IEntity>(p0);
+        if(cmd.Target == null)
+        {
+            throw new Exception($"can not find entity by id p0");
+        }
 
         CommandSender.Send(cmd);
 

@@ -5,6 +5,7 @@ public partial class PopDetailPanel : ViewControl
 {
     public object Id { get; set; }
 
+    public Label DebugID => GetNode<Label>("Panel/DebugID");
     public Label PopName => GetNode<Label>("Panel/PanelContainer/HBoxContainer/PopItem/VBoxContainer/Name/VBoxContainer/Name");
     public Label PopCount => GetNode<Label>("Panel/PanelContainer/HBoxContainer/PopItem/VBoxContainer/Count/VBoxContainer/CurrentValue");
     public Label FamilyName => GetNode<Label>("Panel/PanelContainer/HBoxContainer/PopItem/VBoxContainer/Name/VBoxContainer/Family");
