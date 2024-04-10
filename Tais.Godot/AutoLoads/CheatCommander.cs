@@ -23,13 +23,15 @@ public partial class CheatCommander : Node
 
         foreach (var item in dictCommandType)
         {
-            switch (GetCommandParametersCount(item.Value))
+            var paramNames = GetCommandParameterNames(item.Value);
+
+            switch (paramNames.Count())
             {
                 case 0:
                     CommandConsole.AddCommand(item.Key, OnCheat_0);
                     break;
                 case 2:
-                    CommandConsole.AddCommand(item.Key, OnCheat_2);
+                    CommandConsole.AddCommand(item.Key, OnCheat_2, paramNames);
                     break;
                 default:
                     throw new Exception();
@@ -47,14 +49,15 @@ public partial class CheatCommander : Node
         //CommandConsole.AddCommandDescription("heloworld", "Prints 'Hola Mundo!' in the console.");
     }
 
-    private int GetCommandParametersCount(ConstructorInfo constructor)
+    private IEnumerable<string> GetCommandParameterNames(ConstructorInfo constructor)
     {
+        var parameterNames = constructor.GetParameters().Select(x => x.Name);
         if (constructor.DeclaringType.IsAssignableTo(typeof(ICommandWithTarget)))
         {
-            return constructor.GetParameters().Length + 1;
+            parameterNames = parameterNames.Prepend("target");
         }
 
-        return constructor.GetParameters().Length;
+        return parameterNames;
     }
 
     //void Print(string text)

@@ -508,16 +508,16 @@ public partial class CommandConsole : Node
     /// </summary>
     /// <param name="CommandName">name of the function called in game console</param>
     /// <param name="function">reference to the method</param>
-    public static void AddCommand(string CommandName, Delegate function)
+    public static void AddCommand(string CommandName, Delegate function, IEnumerable<string> parameterNames = null)
     {
         try
         {
 
             instance.Commands.Add(CommandName, new Command(new Callable((GodotObject)function.Target, function.Method.Name), function.Method.GetParameters().Length));
 
-            foreach (var param in function.Method.GetParameters())
+            foreach (var paramName in parameterNames != null ? parameterNames : function.Method.GetParameters().Select(x => x.Name))
             {
-                instance.Commands[CommandName].Params.Add(param.Name, null);
+                instance.Commands[CommandName].Params.Add(paramName, null);
             }
         }
         catch (Exception e)
