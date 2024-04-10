@@ -1,5 +1,6 @@
 using Godot;
 
+#if TOOLS
 [Tool]
 public partial class Console_Plugin : EditorPlugin
 {
@@ -15,3 +16,4 @@ public partial class Console_Plugin : EditorPlugin
         RemoveAutoloadSingleton("CommandConsole");
     }
 }
+#endif
