@@ -1,7 +1,9 @@
-﻿using Tais.CentralGovs;
+﻿using Tais.Buffers;
+using Tais.CentralGovs;
 using Tais.Citys;
 using Tais.Commands;
 using Tais.Effects;
+using Tais.Events;
 using Tais.InitialDatas.Interfaces;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
@@ -90,9 +92,9 @@ class Session : ISession
 
         tasks.RemoveAll(x => x.Progress >= 100);
 
-        foreach (var eventDef in centralGov.OnDaysInc(date))
+        foreach (var @event in EventProcess.Do(centralGov.def.EventDefs, centralGov))
         {
-            yield return new Event(eventDef, centralGov);
+            yield return @event;
         }
 
         date.DaysInc();
@@ -114,17 +116,19 @@ class Session : ISession
             }
         };
 
-        City.OnBufferAdded = null;
-        City.OnBufferAdded += (buff, city) =>
+        BufferProcess.Session = this;
+        BufferProcess.OnBufferAdded = null;
+        BufferProcess.OnBufferAdded += (buff, target) =>
         {
-            toasts.Add(new Toast() { Desc = $"Add Buff {buff.GetType().Name} to {city.Name}" });
+            toasts.Add(new Toast() { Desc = $"Add Buff {buff.GetType().Name} to {target}" });
+        };
+        BufferProcess.OnBufferRemoved = null;
+        BufferProcess.OnBufferRemoved += (buff, target) =>
+        {
+            toasts.Add(new Toast() { Desc = $"Remove Buff {buff.GetType().Name} from {target}" });
         };
 
-        City.OnBufferRemoved = null;
-        City.OnBufferRemoved += (buff, city) =>
-        {
-            toasts.Add(new Toast() { Desc = $"Remove Buff {buff.GetType().Name} from {city.Name}" });
-        };
+        EventProcess.Session = this;
 
         player.CalcUsedEngine = () =>
         {
@@ -150,32 +154,7 @@ class Toast : IToast
     public string Desc { get; init; }
 }
 
-class Event : IEvent
-{
-    private IEventDef def;
-    private object target;
 
-    public Event(IEventDef def, object target)
-    {
-        this.def = def;
-        this.target = target;
-    }
-
-    public void OnSelect()
-    {
-        if (def.Command == null)
-        {
-            return;
-        }
-
-        if (def.Command is ICommandWithTarget commandWithTarget)
-        {
-            commandWithTarget.Target = target;
-        }
-
-        CommandSender.Send(def.Command);
-    }
-}
 
 class Task : ITask
 {

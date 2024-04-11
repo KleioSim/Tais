@@ -15,4 +15,5 @@ Vulkan API 1.2.175 - Forward+ - Using Vulkan Device #0: NVIDIA - NVIDIA GeForce 
 [V] MainScene Ready
 [P] MainScenePresent Ready
 [M] MainSceneMock Ready
-CommandSender Send:Tais.Commands.Cmd_RevokePlayerTitle
+[V] EventDialog Ready
+[P] EventDialogPresent Ready

@@ -5,6 +5,7 @@ using Tais.Commands;
 using Tais.Godot.Utilities.UBBCodes;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
+using Tais.ProcessContexts;
 
 public partial class CityOperationItemPresent : PresentControl<CityOperationItem, ISession>
 {
@@ -39,9 +40,11 @@ public partial class CityOperationItemPresent : PresentControl<CityOperationItem
     {
         var itemObj = ((ITaskDef def, object target))view.Id;
 
+        var context = new ProcessContext() { session = model, current = itemObj.target as ICity };
+
         view.Button.Text = itemObj.def.Name;
         view.Button.Disabled = model.Tasks.Any(x => x.Target == itemObj.target && x.Def == itemObj.def)
             || itemObj.def.RequestActionPoint > model.Player.FreeActionPoints
-            || !itemObj.def.Condition.IsSatisfied(itemObj.target);
+            || !itemObj.def.Condition.IsSatisfied(context);
     }
 }

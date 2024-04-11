@@ -5,7 +5,7 @@ namespace Tais.Modders.Interfaces;
 public interface IEventDef
 {
     IVaildDate VaildDate { get; }
-    bool isTrigger(object obj);
+    ICondition TriggerCondition { get; }
     ICommand Command { get; }
 }
 

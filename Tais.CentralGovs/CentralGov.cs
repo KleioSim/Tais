@@ -1,9 +1,11 @@
-﻿using Tais.Interfaces;
+﻿using Microsoft.VisualBasic;
+using Tais.Entities;
+using Tais.Interfaces;
 using Tais.Modders.Interfaces;
 
 namespace Tais.CentralGovs;
 
-class CentralGov : ICentralGov
+class CentralGov : Entity, ICentralGov
 {
     public IRequestTax RequestTax => requestTax;
 
@@ -11,27 +13,16 @@ class CentralGov : ICentralGov
 
     public RequestTax requestTax;
 
-    private ICentralGovDef def;
+    public ICentralGovDef def { get; set; }
 
     public CentralGov()
     {
         requestTax = new RequestTax(this);
     }
 
-    internal IEnumerable<IEventDef> OnDaysInc(IDate date)
+    internal void OnDaysInc(IDate date)
     {
-        foreach (var eventDef in def.EventDefs)
-        {
-            if (!eventDef.VaildDate.Check(date))
-            {
-                continue;
-            }
 
-            if (eventDef.isTrigger(this))
-            {
-                yield return eventDef;
-            }
-        }
     }
 
     internal void Initialize(ICentralGovDef def)
@@ -39,5 +30,3 @@ class CentralGov : ICentralGov
         this.def = def;
     }
 }
-
-

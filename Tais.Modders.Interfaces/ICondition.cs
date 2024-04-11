@@ -1,6 +1,13 @@
-﻿namespace Tais.Modders.Interfaces;
+﻿using System.Security.Principal;
+
+namespace Tais.Modders.Interfaces;
 
 public interface ICondition
 {
-    bool IsSatisfied(object target);
+    bool IsSatisfied(IProcessContext context);
+}
+
+public interface IProcessContext
+{
+
 }

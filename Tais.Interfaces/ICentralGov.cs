@@ -2,7 +2,7 @@
 
 namespace Tais.Interfaces;
 
-public interface ICentralGov
+public interface ICentralGov : IEntity
 {
     IRequestTax RequestTax { get; }
 }

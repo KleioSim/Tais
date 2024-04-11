@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Tais.Citys\Tais.Citys.csproj" />
+    <ProjectReference Include="..\Tais.Effects\Tais.Effects.csproj" />
     <ProjectReference Include="..\Tais.Interfaces\Tais.Interfaces.csproj" />
     <ProjectReference Include="..\Tais.Modders.Interfaces\Tais.Modders.Interfaces.csproj" />
-    <ProjectReference Include="..\Tais.Pops\Tais.Pops.csproj" />
+    <ProjectReference Include="..\Tais.ProcessContexts\Tais.ProcessContexts.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using Tais.Interfaces;
 using Tais.Modders.Interfaces;
+using Tais.ProcessContexts;
 
 namespace Tais.Modders.Conditions;
 
@@ -12,9 +13,14 @@ public class CityNameCondition : ICondition
         this.cityName = cityName;
     }
 
-    public bool IsSatisfied(object obj)
+    public bool IsSatisfied(IProcessContext context)
     {
-        return ((ICity)obj).Name == cityName;
+        if (((ProcessContext)context).current is not ICity city)
+        {
+            throw new Exception();
+        }
+
+        return city.Name == cityName;
     }
 
     public override string ToString()
@@ -22,3 +28,9 @@ public class CityNameCondition : ICondition
         return $"city name equal {cityName}";
     }
 }
+
+//public class IConditionContext
+//{
+//    ISession GetSession();
+//    T GetCurrent<T>() where T : IEntity;
+//}

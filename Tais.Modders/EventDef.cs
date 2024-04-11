@@ -10,10 +10,8 @@ public class EventDef : IEventDef
 
     public ICommand Command { get; init; }
 
-    public bool isTrigger(object obj)
-    {
-        return true;
-    }
+    public ICondition TriggerCondition { get; init; }
+
 }
 
 public class VaildDate : IVaildDate

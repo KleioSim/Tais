@@ -6,6 +6,7 @@ using Tais.Effects;
 using Tais.Modders.Interfaces;
 using Tais.InitialDatas.Interfaces;
 using Tais.Entities;
+using Tais.Buffers;
 
 namespace Tais.Citys;
 
@@ -59,35 +60,37 @@ internal class City : Entity, ICity
 
     internal void OnDaysInc(IDate date)
     {
-        for (int i = buffers.Count - 1; i >= 0; i--)
-        {
-            var currBuff = buffers[i];
-            if (currBuff.def.InvalidCondition.IsSatisfied(this))
-            {
+        BufferProcess.Do(def.BufferDefs, this, buffers);
 
-                buffers.Remove(currBuff);
+        //for (int i = buffers.Count - 1; i >= 0; i--)
+        //{
+        //    var currBuff = buffers[i];
+        //    if (currBuff.def.InvalidCondition.IsSatisfied(this))
+        //    {
 
-                OnBufferRemoved?.Invoke(currBuff, this);
-            }
-        }
+        //        buffers.Remove(currBuff);
 
-        foreach (var def in def.BufferDefs)
-        {
-            if (buffers.Any(x => x.def == def))
-            {
-                continue;
-            }
+        //        OnBufferRemoved?.Invoke(currBuff, this);
+        //    }
+        //}
 
-            if (!def.ValidCondition.IsSatisfied(this))
-            {
-                continue;
-            }
+        //foreach (var def in def.BufferDefs)
+        //{
+        //    if (buffers.Any(x => x.def == def))
+        //    {
+        //        continue;
+        //    }
 
-            var newBuff = new Buffers.Buffer(def);
-            buffers.Add(newBuff);
+        //    if (!def.ValidCondition.IsSatisfied(this))
+        //    {
+        //        continue;
+        //    }
 
-            OnBufferAdded?.Invoke(newBuff, this);
-        }
+        //    var newBuff = new Buffers.Buffer(def);
+        //    buffers.Add(newBuff);
+
+        //    OnBufferAdded?.Invoke(newBuff, this);
+        //}
     }
 }
 
