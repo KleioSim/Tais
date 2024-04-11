@@ -21,3 +21,16 @@ public class PopTaxChangePercentEffect : IEffect
         Percent = percent;
     }
 }
+
+public class CentralRequestTaxEffect : IEffect
+{
+    public string Desc { get; init; }
+
+    public float Percent { get; init; }
+
+    public CentralRequestTaxEffect(string from, float percent)
+    {
+        Desc = from;
+        Percent = percent;
+    }
+}

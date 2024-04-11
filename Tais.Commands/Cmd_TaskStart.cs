@@ -66,6 +66,22 @@ public class Cmd_RevokePlayerTitle : ICommand
     }
 }
 
+[ExportCheatCommand]
+public class Cmd_ChangeCentralGovTaxLevel : ICommand
+{
+    public string Desc => $"{nameof(Cmd_RevokePlayerTitle)}";
+
+    public string Reason { get; set; }
+
+    public string Value { get; }
+
+    [CheatConstructors]
+    public Cmd_ChangeCentralGovTaxLevel(string value)
+    {
+        Value = value;
+    }
+}
+
 public class ExportCheatCommand : Attribute
 {
 

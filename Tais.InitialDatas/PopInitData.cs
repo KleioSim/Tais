@@ -17,6 +17,8 @@ public class InitialData : IInitialData
 
     public Dictionary<string, IEnumerable<IPopInitData>> City2PopInitDatas { get; init; }
     public IPlayerInitData PlayerInitData { get; init; }
+
+    public ICentralGovInitData CentralGovInitData { get; init; }
 }
 
 public class CityInitData : ICityInitData
@@ -24,4 +26,9 @@ public class CityInitData : ICityInitData
     public string CityName { get; init; }
 
     public bool IsControlled { get; init; }
+}
+
+public class CentralGovInitData : ICentralGovInitData
+{
+    public string TaxLevel { get; init; }
 }

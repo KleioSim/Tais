@@ -30,6 +30,9 @@ public partial class CheatCommander : Node
                 case 0:
                     CommandConsole.AddCommand(item.Key, OnCheat_0);
                     break;
+                case 1:
+                    CommandConsole.AddCommand(item.Key, OnCheat_1, paramNames);
+                    break;
                 case 2:
                     CommandConsole.AddCommand(item.Key, OnCheat_2, paramNames);
                     break;
@@ -76,6 +79,26 @@ public partial class CheatCommander : Node
     //    GD.Print(text);
     //}
 
+    private void OnCheat_1(string p1)
+    {
+        var commandName = CommandConsole.ConsoleHistory.Last().Split(" ")[0];
+
+        var constructor = dictCommandType[commandName];
+
+        var param = constructor.GetParameters().First();
+
+        var converter = TypeDescriptor.GetConverter(param.ParameterType);
+        if (!converter.CanConvertFrom(p1.GetType()))
+        {
+            throw new Exception();
+        }
+
+        var cmd = constructor.Invoke(new[] { converter.ConvertFrom(p1) }) as ICommand;
+        CommandSender.Send(cmd);
+
+        PresentBase.SendCommand(new Cmd_UIRefresh());
+    }
+
     private void OnCheat_0()
     {
         var commandName = CommandConsole.ConsoleHistory.Last().Split(" ")[0];
@@ -104,7 +127,7 @@ public partial class CheatCommander : Node
 
         var cmd = constructor.Invoke(new[] { converter.ConvertFrom(p1) }) as ICommandWithTarget;
         cmd.Target = Entity.GetById<IEntity>(p0);
-        if(cmd.Target == null)
+        if (cmd.Target == null)
         {
             throw new Exception($"can not find entity by id p0");
         }

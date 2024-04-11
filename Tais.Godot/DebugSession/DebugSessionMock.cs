@@ -15,6 +15,11 @@ public partial class DebugSessionMock : MockControl<DebugSession, ISession>
         {
             var initData = new InitialData()
             {
+                CentralGovInitData = new CentralGovInitData()
+                {
+                    TaxLevel = "MID"
+                },
+
                 CityInitDatas = new ICityInitData[]
                 {
                     new CityInitData()

@@ -22,7 +22,7 @@ public static class SessionBuilder
             session.cities.Add(city);
         }
 
-        session.centralGov.Initialize(modder.CentralGovDef);
+        session.centralGov.Initialize(modder.CentralGovDef, initialData.CentralGovInitData);
         session.centralGov.InitTaxValue = session.finance.incomes.Sum(x => x.CurrValue) * 0.8f * 12;
 
         return session;

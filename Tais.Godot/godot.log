@@ -15,5 +15,7 @@ Vulkan API 1.2.175 - Forward+ - Using Vulkan Device #0: NVIDIA - NVIDIA GeForce 
 [V] MainScene Ready
 [P] MainScenePresent Ready
 [M] MainSceneMock Ready
-[V] EventDialog Ready
-[P] EventDialogPresent Ready
+CommandSender Send:Tais.Commands.Cmd_ChangeCentralGovTaxLevel
+CommandSender Send:Tais.Commands.Cmd_ChangeCentralGovTaxLevel
+CommandSender Send:Tais.Commands.Cmd_ChangeCentralGovTaxLevel
+CommandSender Send:Tais.Commands.Cmd_ChangeCentralGovTaxLevel

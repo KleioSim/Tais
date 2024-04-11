@@ -73,6 +73,11 @@ class Session : ISession
                     player.IsRevoked = true;
                 }
                 break;
+            case Cmd_ChangeCentralGovTaxLevel cmd_ChangeCentralGovTaxLevel:
+                {
+                    centralGov.TaxLevel = Enum.Parse<TaxLevel>(cmd_ChangeCentralGovTaxLevel.Value);
+                }
+                break;
             default:
                 throw new Exception($"Not support cmd type {command.GetType()}");
         }

@@ -6,6 +6,7 @@ public interface IInitialData
 
     Dictionary<string, IEnumerable<IPopInitData>> City2PopInitDatas { get; init; }
     IPlayerInitData PlayerInitData { get; init; }
+    ICentralGovInitData CentralGovInitData { get; }
 }
 
 public interface ICityInitData
@@ -23,4 +24,9 @@ public interface IPopInitData
 public interface IPlayerInitData
 {
 
+}
+
+public interface ICentralGovInitData
+{
+    string TaxLevel { get; }
 }

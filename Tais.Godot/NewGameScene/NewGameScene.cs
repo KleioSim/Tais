@@ -28,6 +28,11 @@ public partial class NewGameScene : Control
         {
             var initData = new InitialData()
             {
+                CentralGovInitData = new CentralGovInitData()
+                {
+                    TaxLevel = "MID"
+                },
+
                 CityInitDatas = new ICityInitData[]
                 {
                     new CityInitData()
