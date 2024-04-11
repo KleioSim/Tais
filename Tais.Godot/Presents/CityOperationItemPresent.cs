@@ -40,7 +40,7 @@ public partial class CityOperationItemPresent : PresentControl<CityOperationItem
     {
         var itemObj = ((ITaskDef def, object target))view.Id;
 
-        var context = new ProcessContext() { session = model, current = itemObj.target as ICity };
+        var context = new ProcessContext() { session = model, current = itemObj.target as IEntity };
 
         view.Button.Text = itemObj.def.Name;
         view.Button.Disabled = model.Tasks.Any(x => x.Target == itemObj.target && x.Def == itemObj.def)

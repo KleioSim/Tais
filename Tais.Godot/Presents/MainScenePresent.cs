@@ -62,7 +62,7 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
 
         PresentBase.SendCommand(new Cmd_UIRefresh());
 
-        if (session.Date.Day == 1 || session.Date.Day == 16)
+        if (session.Date.Day == 1 || session.Date.Day == 15)
         {
             view.EmitSignal(MainScene.SignalName.NextTurnFinished);
         }

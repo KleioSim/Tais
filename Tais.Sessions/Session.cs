@@ -85,6 +85,8 @@ class Session : ISession
 
     public IEnumerable<IEvent> OnDaysInc()
     {
+        date.DaysInc();
+
         foreach (var task in tasks)
         {
             task.OnDaysInc(date);
@@ -97,13 +99,12 @@ class Session : ISession
 
         tasks.RemoveAll(x => x.Progress >= 100);
 
+        finance.OnDaysInc(date);
+
         foreach (var @event in EventProcess.Do(centralGov.def.EventDefs, centralGov))
         {
             yield return @event;
         }
-
-        date.DaysInc();
-
     }
 
     public Session()
