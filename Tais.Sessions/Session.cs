@@ -197,6 +197,9 @@ class Task : ITask
 
 class Finance : IFinance
 {
+    public static Func<IDate> GetDate;
+
+    public float ExpectYearReserve => Current + Surplus * (12 - currentYearIncomes.Count);
     public float Current { get; set; }
 
     public float Surplus => Incomes.Sum(x => x.CurrValue) - Spends.Sum(x => x.CurrValue);
@@ -208,9 +211,20 @@ class Finance : IFinance
     public HashSet<IEffectValue> incomes = new HashSet<IEffectValue>();
     public HashSet<IEffectValue> spends = new HashSet<IEffectValue>();
 
-    internal void OnNextTurn()
+    private Dictionary<int, float> currentYearIncomes = new Dictionary<int, float>();
+
+    internal void OnDaysInc(IDate date)
     {
-        Current += Surplus;
+        if (date.Month == 1 && date.Day == 1)
+        {
+            currentYearIncomes.Clear();
+        }
+
+        if (date.Day == 30)
+        {
+            currentYearIncomes.Add(date.Month, Surplus);
+            Current += Surplus;
+        }
     }
 }
 

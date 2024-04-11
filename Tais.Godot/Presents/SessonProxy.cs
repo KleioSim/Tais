@@ -135,6 +135,8 @@ public class FinanceMock : IFinance
 
     public IEnumerable<IEffectValue> Spends => spends;
 
+    public float ExpectYearReserve => throw new NotImplementedException();
+
     public List<EffectValueMock> incomes = new List<EffectValueMock>();
     public List<EffectValueMock> spends = new List<EffectValueMock>();
 

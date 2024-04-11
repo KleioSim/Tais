@@ -39,7 +39,21 @@ public class CentralGovRequestTaxFullFill : ICondition
         }
 
 
-        return centralGov.RequestTax.CurrValue <= ((ProcessContext)context).session.Finance.Current;
+        return centralGov.RequestTax.CurrValue <= ((ProcessContext)context).session.Finance.ExpectYearReserve;
+    }
+}
+
+public class CentralGovRequestTaxNotFullFill : ICondition
+{
+    public bool IsSatisfied(IProcessContext context)
+    {
+        if (((ProcessContext)context).current is not ICentralGov centralGov)
+        {
+            throw new Exception();
+        }
+
+
+        return centralGov.RequestTax.CurrValue > ((ProcessContext)context).session.Finance.ExpectYearReserve;
     }
 }
 
