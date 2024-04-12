@@ -12,6 +12,9 @@ public class EventDef : IEventDef
 
     public ICondition TriggerCondition { get; init; }
 
+    public string Title { get; init; }
+
+    public string Desc { get; init; }
 }
 
 public class VaildDate : IVaildDate

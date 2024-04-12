@@ -7,6 +7,9 @@ namespace Tais.Events;
 
 internal class Event : IEvent
 {
+    public string Title => def.Title;
+    public string Desc => def.Desc;
+
     private IEventDef def;
     private object target;
 

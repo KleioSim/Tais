@@ -17,6 +17,10 @@ public partial class EventDialogPresent : PresentControl<EventDialog, ISession>
 
     protected override void Update(EventDialog view, ISession model)
     {
+        var eventObj = view.Object as IEvent;
+
+        view.Title.Text = eventObj.Title;
+        view.Desc.Text = eventObj.Desc;
 
     }
 }
