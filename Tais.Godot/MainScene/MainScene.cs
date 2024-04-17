@@ -39,6 +39,7 @@ public partial class MainScene : ViewControl
 
     internal ItemContainer<TaskItem> TaskContainer;
     internal ItemContainer<ToastItem> ToastContainer;
+    internal ItemContainer<WarnItem> WarnContainer;
 
     internal GMFailedEvent GMFailedEvent => GetNode<GMFailedEvent>("GMFailedEvent");
 
@@ -66,6 +67,11 @@ public partial class MainScene : ViewControl
         ToastContainer = new ItemContainer<ToastItem>(() =>
         {
             return GetNode<InstancePlaceholder>("RightPanel/ToastContainer/ToastItem");
+        });
+
+        WarnContainer = new ItemContainer<WarnItem>(() =>
+        {
+            return GetNode<InstancePlaceholder>("TopInfo/Warns/WarnItem");
         });
 
         City.Pressed += () =>

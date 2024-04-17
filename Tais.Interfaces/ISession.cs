@@ -15,6 +15,7 @@ public interface ISession
     IList<IToast> Toasts { get; }
 
     ICentralGov CentralGov { get; }
+    IEnumerable<IWarn> Warns { get; }
 
     void OnCommand(ICommand command);
     IEnumerable<IEvent> OnDaysInc();

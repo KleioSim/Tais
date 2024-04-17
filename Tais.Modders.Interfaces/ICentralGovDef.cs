@@ -1,6 +1,6 @@
 ﻿namespace Tais.Modders.Interfaces;
 
-public interface ICentralGovDef
+public interface ICentralGovDef : IEntityDef
 {
-    IEnumerable<IEventDef> EventDefs { get; }
+
 }

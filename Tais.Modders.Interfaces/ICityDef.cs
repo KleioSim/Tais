@@ -1,7 +1,6 @@
 ﻿namespace Tais.Modders.Interfaces;
 
-public interface ICityDef
+public interface ICityDef : IEntityDef
 {
-    IEnumerable<ITaskDef> TaskDefs { get; }
-    IEnumerable<IBufferDef> BufferDefs { get; }
+
 }

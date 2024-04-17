@@ -83,7 +83,7 @@ public partial class CheatCommander : Node
     {
         var commandName = CommandConsole.ConsoleHistory.Last().Split(" ")[0];
 
-        var constructor = dictCommandType[commandName];
+        var constructor = dictCommandType[commandName.ToLower()];
 
         var param = constructor.GetParameters().First();
 

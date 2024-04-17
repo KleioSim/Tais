@@ -10,7 +10,7 @@ using Tais.Buffers;
 
 namespace Tais.Citys;
 
-internal class City : Entity, ICity
+internal class City : Entity<ICityDef>, ICity
 {
     public static Action<bool, City>? OnOwnerChanged;
     public static Action<IBuffer, ICity>? OnBufferAdded;
@@ -33,7 +33,7 @@ internal class City : Entity, ICity
         }
     }
 
-    public IEnumerable<ITaskDef> TaskDefs => def.TaskDefs;
+    public IEnumerable<ITaskDef> TaskDefs => Def.TaskDefs;
 
 
     private PopTax popTax;
@@ -42,11 +42,10 @@ internal class City : Entity, ICity
     private bool isOwned;
     private List<IPop> pops = new List<IPop>();
     private List<Buffers.Buffer> buffers = new List<Buffers.Buffer>();
-    private ICityDef def;
 
     public City(ICityDef def, ICityInitData initData, IEnumerable<IPop> pops)
     {
-        this.def = def;
+        this.Def = def;
 
         popTax = new PopTax(this);
         popCount = new GroupValue();
@@ -60,7 +59,7 @@ internal class City : Entity, ICity
 
     internal void OnDaysInc(IDate date)
     {
-        BufferProcess.Do(def.BufferDefs, this, buffers);
+        BufferProcess.Do(Def.BufferDefs, this, buffers);
 
         //for (int i = buffers.Count - 1; i >= 0; i--)
         //{

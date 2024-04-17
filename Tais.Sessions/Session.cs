@@ -23,6 +23,8 @@ class Session : ISession
     public IList<IToast> Toasts => toasts;
     public IPlayer Player => player;
 
+    public IEnumerable<IWarn> Warns => warnManager;
+
     internal Date date = new Date();
     internal Finance finance = new Finance();
     internal List<Task> tasks = new List<Task>();
@@ -30,6 +32,8 @@ class Session : ISession
     internal CentralGov centralGov = new CentralGov();
     internal List<IToast> toasts = new List<IToast>();
     internal Player player = new Player();
+    internal WarnManager warnManager = new WarnManager();
+
 
     public void OnCommand(ICommand command)
     {
@@ -101,7 +105,7 @@ class Session : ISession
 
         finance.OnDaysInc(date);
 
-        foreach (var @event in EventProcess.Do(centralGov.def.EventDefs, centralGov))
+        foreach (var @event in EventProcess.Do(centralGov.Def.EventDefs, centralGov))
         {
             yield return @event;
         }
@@ -252,18 +256,26 @@ class Player : IPlayer
     }
 }
 
-public class PlayerTitleRevokedEvent : IEvent
-{
-    public void OnSelect()
-    {
-        throw new NotImplementedException();
-    }
-}
+//public class PlayerTitleRevokedEvent : IEvent
+//{
+//    public string Title => throw new NotImplementedException();
 
-public class PlayerDeadEvent : IEvent
-{
-    public void OnSelect()
-    {
-        throw new NotImplementedException();
-    }
-}
+//    public string Desc => throw new NotImplementedException();
+
+//    public void OnSelect()
+//    {
+//        throw new NotImplementedException();
+//    }
+//}
+
+//public class PlayerDeadEvent : IEvent
+//{
+//    public string Title => throw new NotImplementedException();
+
+//    public string Desc => throw new NotImplementedException();
+
+//    public void OnSelect()
+//    {
+//        throw new NotImplementedException();
+//    }
+//}

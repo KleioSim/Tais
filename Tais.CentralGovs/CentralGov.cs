@@ -7,15 +7,13 @@ using Tais.Modders.Interfaces;
 
 namespace Tais.CentralGovs;
 
-class CentralGov : Entity, ICentralGov
+class CentralGov : Entity<ICentralGovDef>, ICentralGov
 {
     public IRequestTax RequestTax => requestTax;
 
     public float InitTaxValue { get; internal set; }
 
     public RequestTax requestTax;
-
-    public ICentralGovDef def { get; set; }
 
     public TaxLevel TaxLevel { get; internal set; }
 
@@ -31,9 +29,8 @@ class CentralGov : Entity, ICentralGov
 
     }
 
-    internal void Initialize(ICentralGovDef def, ICentralGovInitData centralGovInitData)
+    internal void Initialize(ICentralGovInitData centralGovInitData)
     {
-        this.def = def;
         this.TaxLevel = Enum.Parse<TaxLevel>(centralGovInitData.TaxLevel);
     }
 

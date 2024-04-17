@@ -20,6 +20,8 @@ public class SessionMock : ISession
 
     public IPlayer Player => throw new NotImplementedException();
 
+    public IEnumerable<IWarn> Warns => throw new NotImplementedException();
+
     internal FinanceMock finance = new FinanceMock();
     internal List<TaskMock> tasks = new List<TaskMock>();
     internal List<CityMock> cities = new List<CityMock>();
@@ -92,6 +94,8 @@ public class CityMock : ICity
 
     public string Id => throw new NotImplementedException();
 
+    public IEntityDef Def => throw new NotImplementedException();
+
     public EffectValueMock popTax = new EffectValueMock();
     public GroupValueMock popCount = new GroupValueMock();
 }
@@ -109,6 +113,10 @@ public class GroupValueMock : IGroupValue
 public class EventMock : IEvent
 {
     public static Action OnSelected;
+
+    public string Title => throw new NotImplementedException();
+
+    public string Desc => throw new NotImplementedException();
 
     public void OnSelect()
     {

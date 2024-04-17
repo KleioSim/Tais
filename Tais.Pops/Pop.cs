@@ -7,23 +7,21 @@ using Tais.Modders.Interfaces;
 
 namespace Tais.Pops;
 
-internal class Pop : Entity, IPop
+internal class Pop : Entity<IPopDef>, IPop
 {
-    public string Name => def.PopName;
+    public string Name => Def.PopName;
     public float Count { get; set; }
-    public bool IsRegisted => def.IsRegisted;
+    public bool IsRegisted => Def.IsRegisted;
 
     public IFamily Family => family;
 
-    public IEnumerable<ITaskDef> TaskDefs => def.TaskDefs;
+    public IEnumerable<ITaskDef> TaskDefs => Def.TaskDefs;
 
     private Family? family;
 
-    private IPopDef def;
-
     public Pop(IPopDef def, IPopInitData popInitData)
     {
-        this.def = def;
+        this.Def = def;
         this.Count = popInitData.Count;
 
         if (def.HasFamily)

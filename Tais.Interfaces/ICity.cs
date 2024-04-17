@@ -11,7 +11,6 @@ public interface ICity : IEntity
     IEnumerable<IPop> Pops { get; }
     IEnumerable<IBuffer> Buffers { get; }
     IEnumerable<IEffect> Effects { get; }
-    IEnumerable<ITaskDef> TaskDefs { get; }
 }
 
 public interface IGroupValue
@@ -24,9 +23,4 @@ public interface IBuffer
 {
     string Name { get; }
     IEnumerable<IEffect> Effects { get; }
-}
-
-public interface IEntity
-{
-    string Id { get; }
 }

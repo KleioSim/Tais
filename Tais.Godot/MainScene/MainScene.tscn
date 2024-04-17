@@ -16,9 +16,11 @@ script = ExtResource("1_52frr")
 [node name="NextDayTimer" type="Timer" parent="."]
 
 [node name="TopInfo" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 364.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 177.0
+grow_horizontal = 2
 
 [node name="Player" type="VBoxContainer" parent="TopInfo"]
 layout_mode = 2
@@ -201,6 +203,14 @@ size_flags_vertical = 1
 text = "D"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Warns" type="HBoxContainer" parent="TopInfo"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="WarnItem" parent="TopInfo/Warns" instance_placeholder="res://MainScene/Warns/WarnItem.tscn"]
+layout_mode = 2
 
 [node name="LeftPanel" parent="." instance=ExtResource("2_31dac")]
 layout_mode = 1

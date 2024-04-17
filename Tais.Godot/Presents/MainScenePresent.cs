@@ -88,6 +88,7 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
 
         view.TaskContainer.Refresh(model.Tasks.OfType<object>().ToHashSet());
         view.ToastContainer.Refresh(model.Toasts.OfType<object>().ToHashSet());
+        view.WarnContainer.Refresh(model.Warns.OfType<object>().ToHashSet());
 
         if (model.CurrEvent != null)
         {

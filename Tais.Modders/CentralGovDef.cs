@@ -2,7 +2,7 @@
 
 namespace Tais.Modders;
 
-internal class CentralGovDef : ICentralGovDef
+internal class CentralGovDef : EntityDef,  ICentralGovDef
 {
-    public IEnumerable<IEventDef> EventDefs { get; init; }
+
 }

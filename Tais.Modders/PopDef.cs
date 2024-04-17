@@ -2,13 +2,11 @@
 
 namespace Tais.Modders;
 
-public class PopDef : IPopDef
+public class PopDef : EntityDef, IPopDef
 {
     public string PopName { get; init; }
 
     public bool IsRegisted { get; init; }
 
     public bool HasFamily { get; init; }
-
-    public IEnumerable<ITaskDef> TaskDefs { get; init; }
 }

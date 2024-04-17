@@ -135,10 +135,9 @@ public class ModderBuilder
 };
 
 
-public class CityDef : ICityDef
+public class CityDef : EntityDef, ICityDef
 {
-    public IEnumerable<ITaskDef> TaskDefs { get; init; }
-    public IEnumerable<IBufferDef> BufferDefs { get; init; }
+
 }
 
 public class BufferDef : IBufferDef
@@ -150,4 +149,12 @@ public class BufferDef : IBufferDef
     public ICondition InvalidCondition { get; init; }
 
     public IEnumerable<IEffect> Effects { get; init; }
+}
+
+public class EntityDef : IEntityDef
+{
+    public IEnumerable<ITaskDef> TaskDefs { get; init; } = new List<ITaskDef>();
+    public IEnumerable<IBufferDef> BufferDefs { get; init; } = new List<IBufferDef>();
+    public IEnumerable<IEventDef> EventDefs { get; init; } = new List<IEventDef>();
+    public IEnumerable<IWarnDef> WarnDefs { get; init; } = new List<IWarnDef>();
 }
