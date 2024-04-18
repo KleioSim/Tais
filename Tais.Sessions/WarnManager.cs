@@ -8,6 +8,8 @@ namespace Tais.Sessions;
 
 internal class WarnManager : IEnumerable<IWarn>
 {
+    public static ISession Session { get; set; }
+
     IEnumerable<IWarn> Warns
     {
         get
@@ -24,7 +26,7 @@ internal class WarnManager : IEnumerable<IWarn>
                 foreach (var def in entity.Def.WarnDefs
                     .Except(warns.Where(warn => warn.contexts.Any(ct => ct.current == entity)).Select(x => x.Def)))
                 {
-                    var context = new ProcessContext() { current = entity };
+                    var context = new ProcessContext() { current = entity, session = Session };
 
                     if (def.Condition.IsSatisfied(context))
                     {
@@ -54,7 +56,7 @@ internal class WarnManager : IEnumerable<IWarn>
         var warn = warns.SingleOrDefault(x => x.Def == def);
         if (warn == null)
         {
-            warn = new Warn(def, context);
+            warns.Add(new Warn(def, context));
             return;
         }
 

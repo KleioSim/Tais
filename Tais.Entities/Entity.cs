@@ -25,7 +25,7 @@ public class Entity : IEntity
 
     public static IEnumerable<IEntity> GetAll()
     {
-        return _entities.Values;
+        return _entities.Values.ToArray();
     }
 
     public static T GetById<T>(string Id)

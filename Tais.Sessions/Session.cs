@@ -139,6 +139,7 @@ class Session : ISession
         };
 
         EventProcess.Session = this;
+        WarnManager.Session = this;
 
         player.CalcUsedEngine = () =>
         {

@@ -126,6 +126,10 @@ public class ModderBuilder
                         VaildDate = new VaildDate() { Day = 1, Month = 1},
                         TriggerCondition = new TrueCondition()
                     },
+                },
+                WarnDefs = new IWarnDef[]
+                {
+                    new WarnDef(){Condition = new CentralGovRequestTaxNotFullFill()}
                 }
             }
         };
@@ -157,4 +161,9 @@ public class EntityDef : IEntityDef
     public IEnumerable<IBufferDef> BufferDefs { get; init; } = new List<IBufferDef>();
     public IEnumerable<IEventDef> EventDefs { get; init; } = new List<IEventDef>();
     public IEnumerable<IWarnDef> WarnDefs { get; init; } = new List<IWarnDef>();
+}
+
+public class WarnDef : IWarnDef
+{
+    public ICondition Condition { get; init; }
 }

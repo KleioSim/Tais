@@ -1,6 +1,6 @@
 ﻿namespace Tais.Modders.Interfaces;
 
-public class IWarnDef
+public interface IWarnDef
 {
-    public ICondition Condition { get; init; }
+    ICondition Condition { get; }
 }
