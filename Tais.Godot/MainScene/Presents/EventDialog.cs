@@ -8,7 +8,7 @@ public partial class EventDialogPresent : PresentControl<EventDialog, ISession>
         var eventObj = view.Object as IEvent;
         view.Option.Pressed += () =>
         {
-            eventObj.OnSelect();
+            eventObj.Opition.OnSelect();
             view.QueueFree();
 
             SendCommand(new Cmd_UIRefresh());
@@ -21,6 +21,6 @@ public partial class EventDialogPresent : PresentControl<EventDialog, ISession>
 
         view.Title.Text = eventObj.Title;
         view.Desc.Text = eventObj.Desc;
-
+        view.OptionLabel.Text = eventObj.Opition.Desc;
     }
 }

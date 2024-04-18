@@ -10,13 +10,29 @@ internal class Event : IEvent
     public string Title => def.Title;
     public string Desc => def.Desc;
 
-    private IEventDef def;
-    private object target;
+    public IOpition Opition => opition;
+
+    internal IEventDef def { get; }
+    internal object target { get; }
+    private Opition opition;
 
     public Event(IEventDef def, object target)
     {
         this.def = def;
         this.target = target;
+        this.opition = new Opition(this);
+    }
+}
+
+class Opition : IOpition
+{
+    private Event owner;
+    private IOpitionDef def => owner.def.Opition;
+    public string Desc => def.Desc;
+
+    public Opition(Event owner)
+    {
+        this.owner = owner;
     }
 
     public void OnSelect()
@@ -28,7 +44,7 @@ internal class Event : IEvent
 
         if (def.Command is ICommandWithTarget commandWithTarget)
         {
-            commandWithTarget.Target = target;
+            commandWithTarget.Target = owner.target;
         }
 
         CommandSender.Send(def.Command);

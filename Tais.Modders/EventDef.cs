@@ -15,6 +15,15 @@ public class EventDef : IEventDef
     public string Title { get; init; }
 
     public string Desc { get; init; }
+
+    public IOpitionDef Opition { get; init; }
+}
+
+public class OpitionDef : IOpitionDef
+{
+    public string Desc { get; init; }
+
+    public ICommand Command { get; init; }
 }
 
 public class VaildDate : IVaildDate

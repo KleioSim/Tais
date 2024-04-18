@@ -114,17 +114,18 @@ public class ModderBuilder
                     new EventDef()
                     {
                         Title = "CentralGov RequestTax Not FullFill",
-                        Desc = "Confirm",
+                        Desc = "CentralGov RequestTax Not FullFill Desc",
                         VaildDate = new VaildDate() { Day = 1 },
                         TriggerCondition = new CentralGovRequestTaxNotFullFill(),
-                        Command = new Cmd_RevokePlayerTitle()
+                        Opition = new OpitionDef(){ Desc = "Confirm", Command = new Cmd_RevokePlayerTitle() }
                     },
                     new EventDef()
                     {
                         Title = "TrueCondition Test",
-                        Desc = "Confirm",
+                        Desc = "TrueCondition Test Desc",
                         VaildDate = new VaildDate() { Day = 1, Month = 1},
-                        TriggerCondition = new TrueCondition()
+                        TriggerCondition = new TrueCondition(),
+                        Opition = new OpitionDef(){ Desc = "Confirm" }
                     },
                 },
                 WarnDefs = new IWarnDef[]

@@ -118,6 +118,8 @@ public class EventMock : IEvent
 
     public string Desc => throw new NotImplementedException();
 
+    public IOpition Opition => throw new NotImplementedException();
+
     public void OnSelect()
     {
         OnSelected.Invoke();
