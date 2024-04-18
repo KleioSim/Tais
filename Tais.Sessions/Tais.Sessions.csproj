@@ -14,6 +14,7 @@
     <ProjectReference Include="..\Tais.InitialDatas.Interfaces\Tais.InitialDatas.Interfaces.csproj" />
     <ProjectReference Include="..\Tais.Interfaces\Tais.Interfaces.csproj" />
     <ProjectReference Include="..\Tais.Pops\Tais.Pops.csproj" />
+    <ProjectReference Include="..\Tais.Warns\Tais.Warns.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,21 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>disable</ImplicitUsings>
+    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Tais.Buffers\Tais.Buffers.csproj" />
-    <ProjectReference Include="..\Tais.Effects\Tais.Effects.csproj" />
     <ProjectReference Include="..\Tais.Entities\Tais.Entities.csproj" />
-    <ProjectReference Include="..\Tais.InitialDatas.Interfaces\Tais.InitialDatas.Interfaces.csproj" />
     <ProjectReference Include="..\Tais.Interfaces\Tais.Interfaces.csproj" />
-
+    <ProjectReference Include="..\Tais.Modders.Interfaces\Tais.Modders.Interfaces.csproj" />
+    <ProjectReference Include="..\Tais.ProcessContexts\Tais.ProcessContexts.csproj" />
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
       <_Parameter1>Tais.Sessions</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
-
 
 </Project>
