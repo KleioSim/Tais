@@ -3,6 +3,7 @@ using Tais.CentralGovs;
 using Tais.Citys;
 using Tais.Commands;
 using Tais.Effects;
+using Tais.Entities;
 using Tais.Events;
 using Tais.InitialDatas.Interfaces;
 using Tais.Interfaces;
@@ -33,8 +34,10 @@ class Session : ISession
     internal CentralGov centralGov = new CentralGov();
     internal List<IToast> toasts = new List<IToast>();
     internal Player player = new Player();
-    internal WarnManager warnManager = new WarnManager();
 
+    private WarnManager warnManager;
+    private EventManager eventManager;
+    private BufferManager bufferManager;
 
     public void OnCommand(ICommand command)
     {
@@ -106,7 +109,14 @@ class Session : ISession
 
         finance.OnDaysInc(date);
 
-        foreach (var @event in EventProcess.Do(centralGov.Def.EventDefs, centralGov))
+        bufferManager.OnDaysInc();
+
+        //foreach (var @event in EventProcess.Do(centralGov.Def.EventDefs, centralGov))
+        //{
+        //    yield return @event;
+        //}
+
+        foreach (var @event in eventManager.OnDaysInc())
         {
             yield return @event;
         }
@@ -127,20 +137,20 @@ class Session : ISession
             }
         };
 
-        BufferProcess.Session = this;
-        BufferProcess.OnBufferAdded = null;
-        BufferProcess.OnBufferAdded += (buff, target) =>
+        Entity.OnBufferAdded = (buff, target) =>
         {
             toasts.Add(new Toast() { Desc = $"Add Buff {buff.GetType().Name} to {target}" });
         };
-        BufferProcess.OnBufferRemoved = null;
-        BufferProcess.OnBufferRemoved += (buff, target) =>
+
+        Entity.OnBufferRemoved = (buff, target) =>
         {
             toasts.Add(new Toast() { Desc = $"Remove Buff {buff.GetType().Name} from {target}" });
         };
 
-        EventProcess.Session = this;
-        WarnManager.Session = this;
+        eventManager = new EventManager(this);
+        warnManager = new WarnManager(this);
+        bufferManager = new BufferManager(this);
+
 
         player.CalcUsedEngine = () =>
         {

@@ -7,4 +7,6 @@ public interface IEntity
     string Id { get; }
 
     IEntityDef Def { get; }
+
+    IEnumerable<IBuffer> Buffers { get; }
 }

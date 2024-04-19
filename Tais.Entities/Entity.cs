@@ -17,9 +17,8 @@ public class Entity<T> : Entity
 
 public class Entity : IEntity
 {
-    public string Id { get; }
-
-    public IEntityDef Def { get; set; }
+    public static Action<IBuffer, object>? OnBufferAdded;
+    public static Action<IBuffer, object>? OnBufferRemoved;
 
     private static Dictionary<string, IEntity> _entities = new Dictionary<string, IEntity>();
 
@@ -33,6 +32,14 @@ public class Entity : IEntity
     {
         return (T)_entities[Id];
     }
+
+    public string Id { get; }
+
+    public IEntityDef Def { get; set; }
+
+    public IEnumerable<IBuffer> Buffers => buffers;
+
+    private List<IBuffer> buffers = new List<IBuffer>();
 
     public Entity()
     {
@@ -48,5 +55,19 @@ public class Entity : IEntity
     {
         var options = new GenerationOptions(useNumbers: true, useSpecialCharacters: false, length: 8);
         return ShortId.Generate(options);
+    }
+
+    public void RemoveBuffer(IBuffer buff)
+    {
+        buffers.Remove(buff);
+
+        OnBufferRemoved?.Invoke(buff, this);
+    }
+
+    public void AddBuffer(IBuffer buff)
+    {
+        buffers.Add(buff);
+
+        OnBufferAdded?.Invoke(buff, this);
     }
 }

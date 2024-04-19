@@ -8,7 +8,7 @@ namespace Tais.Warns;
 
 internal class WarnManager : IEnumerable<IWarn>
 {
-    public static ISession Session { get; set; }
+    public ISession Session { get; set; }
 
     IEnumerable<IWarn> Warns
     {
@@ -40,6 +40,11 @@ internal class WarnManager : IEnumerable<IWarn>
     }
 
     private List<Warn> warns = new List<Warn>();
+
+    public WarnManager(ISession session)
+    {
+        Session = session;
+    }
 
     public IEnumerator<IWarn> GetEnumerator()
     {

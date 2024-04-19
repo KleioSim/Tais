@@ -13,15 +13,12 @@ namespace Tais.Citys;
 internal class City : Entity<ICityDef>, ICity
 {
     public static Action<bool, City>? OnOwnerChanged;
-    public static Action<IBuffer, ICity>? OnBufferAdded;
-    public static Action<IBuffer, ICity>? OnBufferRemoved;
 
     public string Name { get; }
     public IEffectValue PopTax => popTax;
     public IGroupValue PopCount => popCount;
     public IEnumerable<IPop> Pops => pops;
-    public IEnumerable<IBuffer> Buffers => buffers;
-    public IEnumerable<IEffect> Effects => buffers.SelectMany(x => x.Effects);
+    public IEnumerable<IEffect> Effects => Buffers.SelectMany(x => x.Effects);
 
     public bool IsOwned
     {
@@ -41,7 +38,6 @@ internal class City : Entity<ICityDef>, ICity
 
     private bool isOwned;
     private List<IPop> pops = new List<IPop>();
-    private List<Buffers.Buffer> buffers = new List<Buffers.Buffer>();
 
     public City(ICityDef def, ICityInitData initData, IEnumerable<IPop> pops)
     {
@@ -59,7 +55,7 @@ internal class City : Entity<ICityDef>, ICity
 
     internal void OnDaysInc(IDate date)
     {
-        BufferProcess.Do(Def.BufferDefs, this, buffers);
+        //BufferProcess.Do(Def.BufferDefs, this, buffers);
 
         //for (int i = buffers.Count - 1; i >= 0; i--)
         //{

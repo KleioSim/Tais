@@ -1,7 +1,6 @@
 ﻿using Tais.Commands;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
-using Tais.ProcessContexts;
 
 namespace Tais.Events;
 
@@ -50,27 +49,3 @@ class Opition : IOpition
         CommandSender.Send(def.Command);
     }
 }
-
-internal class EventProcess
-{
-    public static ISession Session { get; set; }
-
-    internal static IEnumerable<IEvent> Do<T>(IEnumerable<IEventDef> eventDefs, T target)
-        where T : IEntity
-    {
-        foreach (var eventDef in eventDefs)
-        {
-            if (!eventDef.VaildDate.Check(Session.Date))
-            {
-                continue;
-            }
-
-            var context = new ProcessContext { current = target, session = Session };
-            if (eventDef.TriggerCondition.IsSatisfied(context))
-            {
-                yield return new Event(eventDef, target);
-            }
-        }
-    }
-}
-
