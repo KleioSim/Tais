@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Tais.Entities;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
 using Tais.ProcessContexts;
@@ -8,7 +7,7 @@ namespace Tais.Warns;
 
 internal class WarnManager : IEnumerable<IWarn>
 {
-    public ISession Session { get; set; }
+    public readonly ISession session;
 
     IEnumerable<IWarn> Warns
     {
@@ -21,12 +20,12 @@ internal class WarnManager : IEnumerable<IWarn>
 
             warns.RemoveAll(x => x.contexts.Count == 0);
 
-            foreach (var entity in Entity.GetAll())
+            foreach (var entity in session.Entities)
             {
                 foreach (var def in entity.Def.WarnDefs
                     .Except(warns.Where(warn => warn.contexts.Any(ct => ct.current == entity)).Select(x => x.Def)))
                 {
-                    var context = new ProcessContext() { current = entity, session = Session };
+                    var context = new ProcessContext() { current = entity, session = session };
 
                     if (def.Condition.IsSatisfied(context))
                     {
@@ -43,7 +42,7 @@ internal class WarnManager : IEnumerable<IWarn>
 
     public WarnManager(ISession session)
     {
-        Session = session;
+        this.session = session;
     }
 
     public IEnumerator<IWarn> GetEnumerator()

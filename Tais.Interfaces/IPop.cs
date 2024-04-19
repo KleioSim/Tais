@@ -11,6 +11,7 @@ public interface IPop : IEntity
     IFamily Family { get; }
 
     IEnumerable<ITaskDef> TaskDefs { get; }
+    string City { get; }
 }
 
 public interface IFamily

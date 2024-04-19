@@ -132,12 +132,19 @@ public class ModderBuilder
                 {
                     new WarnDef(){Condition = new CentralGovRequestTaxNotFullFill()}
                 }
-            }
+            },
+
+            PlayerDef = new PlayerDef()
         };
 
         return modder;
     }
 };
+
+public class PlayerDef : EntityDef, IPlayerDef
+{
+
+}
 
 
 public class CityDef : EntityDef, ICityDef

@@ -8,5 +8,6 @@ public interface IModder
 
     ICityDef CityDef { get; }
 
+    IPlayerDef PlayerDef { get; }
     ICentralGovDef CentralGovDef { get; }
 }

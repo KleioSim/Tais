@@ -2,7 +2,6 @@
 using Tais.CentralGovs;
 using Tais.Citys;
 using Tais.Commands;
-using Tais.Effects;
 using Tais.Entities;
 using Tais.Events;
 using Tais.InitialDatas.Interfaces;
@@ -20,20 +19,20 @@ class Session : ISession
 
     public IEnumerable<ITask> Tasks => tasks;
     public IFinance Finance => finance;
-    public IEnumerable<ICity> Cities => cities;
-    public ICentralGov CentralGov => centralGov;
     public IList<IToast> Toasts => toasts;
-    public IPlayer Player => player;
-
     public IEnumerable<IWarn> Warns => warnManager;
+
+    public IEnumerable<IEntity> Entities => entityManager;
+    public IEnumerable<ICity> Cities => entityManager.OfType<ICity>();
+    public ICentralGov CentralGov => entityManager.OfType<ICentralGov>().Single();
+    public IPlayer Player => entityManager.OfType<IPlayer>().Single();
 
     internal Date date = new Date();
     internal Finance finance = new Finance();
     internal List<Task> tasks = new List<Task>();
-    internal List<City> cities = new List<City>();
-    internal CentralGov centralGov = new CentralGov();
     internal List<IToast> toasts = new List<IToast>();
-    internal Player player = new Player();
+
+    internal EntityManager entityManager;
 
     private WarnManager warnManager;
     private EventManager eventManager;
@@ -78,11 +77,13 @@ class Session : ISession
                 break;
             case Cmd_RevokePlayerTitle cmd_RevokePlayerTitle:
                 {
+                    var player = Player as Player;
                     player.IsRevoked = true;
                 }
                 break;
             case Cmd_ChangeCentralGovTaxLevel cmd_ChangeCentralGovTaxLevel:
                 {
+                    var centralGov = CentralGov as CentralGov;
                     centralGov.TaxLevel = Enum.Parse<TaxLevel>(cmd_ChangeCentralGovTaxLevel.Value);
                 }
                 break;
@@ -100,7 +101,7 @@ class Session : ISession
             task.OnDaysInc(date);
         }
 
-        foreach (var city in cities)
+        foreach (City city in Cities)
         {
             city.OnDaysInc(date);
         }
@@ -111,11 +112,6 @@ class Session : ISession
 
         bufferManager.OnDaysInc();
 
-        //foreach (var @event in EventProcess.Do(centralGov.Def.EventDefs, centralGov))
-        //{
-        //    yield return @event;
-        //}
-
         foreach (var @event in eventManager.OnDaysInc())
         {
             yield return @event;
@@ -124,8 +120,7 @@ class Session : ISession
 
     public Session()
     {
-        City.OnOwnerChanged = null;
-        City.OnOwnerChanged += (flag, city) =>
+        City.OnOwnerChanged = (flag, city) =>
         {
             if (flag)
             {
@@ -137,6 +132,9 @@ class Session : ISession
             }
         };
 
+        City.GetPops = (cityName) => Entities.OfType<IPop>().Where(x => x.City == cityName);
+
+
         Entity.OnBufferAdded = (buff, target) =>
         {
             toasts.Add(new Toast() { Desc = $"Add Buff {buff.GetType().Name} to {target}" });
@@ -147,27 +145,15 @@ class Session : ISession
             toasts.Add(new Toast() { Desc = $"Remove Buff {buff.GetType().Name} from {target}" });
         };
 
-        eventManager = new EventManager(this);
-        warnManager = new WarnManager(this);
-        bufferManager = new BufferManager(this);
-
-
-        player.CalcUsedEngine = () =>
+        Tais.Sessions.Player.CalcUsedEngine = () =>
         {
             return tasks.Sum(x => x.Def.RequestActionPoint);
         };
 
-        //player.OnRevokeTitle = () =>
-        //{
-        //    CurrEvent = new PlayerTitleRevokedEvent();
-        //};
-
-        //player.OnDead = () =>
-        //{
-        //    CurrEvent = new PlayerDeadEvent();
-        //};
-
-        //finance.spends.Add(centralGov.RequestTax);
+        entityManager = new EntityManager();
+        eventManager = new EventManager(this);
+        warnManager = new WarnManager(this);
+        bufferManager = new BufferManager(this);
     }
 }
 
@@ -250,9 +236,9 @@ class Finance : IFinance
     }
 }
 
-class Player : IPlayer
+class Player : Entity<IPlayerDef>, IPlayer
 {
-    internal Func<int> CalcUsedEngine { get; set; }
+    internal static Func<int> CalcUsedEngine { get; set; }
 
     public int FreeActionPoints => TotalActionPoints - CalcUsedEngine();
 
@@ -262,7 +248,7 @@ class Player : IPlayer
 
     public bool IsDead { get; internal set; }
 
-    internal void Initialize(IPlayerInitData initData)
+    public Player(IPlayerInitData playerInitData, IPlayerDef def) : base(def)
     {
         TotalActionPoints = 10;
     }

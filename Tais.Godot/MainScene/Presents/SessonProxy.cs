@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Tais.Commands;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
@@ -21,6 +20,8 @@ public class SessionMock : ISession
     public IPlayer Player => throw new NotImplementedException();
 
     public IEnumerable<IWarn> Warns => throw new NotImplementedException();
+
+    public IEnumerable<IEntity> Entities => throw new NotImplementedException();
 
     internal FinanceMock finance = new FinanceMock();
     internal List<TaskMock> tasks = new List<TaskMock>();

@@ -17,11 +17,13 @@ internal class Pop : Entity<IPopDef>, IPop
 
     public IEnumerable<ITaskDef> TaskDefs => Def.TaskDefs;
 
+    public string City { get; }
+
     private Family? family;
 
-    public Pop(IPopDef def, IPopInitData popInitData)
+    public Pop(IPopDef def, IPopInitData popInitData) : base(def)
     {
-        this.Def = def;
+        this.City = popInitData.CityName;
         this.Count = popInitData.Count;
 
         if (def.HasFamily)

@@ -15,7 +15,7 @@ public class BufferManager
 
     public void OnDaysInc()
     {
-        foreach (Entity entity in Entity.GetAll())
+        foreach (Entity entity in session.Entities)
         {
             var context = new ProcessContext { current = entity, session = session };
 

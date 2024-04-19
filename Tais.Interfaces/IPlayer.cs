@@ -1,6 +1,6 @@
 ﻿namespace Tais.Interfaces;
 
-public interface IPlayer
+public interface IPlayer : IEntity
 {
     int FreeActionPoints { get; }
     int TotalActionPoints { get; }

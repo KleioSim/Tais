@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using Tais.Effects;
+﻿using Tais.Effects;
 using Tais.Entities;
 using Tais.InitialDatas.Interfaces;
 using Tais.Interfaces;
@@ -19,19 +18,16 @@ class CentralGov : Entity<ICentralGovDef>, ICentralGov
 
     internal IEnumerable<IEffect> effects => GetTaxLevelEffect(TaxLevel);
 
-    public CentralGov()
+    public CentralGov(ICentralGovInitData centralGovInitData, ICentralGovDef def) : base(def)
     {
+        this.TaxLevel = Enum.Parse<TaxLevel>(centralGovInitData.TaxLevel);
+
         requestTax = new RequestTax(this);
     }
 
     internal void OnDaysInc(IDate date)
     {
 
-    }
-
-    internal void Initialize(ICentralGovInitData centralGovInitData)
-    {
-        this.TaxLevel = Enum.Parse<TaxLevel>(centralGovInitData.TaxLevel);
     }
 
     private IEnumerable<IEffect> GetTaxLevelEffect(TaxLevel taxLevel)

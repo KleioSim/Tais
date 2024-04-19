@@ -1,5 +1,6 @@
-﻿using shortid.Configuration;
-using shortid;
+﻿using shortid;
+using shortid.Configuration;
+using System.Collections;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
 
@@ -12,6 +13,11 @@ public class Entity<T> : Entity
     {
         get => (T)base.Def;
         set => base.Def = value;
+    }
+
+    public Entity(T def)
+    {
+        Def = def;
     }
 }
 
@@ -69,5 +75,25 @@ public class Entity : IEntity
         buffers.Add(buff);
 
         OnBufferAdded?.Invoke(buff, this);
+    }
+}
+
+internal class EntityManager : IEnumerable<Entity>
+{
+    private List<Entity> entities = new List<Entity>();
+
+    public IEnumerator<Entity> GetEnumerator()
+    {
+        return ((IEnumerable<Entity>)entities).GetEnumerator();
+    }
+
+    internal void Add(Entity entity)
+    {
+        entities.Add(entity);
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return ((IEnumerable)entities).GetEnumerator();
     }
 }

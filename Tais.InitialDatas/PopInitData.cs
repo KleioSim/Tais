@@ -9,13 +9,15 @@ public class PopInitData : IPopInitData
     public string FamilyName { get; init; }
 
     public string PopName { get; init; }
+
+    public string CityName { get; init; }
 }
 
 public class InitialData : IInitialData
 {
     public IEnumerable<ICityInitData> CityInitDatas { get; init; }
 
-    public Dictionary<string, IEnumerable<IPopInitData>> City2PopInitDatas { get; init; }
+    public IEnumerable<IPopInitData> PopInitDatas { get; init; }
     public IPlayerInitData PlayerInitData { get; init; }
 
     public ICentralGovInitData CentralGovInitData { get; init; }

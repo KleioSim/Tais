@@ -4,7 +4,7 @@ public interface IInitialData
 {
     IEnumerable<ICityInitData> CityInitDatas { get; init; }
 
-    Dictionary<string, IEnumerable<IPopInitData>> City2PopInitDatas { get; init; }
+    IEnumerable<IPopInitData> PopInitDatas { get; init; }
     IPlayerInitData PlayerInitData { get; init; }
     ICentralGovInitData CentralGovInitData { get; }
 }
@@ -17,6 +17,7 @@ public interface ICityInitData
 
 public interface IPopInitData
 {
+    string CityName { get; }
     string PopName { get; }
     int Count { get; }
     string FamilyName { get; }

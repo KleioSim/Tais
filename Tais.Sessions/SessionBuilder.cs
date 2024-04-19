@@ -1,4 +1,5 @@
-﻿using Tais.Citys;
+﻿using Tais.CentralGovs;
+using Tais.Citys;
 using Tais.InitialDatas.Interfaces;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
@@ -12,20 +13,22 @@ public static class SessionBuilder
     {
         var session = new Session();
 
-        session.player.Initialize(initialData.PlayerInitData);
+        session.entityManager.Add(new Player(initialData.PlayerInitData, modder.PlayerDef));
+        session.entityManager.Add(new CentralGov(initialData.CentralGovInitData, modder.CentralGovDef));
 
         foreach (var cityInitData in initialData.CityInitDatas)
         {
-            var pops = initialData.City2PopInitDatas[cityInitData.CityName].Select(popInit => new Pop(modder.PopDefs[popInit.PopName], popInit));
-            var city = new City(modder.CityDef, cityInitData, pops);
-
-            session.cities.Add(city);
+            var city = new City(modder.CityDef, cityInitData);
+            session.entityManager.Add(city);
         }
 
-        session.centralGov.Initialize(initialData.CentralGovInitData);
-        session.centralGov.Def = modder.CentralGovDef;
+        foreach (var popInitData in initialData.PopInitDatas)
+        {
+            var pop = new Pop(modder.PopDefs[popInitData.PopName], popInitData);
+            session.entityManager.Add(pop);
+        }
 
-        session.centralGov.InitTaxValue = session.finance.incomes.Sum(x => x.CurrValue) * 0.8f * 12;
+        //session.centralGov.InitTaxValue = session.finance.incomes.Sum(x => x.CurrValue) * 0.8f * 12;
 
         return session;
     }

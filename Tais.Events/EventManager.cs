@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using Tais.Entities;
-using Tais.Interfaces;
+﻿using Tais.Interfaces;
 using Tais.ProcessContexts;
 
 namespace Tais.Events;
@@ -16,7 +14,7 @@ internal class EventManager
 
     public IEnumerable<IEvent> OnDaysInc()
     {
-        foreach (var entity in Entity.GetAll())
+        foreach (var entity in session.Entities)
         {
             foreach (var def in entity.Def.EventDefs)
             {

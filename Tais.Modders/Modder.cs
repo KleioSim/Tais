@@ -10,4 +10,6 @@ class Modder : IModder
     public ICityDef CityDef { get; init; }
 
     public ICentralGovDef CentralGovDef { get; init; }
+
+    public IPlayerDef PlayerDef { get; init; }
 }
