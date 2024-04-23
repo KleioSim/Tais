@@ -5,7 +5,7 @@ namespace Tais.Interfaces;
 public interface ICity : IEntity
 {
     string Name { get; }
-    IGroupValue PopCount { get; }
+    IGroupValue RegistPopCount { get; }
     IEffectValue PopTax { get; }
     bool IsOwned { get; }
     IEnumerable<IPop> Pops { get; }

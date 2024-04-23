@@ -16,7 +16,7 @@ public partial class CityListItemPresent : PresentControl<CityListItem, ISession
         var cityObj = view.Id as ICity;
 
         view.CityName.Text = cityObj.Name;
-        view.PopCount.Text = cityObj.PopCount.Current.ToString();
+        view.PopCount.Text = cityObj.RegistPopCount.Current.ToString();
         view.IsControl.Text = cityObj.IsOwned.ToString();
     }
 }

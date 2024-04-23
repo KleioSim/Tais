@@ -15,7 +15,6 @@ public static class SessionBuilder
         var session = new Session();
 
         session.entityManager.CreatePlayer(modder.PlayerDef, initialData.PlayerInitData);
-        session.entityManager.CreateCentralGov(modder.CentralGovDef, initialData.CentralGovInitData);
 
         foreach (var cityInitData in initialData.CityInitDatas)
         {
@@ -27,7 +26,8 @@ public static class SessionBuilder
             session.entityManager.CreatePop(modder.PopDefs[popInitData.PopName], popInitData);
         }
 
-        //session.centralGov.InitTaxValue = session.finance.incomes.Sum(x => x.CurrValue) * 0.8f * 12;
+        var centralGov = session.entityManager.CreateCentralGov(modder.CentralGovDef, initialData.CentralGovInitData);
+        centralGov.ReportPopCount = session.Cities.Sum(x => (int)x.RegistPopCount.Current);
 
         return session;
     }

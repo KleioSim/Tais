@@ -14,6 +14,8 @@ class CentralGov : Entity<ICentralGovDef>, ICentralGov
 
     public RequestTax requestTax;
 
+    public int ReportPopCount { get; internal set; }
+
     public TaxLevel TaxLevel { get; internal set; }
 
     internal IEnumerable<IEffect> effects => GetTaxLevelEffect(TaxLevel);

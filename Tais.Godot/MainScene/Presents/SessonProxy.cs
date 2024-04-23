@@ -78,7 +78,7 @@ public class SessionMock : ISession
 
 public class CityMock : ICity
 {
-    public IGroupValue PopCount => popCount;
+    public IGroupValue RegistPopCount => popCount;
     public IEffectValue PopTax => popTax;
 
     public bool IsOwned { get; set; }

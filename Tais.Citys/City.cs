@@ -16,7 +16,7 @@ internal class City : Entity<ICityDef>, ICity
 
     public string Name { get; }
     public IEffectValue PopTax => popTax;
-    public IGroupValue PopCount => popTax.RegisterPopCount;
+    public IGroupValue RegistPopCount => popTax.RegisterPopCount;
     public IEnumerable<IPop> Pops => GetPops(Name);
     public IEnumerable<IEffect> Effects => Buffers.SelectMany(x => x.Effects);
 

@@ -77,7 +77,7 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
         view.FinanceCurrent.Text = model.Finance.Current.ToString();
         view.FinanceSurplus.Text = model.Finance.Surplus.ToString();
         view.CityCount.Text = model.Cities.Count(x => x.IsOwned).ToString();
-        view.PopCount.Text = model.Cities.Where(x => x.IsOwned).Sum(x => x.PopCount.Current).ToString();
+        view.PopCount.Text = model.Cities.Where(x => x.IsOwned).Sum(x => x.RegistPopCount.Current).ToString();
 
         view.Year.Text = model.Date.Year.ToString();
         view.Month.Text = model.Date.Month.ToString();

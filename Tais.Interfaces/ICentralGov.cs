@@ -5,6 +5,7 @@ namespace Tais.Interfaces;
 public interface ICentralGov : IEntity
 {
     TaxLevel TaxLevel { get; }
+    int ReportPopCount { get; }
     IRequestTax RequestTax { get; }
 }
 
