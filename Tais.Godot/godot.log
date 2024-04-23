@@ -17,5 +17,40 @@ Vulkan API 1.2.175 - Forward+ - Using Vulkan Device #0: NVIDIA - NVIDIA GeForce 
 [M] MainSceneMock Ready
 [V] WarnItem Ready
 [P] WarnItemPresent Ready
-CommandSender Send:Tais.Commands.Cmd_ChangeCentralGovTaxLevel
-CommandSender Send:Tais.Commands.Cmd_ChangeCentralGovTaxLevel
+CommandSender Send:Tais.Commands.Cmd_ChangeFinance
+CommandSender Send:Tais.Commands.Cmd_ChangeFinance
+[V] WarnItem Ready
+[P] WarnItemPresent Ready
+[V] CityListPanel Ready
+[P] CityListPanelPresent Ready
+[V] CityListItem Ready
+[P] CityListItemPresent Ready
+[V] CityListItem Ready
+[P] CityListItemPresent Ready
+[V] CityListItem Ready
+[P] CityListItemPresent Ready
+view.Button.Pressed
+[V] PopItem Ready
+[P] PopItemPresent Ready
+[V] PopItem Ready
+[P] PopItemPresent Ready
+[V] PopItem Ready
+[P] PopItemPresent Ready
+[V] CityOperationItem Ready
+[P] CityOperationItemPresent Ready
+[V] CityOperationItem Ready
+[P] CityOperationItemPresent Ready
+[V] CityOperationItem Ready
+[P] CityOperationItemPresent Ready
+[V] CityOperationItem Ready
+[P] CityOperationItemPresent Ready
+[V] CityOperationItem Ready
+[P] CityOperationItemPresent Ready
+[V] CityOperationItem Ready
+[P] CityOperationItemPresent Ready
+[V] CityOperationItem Ready
+[P] CityOperationItemPresent Ready
+UI Send:Tais.Commands.Cmd_TaskStart
+[V] TaskItem Ready
+[P] TaskItemPresent Ready
+CommandSender Send:Tais.Commands.Cmd_ChangeFinance

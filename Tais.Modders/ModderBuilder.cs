@@ -50,7 +50,15 @@ public class ModderBuilder
                             Speed = 10,
                             Condition = new PopMinCountCondition(1200),
                             Command = new Cmd_ChangePopCount(0.1f),
-                        }
+                        },
+                        new TaskDef()
+                        {
+                            Name = $"COLLECT_MORE_POP_TAX",
+                            RequestActionPoint = 5,
+                            Speed = 5,
+                            Condition = new TrueCondition(),
+                            Command = new Cmd_ChangeFinance(+100.0f),
+                         }
                     }
                 },
                 new PopDef()

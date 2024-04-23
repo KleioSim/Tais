@@ -87,6 +87,11 @@ class Session : ISession
                     centralGov.TaxLevel = Enum.Parse<TaxLevel>(cmd_ChangeCentralGovTaxLevel.Value);
                 }
                 break;
+            case Cmd_ChangeFinance cmd_ChangeFinance:
+                {
+                    finance.Current += cmd_ChangeFinance.Value;
+                }
+                break;
             default:
                 throw new Exception($"Not support cmd type {command.GetType()}");
         }
