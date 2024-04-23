@@ -1,5 +1,6 @@
 ﻿using Tais.CentralGovs;
 using Tais.Citys;
+using Tais.Entities;
 using Tais.InitialDatas.Interfaces;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
@@ -13,19 +14,17 @@ public static class SessionBuilder
     {
         var session = new Session();
 
-        session.entityManager.Add(new Player(initialData.PlayerInitData, modder.PlayerDef));
-        session.entityManager.Add(new CentralGov(initialData.CentralGovInitData, modder.CentralGovDef));
+        session.entityManager.CreatePlayer(modder.PlayerDef, initialData.PlayerInitData);
+        session.entityManager.CreateCentralGov(modder.CentralGovDef, initialData.CentralGovInitData);
 
         foreach (var cityInitData in initialData.CityInitDatas)
         {
-            var city = new City(modder.CityDef, cityInitData);
-            session.entityManager.Add(city);
+            session.entityManager.CreateCity(modder.CityDef, cityInitData);
         }
 
         foreach (var popInitData in initialData.PopInitDatas)
         {
-            var pop = new Pop(modder.PopDefs[popInitData.PopName], popInitData);
-            session.entityManager.Add(pop);
+            session.entityManager.CreatePop(modder.PopDefs[popInitData.PopName], popInitData);
         }
 
         //session.centralGov.InitTaxValue = session.finance.incomes.Sum(x => x.CurrValue) * 0.8f * 12;
@@ -34,3 +33,33 @@ public static class SessionBuilder
     }
 }
 
+static class EntityExtension
+{
+    public static Player CreatePlayer(this EntityManager entityManager, IPlayerDef def, IPlayerInitData initData)
+    {
+        var player = new Player(entityManager.GenerateId(), def, initData);
+        entityManager.AddEntity(player);
+        return player;
+    }
+
+    public static CentralGov CreateCentralGov(this EntityManager entityManager, ICentralGovDef def, ICentralGovInitData initData)
+    {
+        var centralGov = new CentralGov(entityManager.GenerateId(), def, initData);
+        entityManager.AddEntity(centralGov);
+        return centralGov;
+    }
+
+    public static City CreateCity(this EntityManager entityManager, ICityDef def, ICityInitData initData)
+    {
+        var city = new City(entityManager.GenerateId(), def, initData);
+        entityManager.AddEntity(city);
+        return city;
+    }
+
+    public static Pop CreatePop(this EntityManager entityManager, IPopDef def, IPopInitData initData)
+    {
+        var pop = new Pop(entityManager.GenerateId(), def, initData);
+        entityManager.AddEntity(pop);
+        return pop;
+    }
+}

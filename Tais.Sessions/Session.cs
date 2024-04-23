@@ -248,7 +248,7 @@ class Player : Entity<IPlayerDef>, IPlayer
 
     public bool IsDead { get; internal set; }
 
-    public Player(IPlayerInitData playerInitData, IPlayerDef def) : base(def)
+    public Player(string id, IPlayerDef def, IPlayerInitData playerInitData) : base(id, def)
     {
         TotalActionPoints = 10;
     }

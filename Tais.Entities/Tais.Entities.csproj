@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tais.InitialDatas.Interfaces\Tais.InitialDatas.Interfaces.csproj" />
     <ProjectReference Include="..\Tais.Interfaces\Tais.Interfaces.csproj" />
+    <ProjectReference Include="..\Tais.Modders.Interfaces\Tais.Modders.Interfaces.csproj" />
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
       <_Parameter1>Tais.Sessions</_Parameter1>
     </AssemblyAttribute>

@@ -1,6 +1,7 @@
 ﻿using shortid;
 using shortid.Configuration;
 using System.Collections;
+using Tais.InitialDatas.Interfaces;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
 
@@ -15,31 +16,18 @@ public class Entity<T> : Entity
         set => base.Def = value;
     }
 
-    public Entity(T def)
+    public Entity(string id, T def) : base(id, def)
     {
-        Def = def;
     }
 }
+
 
 public class Entity : IEntity
 {
     public static Action<IBuffer, object>? OnBufferAdded;
     public static Action<IBuffer, object>? OnBufferRemoved;
 
-    private static Dictionary<string, IEntity> _entities = new Dictionary<string, IEntity>();
-
-    public static IEnumerable<IEntity> GetAll()
-    {
-        return _entities.Values.ToArray();
-    }
-
-    public static T GetById<T>(string Id)
-        where T : IEntity
-    {
-        return (T)_entities[Id];
-    }
-
-    public string Id { get; }
+    public string Id { get; init; }
 
     public IEntityDef Def { get; set; }
 
@@ -47,20 +35,10 @@ public class Entity : IEntity
 
     private List<IBuffer> buffers = new List<IBuffer>();
 
-    public Entity()
+    public Entity(string id, IEntityDef def)
     {
-    re_generate:
-        Id = GenerateId().ToLower();
-        if (_entities.ContainsKey(Id))
-            goto re_generate;
-
-        _entities.Add(Id, this);
-    }
-
-    private string GenerateId()
-    {
-        var options = new GenerationOptions(useNumbers: true, useSpecialCharacters: false, length: 8);
-        return ShortId.Generate(options);
+        Id = id;
+        Def = def;
     }
 
     public void RemoveBuffer(IBuffer buff)
@@ -87,13 +65,27 @@ internal class EntityManager : IEnumerable<Entity>
         return ((IEnumerable<Entity>)entities).GetEnumerator();
     }
 
-    internal void Add(Entity entity)
-    {
-        entities.Add(entity);
-    }
-
     IEnumerator IEnumerable.GetEnumerator()
     {
         return ((IEnumerable)entities).GetEnumerator();
+    }
+
+    public string GenerateId()
+    {
+        var options = new GenerationOptions(useNumbers: true, useSpecialCharacters: false, length: 8);
+
+        string id = null;
+        do
+        {
+            id = ShortId.Generate(options);
+        }
+        while (entities.Any(x => x.Id == id));
+
+        return id;
+    }
+
+    public void AddEntity(Entity entity)
+    {
+        entities.Add(entity);
     }
 }

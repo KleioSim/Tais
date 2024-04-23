@@ -18,7 +18,7 @@ class CentralGov : Entity<ICentralGovDef>, ICentralGov
 
     internal IEnumerable<IEffect> effects => GetTaxLevelEffect(TaxLevel);
 
-    public CentralGov(ICentralGovInitData centralGovInitData, ICentralGovDef def) : base(def)
+    public CentralGov(string id, ICentralGovDef def, ICentralGovInitData centralGovInitData) : base(id, def)
     {
         this.TaxLevel = Enum.Parse<TaxLevel>(centralGovInitData.TaxLevel);
 

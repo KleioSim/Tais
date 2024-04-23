@@ -9,25 +9,30 @@ public interface IInitialData
     ICentralGovInitData CentralGovInitData { get; }
 }
 
-public interface ICityInitData
+public interface IEntityInitial
+{
+
+}
+
+public interface ICityInitData : IEntityInitial
 {
     string CityName { get; }
     bool IsControlled { get; }
 }
 
-public interface IPopInitData
+public interface IPopInitData : IEntityInitial
 {
     string CityName { get; }
     string PopName { get; }
     int Count { get; }
     string FamilyName { get; }
 }
-public interface IPlayerInitData
+public interface IPlayerInitData : IEntityInitial
 {
 
 }
 
-public interface ICentralGovInitData
+public interface ICentralGovInitData : IEntityInitial
 {
     string TaxLevel { get; }
 }

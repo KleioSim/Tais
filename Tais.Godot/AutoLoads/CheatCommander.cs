@@ -126,10 +126,11 @@ public partial class CheatCommander : Node
         }
 
         var cmd = constructor.Invoke(new[] { converter.ConvertFrom(p1) }) as ICommandWithTarget;
-        cmd.Target = Entity.GetById<IEntity>(p0);
+        var global = GetNode<Global>("/root/Global");
+        cmd.Target = global.session.Entities.SingleOrDefault(x => x.Id == p0);
         if (cmd.Target == null)
         {
-            throw new Exception($"can not find entity by id p0");
+            throw new Exception($"can not find entity by id {p0}");
         }
 
         CommandSender.Send(cmd);

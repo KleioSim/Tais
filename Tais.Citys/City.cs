@@ -37,7 +37,7 @@ internal class City : Entity<ICityDef>, ICity
 
     private bool isOwned;
 
-    public City(ICityDef def, ICityInitData initData) : base(def)
+    public City(string id, ICityDef def, ICityInitData initData) : base(id, def)
     {
         popTax = new PopTax(this);
 
