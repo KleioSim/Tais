@@ -1,0 +1,168 @@
+[gd_scene load_steps=5 format=3 uid="uid://ceigfnqtf77o1"]
+
+[ext_resource type="Script" path="res://MainScene/LeftPanels/CityDetailPanel/PopItem/PopItem.cs" id="1_06hly"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4xjx"]
+bg_color = Color(0.129412, 0.129412, 0.129412, 0.980392)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4w82c"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_wsmvm"]
+font_size = 12
+
+[node name="PopItem" type="PanelContainer"]
+custom_minimum_size = Vector2(320, 0)
+theme_override_styles/panel = SubResource("StyleBoxFlat_h4xjx")
+script = ExtResource("1_06hly")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(80, 100)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="HBoxContainer/Button/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Family" type="Label" parent="HBoxContainer/Button/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+text = "Family
+"
+label_settings = SubResource("LabelSettings_4w82c")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="PopCount" type="Panel" parent="HBoxContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/GridContainer/PopCount"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/GridContainer/PopCount/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "PC"
+label_settings = SubResource("LabelSettings_wsmvm")
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="Value" type="Label" parent="HBoxContainer/VBoxContainer/GridContainer/PopCount/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "--"
+label_settings = SubResource("LabelSettings_wsmvm")
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="Attitude" type="Panel" parent="HBoxContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/GridContainer/Attitude"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/GridContainer/Attitude/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "AT"
+label_settings = SubResource("LabelSettings_wsmvm")
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="Value" type="Label" parent="HBoxContainer/VBoxContainer/GridContainer/Attitude/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "--"
+label_settings = SubResource("LabelSettings_wsmvm")
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="Living" type="Panel" parent="HBoxContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/GridContainer/Living"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/GridContainer/Living/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "LV"
+label_settings = SubResource("LabelSettings_wsmvm")
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="Value" type="Label" parent="HBoxContainer/VBoxContainer/GridContainer/Living/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "--"
+label_settings = SubResource("LabelSettings_wsmvm")
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="BufferContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="BufferItem" type="Panel" parent="HBoxContainer/VBoxContainer/BufferContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2

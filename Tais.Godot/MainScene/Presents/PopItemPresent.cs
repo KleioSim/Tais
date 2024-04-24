@@ -23,12 +23,11 @@ public partial class PopItemPresent : PresentControl<PopItem, ISession>
 
         if (popObj.Family == null)
         {
-            view.FamilyName.Visible = false;
             view.Attitude.Visible = false;
+            view.FamilyName.Text = "";
         }
         else
         {
-            view.FamilyName.Visible = true;
             view.FamilyName.Text = popObj.Family.Name;
 
             view.Attitude.Visible = true;

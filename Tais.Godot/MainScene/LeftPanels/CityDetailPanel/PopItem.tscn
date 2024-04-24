@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d11e2w3pciejs"]
+[gd_scene load_steps=4 format=3 uid="uid://c5hd0t76aj87k"]
 
 [ext_resource type="Script" path="res://MainScene/LeftPanels/CityDetailPanel/PopItem.cs" id="1_de0ru"]
 

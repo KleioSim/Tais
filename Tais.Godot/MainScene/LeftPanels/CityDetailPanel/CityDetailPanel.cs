@@ -28,7 +28,7 @@ public partial class CityDetailPanel : LeftContentPanel1
 
         PopContainer = new ItemContainer<PopItem>(() =>
         {
-            return GetNode<InstancePlaceholder>("HBoxContainer/VBoxContainer2/VBoxContainer/Pops/FlowContainer/PopItem");
+            return GetNode<InstancePlaceholder>("HBoxContainer/VBoxContainer2/VBoxContainer/Pops/VBoxContainer/PopItem");
         });
 
         BufferContainer = new ItemContainer<BufferItem>(() =>
