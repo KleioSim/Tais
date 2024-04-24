@@ -9,6 +9,7 @@ public interface IPop : IEntity
     bool IsRegisted { get; }
 
     IFamily Family { get; }
+    IGroupValue Living { get; }
 
     IEnumerable<ITaskDef> TaskDefs { get; }
     string City { get; }

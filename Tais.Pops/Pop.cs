@@ -14,12 +14,14 @@ internal class Pop : Entity<IPopDef>, IPop
     public bool IsRegisted => Def.IsRegisted;
 
     public IFamily Family => family;
+    public IGroupValue Living => living;
 
     public IEnumerable<ITaskDef> TaskDefs => Def.TaskDefs;
 
     public string City { get; }
 
     private Family? family;
+    private Living? living;
 
     public Pop(string id, IPopDef def, IPopInitData popInitData) : base(id, def)
     {
@@ -29,6 +31,11 @@ internal class Pop : Entity<IPopDef>, IPop
         if (def.HasFamily)
         {
             family = new Family(popInitData.FamilyName, new[] { ("Test", 10f) });
+        }
+
+        if (def.HasLiving)
+        {
+            living = new Living(70);
         }
     }
 }

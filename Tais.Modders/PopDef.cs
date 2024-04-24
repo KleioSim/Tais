@@ -9,4 +9,6 @@ public class PopDef : EntityDef, IPopDef
     public bool IsRegisted { get; init; }
 
     public bool HasFamily { get; init; }
+
+    public bool HasLiving { get; init; }
 }

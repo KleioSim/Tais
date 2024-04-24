@@ -21,6 +21,28 @@ public partial class PopItemPresent : PresentControl<PopItem, ISession>
             view.PopCount.Text = string.Join("", Enumerable.Range(0, view.PopCount.Text.Length).Select(_ => "*"));
         }
 
-        view.FamilyName.Text = popObj.Family == null ? "" : popObj.Family.Name;
+        if (popObj.Family == null)
+        {
+            view.FamilyName.Visible = false;
+            view.Attitude.Visible = false;
+        }
+        else
+        {
+            view.FamilyName.Visible = true;
+            view.FamilyName.Text = popObj.Family.Name;
+
+            view.Attitude.Visible = true;
+            view.AttitudeLabel.Text = popObj.Family.Attitude.Current.ToString();
+        }
+
+        if (popObj.Living == null)
+        {
+            view.Living.Visible = false;
+        }
+        else
+        {
+            view.Living.Visible = true;
+            view.LivingLabel.Text = popObj.Living.Current.ToString();
+        }
     }
 }

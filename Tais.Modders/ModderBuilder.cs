@@ -41,7 +41,7 @@ public class ModderBuilder
                 {
                     PopName = "MIN",
                     IsRegisted = true,
-                    HasFamily = false,
+                    HasLiving = true,
                     TaskDefs = new ITaskDef[] {
                         new TaskDef()
                         {
@@ -98,7 +98,7 @@ public class ModderBuilder
                         Speed = 5,
                         Condition = new CityNameCondition($"CITY_1"),
                         Command = new Cmd_ChangeCityIsControlFlag(false),
-                    }
+                    },
                 },
                 BufferDefs = new IBufferDef[]
                 {
