@@ -10,5 +10,5 @@ public interface ITaskDef
     float Speed { get; }
 
     ICondition Condition { get; }
-    ICommand Command { get; }
+    IEnumerable<ICommand> Commands { get; }
 }

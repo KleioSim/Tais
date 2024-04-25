@@ -13,7 +13,7 @@ class TaskDef : ITaskDef
 
     public int RequestActionPoint { get; init; }
 
-    public ICommand Command { get; init; }
+    public IEnumerable<ICommand> Commands { get; init; }
 
     public TaskDef()
     {
