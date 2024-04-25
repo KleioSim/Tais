@@ -92,6 +92,14 @@ class Session : ISession
                     finance.Current += cmd_ChangeFinance.Value;
                 }
                 break;
+            case Cmd_ChangePopLiving cmd_ChangePopLiving:
+                {
+                    var pop = cmd_ChangePopLiving.Target as Pop;
+                    var living = pop.Living as Living;
+
+                    living.items.Add(new Living.Item(cmd_ChangePopLiving.Reason, cmd_ChangePopLiving.Value));
+                }
+                break;
             default:
                 throw new Exception($"Not support cmd type {command.GetType()}");
         }
