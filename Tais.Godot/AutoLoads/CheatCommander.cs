@@ -4,42 +4,24 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using Tais.Commands;
 using Tais.Entities;
 using Tais.Interfaces;
 
 public partial class CheatCommander : Node
 {
-    Dictionary<string, ConstructorInfo> dictCommandType;
-
     public override void _Ready()
     {
-        dictCommandType = AppDomain.CurrentDomain.GetAssemblies()
+        var cmdConstructors = AppDomain.CurrentDomain.GetAssemblies()
             .Single(x => x.GetName().Name == "Tais.Commands").GetTypes()
             .Where(x => x.IsAssignableTo(typeof(ICommand)) && x.GetCustomAttribute<ExportCheatCommand>() != null)
-            .ToDictionary(
-                x => x.Name.ToLower(),
-                x => x.GetConstructors().Single(x => x.GetCustomAttribute<CheatConstructors>() != null));
+            .Select(x => x.GetConstructors().Single(x => x.GetCustomAttribute<CheatConstructors>() != null))
+            .ToList();
 
-        foreach (var item in dictCommandType)
+        foreach (var constructor in cmdConstructors)
         {
-            var paramNames = GetCommandParameterNames(item.Value);
-
-            switch (paramNames.Count())
-            {
-                case 0:
-                    CommandConsole.AddCommand(item.Key, OnCheat_0);
-                    break;
-                case 1:
-                    CommandConsole.AddCommand(item.Key, OnCheat_1, paramNames);
-                    break;
-                case 2:
-                    CommandConsole.AddCommand(item.Key, OnCheat_2, paramNames);
-                    break;
-                default:
-                    throw new Exception();
-
-            }
+            AddCommand(constructor);
         }
 
         //System.Delegate[] @delegate = new System.Delegate[] { Print };
@@ -50,6 +32,45 @@ public partial class CheatCommander : Node
 
         //CommandConsole.AddCommand("heloworld", HelloWorld);
         //CommandConsole.AddCommandDescription("heloworld", "Prints 'Hola Mundo!' in the console.");
+    }
+
+    private void AddCommand(ConstructorInfo constructor)
+    {
+        Action<string[]> action = (parameters) =>
+        {
+            IEntity target = null;
+            if (constructor.DeclaringType.IsAssignableTo(typeof(ICommandWithTarget)))
+            {
+                var global = GetNode<Global>("/root/Global");
+                target = global.session.Entities.SingleOrDefault(x => x.Id == parameters[0]);
+                if (target == null)
+                {
+                    throw new Exception($"can not find entity by id {parameters[0]}");
+                }
+
+                parameters = parameters.Skip(1).ToArray();
+            }
+
+
+            var converters = constructor.GetParameters().Select(x => TypeDescriptor.GetConverter(x.ParameterType)).ToArray();
+            var convertedParams = new List<object>();
+            for (int i = 0; i < converters.Length; i++)
+            {
+                convertedParams.Add(converters[i].ConvertFrom(parameters[i]));
+            }
+
+            var cmd = constructor.Invoke(convertedParams.ToArray()) as ICommand;
+            if (cmd is ICommandWithTarget cmdExt)
+            {
+                cmdExt.Target = target;
+            }
+
+            CommandSender.Send(cmd);
+
+            PresentBase.SendCommand(new Cmd_UIRefresh());
+        };
+
+        CommandConsole.AddCommand(constructor.DeclaringType.Name.ToLower(), action, GetCommandParameterNames(constructor));
     }
 
     private IEnumerable<string> GetCommandParameterNames(ConstructorInfo constructor)
@@ -78,63 +99,4 @@ public partial class CheatCommander : Node
     //{
     //    GD.Print(text);
     //}
-
-    private void OnCheat_1(string p1)
-    {
-        var commandName = CommandConsole.ConsoleHistory.Last().Split(" ")[0];
-
-        var constructor = dictCommandType[commandName.ToLower()];
-
-        var param = constructor.GetParameters().First();
-
-        var converter = TypeDescriptor.GetConverter(param.ParameterType);
-        if (!converter.CanConvertFrom(p1.GetType()))
-        {
-            throw new Exception();
-        }
-
-        var cmd = constructor.Invoke(new[] { converter.ConvertFrom(p1) }) as ICommand;
-        CommandSender.Send(cmd);
-
-        PresentBase.SendCommand(new Cmd_UIRefresh());
-    }
-
-    private void OnCheat_0()
-    {
-        var commandName = CommandConsole.ConsoleHistory.Last().Split(" ")[0];
-
-        var constructor = dictCommandType[commandName];
-
-        var cmd = constructor.Invoke(new object[] { }) as ICommand;
-        CommandSender.Send(cmd);
-
-        PresentBase.SendCommand(new Cmd_UIRefresh());
-    }
-
-    private void OnCheat_2(string p0, string p1)
-    {
-        var commandName = CommandConsole.ConsoleHistory.Last().Split(" ")[0];
-
-        var constructor = dictCommandType[commandName];
-
-        var param = constructor.GetParameters().First();
-
-        var converter = TypeDescriptor.GetConverter(param.ParameterType);
-        if (!converter.CanConvertFrom(p1.GetType()))
-        {
-            throw new Exception();
-        }
-
-        var cmd = constructor.Invoke(new[] { converter.ConvertFrom(p1) }) as ICommandWithTarget;
-        var global = GetNode<Global>("/root/Global");
-        cmd.Target = global.session.Entities.SingleOrDefault(x => x.Id == p0);
-        if (cmd.Target == null)
-        {
-            throw new Exception($"can not find entity by id {p0}");
-        }
-
-        CommandSender.Send(cmd);
-
-        PresentBase.SendCommand(new Cmd_UIRefresh());
-    }
 }

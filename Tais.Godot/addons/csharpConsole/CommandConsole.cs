@@ -23,6 +23,13 @@ public partial class CommandConsole : Node
         public int param_count;
         public Dictionary<string, string> Params = new Dictionary<string, string>();
         public string Description = "Description Not Definned";
+        public Delegate @delegate;
+
+        public Command(Delegate @delegate, int in_param_count)
+        {
+            this.@delegate = @delegate;
+            this.param_count = in_param_count;
+        }
 
         public Command(Callable in_function, int in_param_count)
         {
@@ -153,29 +160,30 @@ public partial class CommandConsole : Node
                     switch (commandEntry.param_count)
                     {
                         case 0:
-                            commandEntry.function.Call();
+                            commandEntry.@delegate.DynamicInvoke();
                             break;
                         case > 0:
-                            List<Variant> InGameparams_ = new List<Variant>();
-
-                            for (int i = 1; i < splitText.Length; i++)
-                            {
-                                InGameparams_.Add(splitText[i]);
-                            }
-
                             //verify the ammount of params
-                            if (InGameparams_.Count < commandEntry.Params.Count)
+                            var parmas = splitText.Skip(1).ToArray();
+                            if (parmas.Length < commandEntry.Params.Count)
                             {
                                 PrintLine("[color=red]Not enough parameters.[/color]");
                                 return;
                             }
-                            if (InGameparams_.Count > commandEntry.Params.Count)
+                            if (parmas.Length > commandEntry.Params.Count)
                             {
                                 PrintLine("[color=red]too much parameters.[/color]");
                                 return;
                             }
 
-                            commandEntry.function.Call(InGameparams_.ToArray());
+                            if (commandEntry.@delegate is Action<string[]>)
+                            {
+                                commandEntry.@delegate.DynamicInvoke(new object[] { parmas });
+                            }
+                            else
+                            {
+                                commandEntry.@delegate.DynamicInvoke(parmas);
+                            }
                             break;
                     }
                 }
@@ -508,14 +516,24 @@ public partial class CommandConsole : Node
     /// </summary>
     /// <param name="CommandName">name of the function called in game console</param>
     /// <param name="function">reference to the method</param>
-    public static void AddCommand(string CommandName, Delegate function, IEnumerable<string> parameterNames = null)
+    public static void AddCommand(string CommandName, Delegate function)
     {
         try
         {
+            instance.Commands.Add(CommandName, new Command(function, function.Method.GetParameters().Length));
+        }
+        catch (Exception e)
+        {
+            GD.PrintErr(e);
+        }
+    }
 
-            instance.Commands.Add(CommandName, new Command(new Callable((GodotObject)function.Target, function.Method.Name), function.Method.GetParameters().Length));
-
-            foreach (var paramName in parameterNames != null ? parameterNames : function.Method.GetParameters().Select(x => x.Name))
+    public static void AddCommand(string CommandName, Action<string[]> function, IEnumerable<string> parameterNames)
+    {
+        try
+        {
+            instance.Commands.Add(CommandName, new Command(function, function.Method.GetParameters().Length));
+            foreach (var paramName in parameterNames)
             {
                 instance.Commands[CommandName].Params.Add(paramName, null);
             }
