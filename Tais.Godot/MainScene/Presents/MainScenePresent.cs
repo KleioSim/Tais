@@ -52,12 +52,6 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
             dialog.Visible = true;
 
             await ToSignal(dialog, EventDialog.SignalName.TreeExited);
-
-            if (Model.Player.IsRevoked || Model.Player.IsDead)
-            {
-                View.GMFailedEvent.Visible = true;
-                return;
-            }
         }
 
         PresentBase.SendCommand(new Cmd_UIRefresh());
@@ -90,10 +84,10 @@ public partial class MainScenePresent : PresentControl<MainScene, ISession>
         view.ToastContainer.Refresh(model.Toasts.OfType<object>().ToHashSet());
         view.WarnContainer.Refresh(model.Warns.OfType<object>().ToHashSet());
 
-        if (model.CurrEvent != null)
+        if (Model.Player.IsRevoked || Model.Player.IsDead)
         {
-            var dialog = view.EventDialogHolder.CreateInstance() as EventDialog;
-            dialog.Object = model.CurrEvent;
+            View.GMFailedEvent.Visible = true;
+            return;
         }
     }
 }
