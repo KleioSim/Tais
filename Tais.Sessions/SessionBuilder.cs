@@ -1,4 +1,5 @@
-﻿using Tais.CentralGovs;
+﻿using System.Linq;
+using Tais.CentralGovs;
 using Tais.Citys;
 using Tais.Entities;
 using Tais.InitialDatas.Interfaces;

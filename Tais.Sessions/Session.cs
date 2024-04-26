@@ -1,4 +1,7 @@
-﻿using Tais.Buffers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Tais.Buffers;
 using Tais.CentralGovs;
 using Tais.Citys;
 using Tais.Commands;
@@ -8,6 +11,7 @@ using Tais.InitialDatas.Interfaces;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
 using Tais.Pops;
+using Tais.Tasks;
 using Tais.Warns;
 
 namespace Tais.Sessions;
@@ -17,7 +21,7 @@ class Session : ISession
     public IEvent? CurrEvent { get; private set; }
     public IDate Date => date;
 
-    public IEnumerable<ITask> Tasks => tasks;
+    public IEnumerable<ITask> Tasks => taskManager;
     public IFinance Finance => finance;
     public IList<IToast> Toasts => toasts;
     public IEnumerable<IWarn> Warns => warnManager;
@@ -29,7 +33,6 @@ class Session : ISession
 
     internal Date date = new Date();
     internal Finance finance = new Finance();
-    internal List<Task> tasks = new List<Task>();
     internal List<IToast> toasts = new List<IToast>();
 
     internal EntityManager entityManager;
@@ -37,6 +40,7 @@ class Session : ISession
     private WarnManager warnManager;
     private EventManager eventManager;
     private BufferManager bufferManager;
+    private TaskManager taskManager;
 
     public void OnCommand(ICommand command)
     {
@@ -44,14 +48,13 @@ class Session : ISession
         {
             case Cmd_TaskStart cmd_TaskStart:
                 {
-                    var task = new Task(cmd_TaskStart.Def as ITaskDef, cmd_TaskStart.Target);
-                    tasks.Add(task);
+                    taskManager.Add(cmd_TaskStart.Def as ITaskDef, cmd_TaskStart.Target);
                 }
                 break;
             case Cmd_TaskCancel cmd_TaskCancel:
                 {
                     var task = cmd_TaskCancel.Target as Task;
-                    tasks.Remove(task);
+                    taskManager.Remove(task);
                 }
                 break;
             case Cmd_ChangeFamilyAttitude cmd_ChangeFamilyAttitude:
@@ -109,17 +112,12 @@ class Session : ISession
     {
         date.DaysInc();
 
-        foreach (var task in tasks)
-        {
-            task.OnDaysInc(date);
-        }
-
         foreach (City city in Cities)
         {
             city.OnDaysInc(date);
         }
 
-        tasks.RemoveAll(x => x.Progress >= 100);
+        taskManager.OnDaysInc(date);
 
         finance.OnDaysInc(date);
 
@@ -160,13 +158,14 @@ class Session : ISession
 
         Tais.Sessions.Player.CalcUsedEngine = () =>
         {
-            return tasks.Sum(x => x.Def.RequestActionPoint);
+            return taskManager.Sum(x => x.Def.RequestActionPoint);
         };
 
         entityManager = new EntityManager();
         eventManager = new EventManager(this);
         warnManager = new WarnManager(this);
         bufferManager = new BufferManager(this);
+        taskManager = new TaskManager(this);
     }
 }
 
@@ -175,51 +174,6 @@ class Toast : IToast
     public string Desc { get; init; }
 }
 
-
-
-class Task : ITask
-{
-    public ITaskDef Def { get; }
-    public object Target { get; }
-
-    public float Progress
-    {
-        get => progress;
-        internal set
-        {
-            progress = value;
-            if (Progress >= 100)
-            {
-                foreach (var cmdBuilder in Def.CommandBuilders)
-                {
-                    var cmd = cmdBuilder.Build(Target);
-
-                    cmd.Reason = Def.Name;
-
-                    if (cmd is ICommandWithTarget cmdWithTarget)
-                    {
-                        cmdWithTarget.Target = Target;
-                    }
-
-                    CommandSender.Send(cmd);
-                }
-            }
-        }
-    }
-
-    private float progress;
-
-    public Task(ITaskDef def, object target)
-    {
-        this.Def = def;
-        this.Target = target;
-    }
-
-    internal void OnDaysInc(IDate date)
-    {
-        Progress += Def.Speed;
-    }
-}
 
 class Finance : IFinance
 {

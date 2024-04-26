@@ -35,7 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.Events", "..\Tais.Even
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.ProcessContexts", "..\Tais.ProcessContexts\Tais.ProcessContexts.csproj", "{7053E6FE-1860-40E5-B4B2-9320D21BCBEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tais.Warns", "..\Tais.Warns\Tais.Warns.csproj", "{7C178265-6B6D-4EEC-8C5E-D4847CB1C1BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.Warns", "..\Tais.Warns\Tais.Warns.csproj", "{7C178265-6B6D-4EEC-8C5E-D4847CB1C1BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tais.Tasks", "..\Tais.Tasks\Tais.Tasks.csproj", "{6E7C9C96-3F4A-4017-93FA-F1FFED30EAA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -181,6 +183,14 @@ Global
 		{7C178265-6B6D-4EEC-8C5E-D4847CB1C1BA}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
 		{7C178265-6B6D-4EEC-8C5E-D4847CB1C1BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C178265-6B6D-4EEC-8C5E-D4847CB1C1BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E7C9C96-3F4A-4017-93FA-F1FFED30EAA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E7C9C96-3F4A-4017-93FA-F1FFED30EAA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E7C9C96-3F4A-4017-93FA-F1FFED30EAA1}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E7C9C96-3F4A-4017-93FA-F1FFED30EAA1}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{6E7C9C96-3F4A-4017-93FA-F1FFED30EAA1}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{6E7C9C96-3F4A-4017-93FA-F1FFED30EAA1}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
+		{6E7C9C96-3F4A-4017-93FA-F1FFED30EAA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E7C9C96-3F4A-4017-93FA-F1FFED30EAA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
