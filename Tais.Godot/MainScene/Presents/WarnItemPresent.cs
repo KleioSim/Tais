@@ -16,6 +16,7 @@ public partial class WarnItemPresent : PresentControl<WarnItem, ISession>
     {
         var warnObj = view.Id as IWarn;
 
+        view.Label.Text = warnObj.Name;
         view.CountPanel.Visible = warnObj.Items.Count() > 1;
         view.Count.Text = warnObj.Items.Count().ToString();
     }

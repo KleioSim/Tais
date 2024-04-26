@@ -2,5 +2,6 @@
 
 public interface IWarnDef
 {
+    string Name { get; }
     ICondition Condition { get; }
 }

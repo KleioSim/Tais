@@ -47,6 +47,7 @@ grow_vertical = 2
 text = "--"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 1
 
 [node name="TooltipTrigger" type="Control" parent="."]
 layout_mode = 1
