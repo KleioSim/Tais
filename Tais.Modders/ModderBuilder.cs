@@ -62,7 +62,7 @@ public class ModderBuilder
                             Condition = new TrueCondition(),
                             CommandBuilders = new ICommandBuilder[]
                             {
-                                new Cmd_ChangeFinance_Builder(new DataWapperConst<float>(100f)),
+                                new Cmd_ChangeFinance_Builder(new CityMonthPopTax()),
                                 new Cmd_ChangePopLiving_Builder(new DataWapperConst<float>(-10f))
                             },
                          }

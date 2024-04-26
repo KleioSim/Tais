@@ -12,7 +12,7 @@ public interface IPop : IEntity
     IGroupValue Living { get; }
 
     IEnumerable<ITaskDef> TaskDefs { get; }
-    string City { get; }
+    ICity City { get; }
 }
 
 public interface IFamily

@@ -145,8 +145,8 @@ class Session : ISession
             }
         };
 
-        City.GetPops = (cityName) => Entities.OfType<IPop>().Where(x => x.City == cityName);
-
+        City.GetPops = (cityName) => Entities.OfType<Pop>().Where(x => x.cityName == cityName);
+        Pop.GetCity = (cityName) => Entities.OfType<City>().Single(x => x.Name == cityName);
 
         Entity.OnBufferAdded = (buff, target) =>
         {

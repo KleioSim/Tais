@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Tais.Entities;
 using Tais.InitialDatas.Interfaces;
@@ -9,6 +10,8 @@ namespace Tais.Pops;
 
 internal class Pop : Entity<IPopDef>, IPop
 {
+    public static Func<string, ICity> GetCity { get; set; }
+
     public string Name => Def.PopName;
     public float Count { get; set; }
     public bool IsRegisted => Def.IsRegisted;
@@ -18,14 +21,15 @@ internal class Pop : Entity<IPopDef>, IPop
 
     public IEnumerable<ITaskDef> TaskDefs => Def.TaskDefs;
 
-    public string City { get; }
+    public ICity City => GetCity(cityName);
 
+    internal readonly string cityName;
     private Family? family;
     private Living? living;
 
     public Pop(string id, IPopDef def, IPopInitData popInitData) : base(id, def)
     {
-        this.City = popInitData.CityName;
+        this.cityName = popInitData.CityName;
         this.Count = popInitData.Count;
 
         if (def.HasFamily)
