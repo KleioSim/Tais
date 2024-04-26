@@ -1,6 +1,9 @@
 ﻿using Tais.Commands;
 using Tais.Effects;
+using Tais.Modders.CommandBuilders;
 using Tais.Modders.Conditions;
+using Tais.Modders.DataWappers;
+using Tais.Modders.DataWappers.Visitors;
 using Tais.Modders.Interfaces;
 
 namespace Tais.Modders;
@@ -25,7 +28,7 @@ public class ModderBuilder
                             RequestActionPoint = 2,
                             Speed = 10,
                             Condition = new PopMinCountCondition(100),
-                            Commands = new [] {  new Cmd_ChangePopCount(0.1f) },
+                            CommandBuilders = new [] {  new Cmd_ChangePopCount_Builder(new DataWapperConst<float>(0.1f)) },
                         },
                         new TaskDef()
                         {
@@ -33,7 +36,7 @@ public class ModderBuilder
                             RequestActionPoint = 3,
                             Speed = 10,
                             Condition = new TrueCondition(),
-                            Commands = new ICommand[] {  new Cmd_ChangeFamilyAttitude(5.0f) },
+                            CommandBuilders = new [] {  new Cmd_ChangeFamilyAttitude_Builder(new DataWapperConst<float>(5.0f)) },
                         }
                     }
                 },
@@ -49,7 +52,7 @@ public class ModderBuilder
                             RequestActionPoint = 1,
                             Speed = 10,
                             Condition = new PopMinCountCondition(1200),
-                            Commands = new [] {  new Cmd_ChangePopCount(0.1f) },
+                            CommandBuilders = new [] {  new Cmd_ChangePopCount_Builder(new DataWapperConst<float>(0.1f)) },
                         },
                         new TaskDef()
                         {
@@ -57,7 +60,11 @@ public class ModderBuilder
                             RequestActionPoint = 5,
                             Speed = 5,
                             Condition = new TrueCondition(),
-                            Commands = new ICommand[] { new Cmd_ChangeFinance(+100.0f), new Cmd_ChangePopLiving(-10f) },
+                            CommandBuilders = new ICommandBuilder[]
+                            {
+                                new Cmd_ChangeFinance_Builder(new DataWapperConst<float>(100f)),
+                                new Cmd_ChangePopLiving_Builder(new DataWapperConst<float>(-10f))
+                            },
                          }
                     }
                 },
@@ -73,7 +80,7 @@ public class ModderBuilder
                             RequestActionPoint = 3,
                             Speed = 10,
                             Condition = new PopMinCountCondition(12000),
-                            Commands = new ICommand[] {  new Cmd_ChangePopCount(0.1f) },
+                            CommandBuilders = new [] {  new Cmd_ChangePopCount_Builder(new DataWapperConst<float>(0.1f)) },
                         }
                     }
                 }
@@ -89,7 +96,7 @@ public class ModderBuilder
                         RequestActionPoint = 4,
                         Speed = 5,
                         Condition = new CityNameCondition($"CITY_0"),
-                        Commands = new ICommand[] {  new Cmd_ChangeCityIsControlFlag(false) },
+                        CommandBuilders = new [] {  new Cmd_ChangeCityIsControlFlag_Builder(false) },
                     },
                     new TaskDef()
                     {
@@ -97,7 +104,7 @@ public class ModderBuilder
                         RequestActionPoint = 5,
                         Speed = 5,
                         Condition = new CityNameCondition($"CITY_1"),
-                        Commands = new ICommand[] {  new Cmd_ChangeCityIsControlFlag(false) },
+                        CommandBuilders = new [] {  new Cmd_ChangeCityIsControlFlag_Builder(false) },
                     },
                 },
                 BufferDefs = new IBufferDef[]
@@ -125,7 +132,7 @@ public class ModderBuilder
                         Desc = "CentralGov RequestTax Not FullFill Desc",
                         VaildDate = new VaildDate() { Day = 1 },
                         TriggerCondition = new CentralGovRequestTaxNotFullFill(),
-                        Opition = new OpitionDef(){ Desc = "Confirm", Command = new Cmd_RevokePlayerTitle() }
+                        Opition = new OpitionDef(){ Desc = "Confirm", CommandBuilder = new Cmd_RevokePlayerTitle_Builder() }
                     },
                     new EventDef()
                     {

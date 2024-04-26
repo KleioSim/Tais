@@ -1,6 +1,4 @@
-﻿using Tais.Commands;
-
-namespace Tais.Modders.Interfaces;
+﻿namespace Tais.Modders.Interfaces;
 
 public interface ITaskDef
 {
@@ -10,5 +8,5 @@ public interface ITaskDef
     float Speed { get; }
 
     ICondition Condition { get; }
-    IEnumerable<ICommand> Commands { get; }
+    IEnumerable<ICommandBuilder> CommandBuilders { get; }
 }

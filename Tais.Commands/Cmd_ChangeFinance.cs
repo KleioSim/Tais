@@ -3,7 +3,7 @@
 [ExportCheatCommand]
 public class Cmd_ChangeFinance : ICommand
 {
-    public string Desc => $"{nameof(Cmd_ChangeFinance)}";
+    public string Desc => $"{nameof(Cmd_ChangeFinance)} {Value}";
 
     public string Reason { get; set; }
 

@@ -10,7 +10,6 @@ public interface IEventDef
     IVaildDate VaildDate { get; }
     ICondition TriggerCondition { get; }
     IOpitionDef Opition { get; }
-    ICommand Command { get; }
 }
 
 public interface IVaildDate
@@ -21,5 +20,5 @@ public interface IVaildDate
 public interface IOpitionDef
 {
     string Desc { get; }
-    ICommand Command { get; }
+    ICommandBuilder CommandBuilder { get; }
 }

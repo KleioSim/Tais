@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DataVisitors\**" />
+    <EmbeddedResource Remove="DataVisitors\**" />
+    <None Remove="DataVisitors\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Tais.Effects\Tais.Effects.csproj" />
     <ProjectReference Include="..\Tais.Interfaces\Tais.Interfaces.csproj" />
     <ProjectReference Include="..\Tais.Modders.Interfaces\Tais.Modders.Interfaces.csproj" />

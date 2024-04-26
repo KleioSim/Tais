@@ -8,8 +8,6 @@ public class EventDef : IEventDef
 {
     public IVaildDate VaildDate { get; init; }
 
-    public ICommand Command { get; init; }
-
     public ICondition TriggerCondition { get; init; }
 
     public string Title { get; init; }
@@ -23,7 +21,7 @@ public class OpitionDef : IOpitionDef
 {
     public string Desc { get; init; }
 
-    public ICommand Command { get; init; }
+    public ICommandBuilder CommandBuilder { get; init; }
 }
 
 public class VaildDate : IVaildDate

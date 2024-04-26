@@ -24,7 +24,7 @@ public partial class CityOperationItemPresent : PresentControl<CityOperationItem
 
             var def = itemObj.def;
 
-            var desc = String.Join("\n", def.Commands.Select(x => x.Desc));
+            var desc = String.Join("\n", def.CommandBuilders.Select(x => x.Build(itemObj.target).Desc));
 
             desc += "\n";
             desc += UBB.Core($"Request ActionPoint {def.RequestActionPoint}")

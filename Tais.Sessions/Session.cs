@@ -190,16 +190,18 @@ class Task : ITask
             progress = value;
             if (Progress >= 100)
             {
-                foreach (var command in Def.Commands)
+                foreach (var cmdBuilder in Def.CommandBuilders)
                 {
-                    command.Reason = Def.Name;
+                    var cmd = cmdBuilder.Build(Target);
 
-                    if (command is ICommandWithTarget commandWithTarget)
+                    cmd.Reason = Def.Name;
+
+                    if (cmd is ICommandWithTarget cmdWithTarget)
                     {
-                        commandWithTarget.Target = Target;
+                        cmdWithTarget.Target = Target;
                     }
 
-                    CommandSender.Send(command);
+                    CommandSender.Send(cmd);
                 }
             }
         }

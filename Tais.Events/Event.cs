@@ -36,16 +36,18 @@ class Opition : IOpition
 
     public void OnSelect()
     {
-        if (def.Command == null)
+        if (def.CommandBuilder == null)
         {
             return;
         }
 
-        if (def.Command is ICommandWithTarget commandWithTarget)
+        var command = def.CommandBuilder.Build(owner.target);
+
+        if (def.CommandBuilder is ICommandWithTarget commandWithTarget)
         {
             commandWithTarget.Target = owner.target;
         }
 
-        CommandSender.Send(def.Command);
+        CommandSender.Send(command);
     }
 }
