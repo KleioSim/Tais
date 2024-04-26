@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ceigfnqtf77o1"]
+[gd_scene load_steps=6 format=3 uid="uid://ceigfnqtf77o1"]
 
 [ext_resource type="Script" path="res://MainScene/LeftPanels/CityDetailPanel/PopItem/PopItem.cs" id="1_06hly"]
+[ext_resource type="PackedScene" uid="uid://c4ec77j7g1k1i" path="res://Utilities/TooltipPanel/TooltipTriggerEx.tscn" id="3_y8sp8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4xjx"]
 bg_color = Color(0.129412, 0.129412, 0.129412, 0.980392)
@@ -126,6 +127,9 @@ label_settings = SubResource("LabelSettings_wsmvm")
 vertical_alignment = 1
 text_overrun_behavior = 1
 
+[node name="TooltipTriggerEx" parent="HBoxContainer/VBoxContainer/GridContainer/Attitude/HBoxContainer/Value" instance=ExtResource("3_y8sp8")]
+layout_mode = 1
+
 [node name="Living" type="Panel" parent="HBoxContainer/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
@@ -158,6 +162,9 @@ text = "--"
 label_settings = SubResource("LabelSettings_wsmvm")
 vertical_alignment = 1
 text_overrun_behavior = 1
+
+[node name="TooltipTriggerEx" parent="HBoxContainer/VBoxContainer/GridContainer/Living/HBoxContainer/Value" instance=ExtResource("3_y8sp8")]
+layout_mode = 1
 
 [node name="BufferContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)

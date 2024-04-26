@@ -6,4 +6,9 @@ public static class UBB
     {
         return new UBBCore(obj);
     }
+
+    public static UBBWapper ColorNumber(float num)
+    {
+        return new UBBCore(num.ToString()).Color(num < 0 ? UBBColor.RED : UBBColor.GREEN);
+    }
 }

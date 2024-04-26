@@ -1,11 +1,22 @@
 ﻿using System.Linq;
+using Tais.Godot.Utilities.UBBCodes;
 using Tais.Interfaces;
 
 public partial class PopItemPresent : PresentControl<PopItem, ISession>
 {
     protected override void Initialize(PopItem view, ISession model)
     {
+        view.AttitudeDetail.funcGetToolTipString = () =>
+        {
+            var popObj = view.Id as IPop;
+            return string.Join("\n", popObj.Family.Attitude.Items.Select(x => $"{x.desc} {UBB.ColorNumber(x.count)}"));
+        };
 
+        view.LivingDetail.funcGetToolTipString = () =>
+        {
+            var popObj = view.Id as IPop;
+            return string.Join("\n", popObj.Living.Items.Select(x => $"{x.desc} {UBB.ColorNumber(x.count)}"));
+        };
     }
 
     protected override void Update(PopItem view, ISession model)
