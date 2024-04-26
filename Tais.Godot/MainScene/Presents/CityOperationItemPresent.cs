@@ -24,7 +24,8 @@ public partial class CityOperationItemPresent : PresentControl<CityOperationItem
 
             var def = itemObj.def;
 
-            var desc = String.Join("\n", def.CommandBuilders.Select(x => x.Build(itemObj.target).Desc));
+            var context = new ProcessContext() { session = model, current = itemObj.target as IEntity };
+            var desc = String.Join("\n", def.CommandBuilders.Select(x => x.Build(context).Desc));
 
             desc += "\n";
             desc += UBB.Core($"Request ActionPoint {def.RequestActionPoint}")

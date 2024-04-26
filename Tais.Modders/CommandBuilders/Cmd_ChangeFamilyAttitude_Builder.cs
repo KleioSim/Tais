@@ -13,8 +13,8 @@ class Cmd_ChangeFamilyAttitude_Builder : ICommandBuilder
         this.dataWapper = dataWapper;
     }
 
-    public ICommand Build(object target)
+    public ICommand Build(object context)
     {
-        return new Cmd_ChangeFamilyAttitude(dataWapper.GetValue(target));
+        return new Cmd_ChangeFamilyAttitude(dataWapper.GetValue(context));
     }
 }

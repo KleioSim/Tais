@@ -27,7 +27,7 @@ internal class EventManager
 
                 if (def.TriggerCondition.IsSatisfied(context))
                 {
-                    yield return new Event(def, entity);
+                    yield return new Event(def, context);
                 }
             }
         }
