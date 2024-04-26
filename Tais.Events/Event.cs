@@ -6,7 +6,7 @@ namespace Tais.Events;
 
 internal class Event : IEvent
 {
-    public string Title => def.Title;
+    public string Title => def.Title.Build(target);
     public string Desc => def.Desc;
 
     public IOpition Opition => opition;

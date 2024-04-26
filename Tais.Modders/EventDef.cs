@@ -10,7 +10,7 @@ public class EventDef : IEventDef
 
     public ICondition TriggerCondition { get; init; }
 
-    public string Title { get; init; }
+    public IStringBuilder Title { get; init; }
 
     public string Desc { get; init; }
 

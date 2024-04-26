@@ -5,6 +5,7 @@ using Tais.Modders.Conditions;
 using Tais.Modders.DataWappers;
 using Tais.Modders.DataWappers.Visitors;
 using Tais.Modders.Interfaces;
+using Tais.Modders.StringBuilders;
 
 namespace Tais.Modders;
 
@@ -28,7 +29,7 @@ public class ModderBuilder
                             RequestActionPoint = 2,
                             Speed = 10,
                             Condition = new PopMinCountCondition(100),
-                            CommandBuilders = new [] {  new Cmd_ChangePopCount_Builder(new DataWapperConst<float>(0.1f)) },
+                            CommandBuilders = new[] { new Cmd_ChangePopCount_Builder(new DataWapperConst<float>(0.1f)) },
                         },
                         new TaskDef()
                         {
@@ -36,7 +37,7 @@ public class ModderBuilder
                             RequestActionPoint = 3,
                             Speed = 10,
                             Condition = new TrueCondition(),
-                            CommandBuilders = new [] {  new Cmd_ChangeFamilyAttitude_Builder(new DataWapperConst<float>(5.0f)) },
+                            CommandBuilders = new[] { new Cmd_ChangeFamilyAttitude_Builder(new DataWapperConst<float>(5.0f)) },
                         }
                     }
                 },
@@ -52,7 +53,7 @@ public class ModderBuilder
                             RequestActionPoint = 1,
                             Speed = 10,
                             Condition = new PopMinCountCondition(1200),
-                            CommandBuilders = new [] {  new Cmd_ChangePopCount_Builder(new DataWapperConst<float>(0.1f)) },
+                            CommandBuilders = new[] { new Cmd_ChangePopCount_Builder(new DataWapperConst<float>(0.1f)) },
                         },
                         new TaskDef()
                         {
@@ -65,7 +66,7 @@ public class ModderBuilder
                                 new Cmd_ChangeFinance_Builder(new CityMonthPopTax()),
                                 new Cmd_ChangePopLiving_Builder(new DataWapperConst<float>(-10f))
                             },
-                         }
+                        }
                     }
                 },
                 new PopDef()
@@ -80,7 +81,7 @@ public class ModderBuilder
                             RequestActionPoint = 3,
                             Speed = 10,
                             Condition = new PopMinCountCondition(12000),
-                            CommandBuilders = new [] {  new Cmd_ChangePopCount_Builder(new DataWapperConst<float>(0.1f)) },
+                            CommandBuilders = new[] { new Cmd_ChangePopCount_Builder(new DataWapperConst<float>(0.1f)) },
                         }
                     }
                 }
@@ -96,7 +97,7 @@ public class ModderBuilder
                         RequestActionPoint = 4,
                         Speed = 5,
                         Condition = new CityNameCondition($"CITY_0"),
-                        CommandBuilders = new [] {  new Cmd_ChangeCityIsControlFlag_Builder(false) },
+                        CommandBuilders = new[] { new Cmd_ChangeCityIsControlFlag_Builder(false) },
                     },
                     new TaskDef()
                     {
@@ -104,7 +105,7 @@ public class ModderBuilder
                         RequestActionPoint = 5,
                         Speed = 5,
                         Condition = new CityNameCondition($"CITY_1"),
-                        CommandBuilders = new [] {  new Cmd_ChangeCityIsControlFlag_Builder(false) },
+                        CommandBuilders = new[] { new Cmd_ChangeCityIsControlFlag_Builder(false) },
                     },
                 },
                 BufferDefs = new IBufferDef[]
@@ -128,7 +129,7 @@ public class ModderBuilder
                 {
                     new EventDef()
                     {
-                        Title = "CentralGov RequestTax Not FullFill",
+                        Title = new StringBuilder("CentralGov RequestTax Not FullFill, {0}", new CentralGovRequestTax()),
                         Desc = "CentralGov RequestTax Not FullFill Desc",
                         VaildDate = new VaildDate() { Day = 1 },
                         TriggerCondition = new CentralGovRequestTaxNotFullFill(),
@@ -136,7 +137,7 @@ public class ModderBuilder
                     },
                     new EventDef()
                     {
-                        Title = "TrueCondition Test",
+                        Title = new StringBuilder("TrueCondition Test"),
                         Desc = "TrueCondition Test Desc",
                         VaildDate = new VaildDate() { Day = 1, Month = 1},
                         TriggerCondition = new TrueCondition(),

@@ -4,7 +4,7 @@ namespace Tais.Modders.Interfaces;
 
 public interface IEventDef
 {
-    string Title { get; }
+    IStringBuilder Title { get; }
     string Desc { get; }
 
     IVaildDate VaildDate { get; }
