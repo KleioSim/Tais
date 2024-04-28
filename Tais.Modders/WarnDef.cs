@@ -5,5 +5,6 @@ namespace Tais.Modders;
 public class WarnDef : IWarnDef
 {
     public string Name { get; init; }
+    public IStringBuilder Desc { get; init; }
     public ICondition Condition { get; init; }
 }

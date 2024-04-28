@@ -10,7 +10,7 @@ internal class Warn : IWarn
 
     public IWarnDef Def { get; }
 
-    public IEnumerable<string> Items => contexts.Select(x => x.current.Id);
+    public IEnumerable<string> Items => contexts.Select(x => Def.Desc.Build(x));
 
     internal List<ProcessContext> contexts = new List<ProcessContext>();
 

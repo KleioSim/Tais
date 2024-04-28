@@ -146,7 +146,12 @@ public class ModderBuilder
                 },
                 WarnDefs = new IWarnDef[]
                 {
-                    new WarnDef(){ Name = nameof(CentralGovRequestTaxNotFullFill),  Condition = new CentralGovRequestTaxNotFullFill() }
+                    new WarnDef()
+                    {
+                        Name = nameof(CentralGovRequestTaxNotFullFill),
+                        Desc = new StringBuilder("CentralGov RequestTax Not FullFill, {0} {1}", new CentralGovRequestTax(), new ExpectFinanceYearReserve()),
+                        Condition = new CentralGovRequestTaxNotFullFill()
+                    }
                 }
             },
 
