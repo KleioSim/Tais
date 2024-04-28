@@ -129,7 +129,7 @@ public class ModderBuilder
                 {
                     new EventDef()
                     {
-                        Title = new StringBuilder("CentralGov RequestTax Not FullFill, {0}", new CentralGovRequestTax()),
+                        Title = new StringBuilder("CentralGov RequestTax Not FullFill, {0} {1}", new CentralGovRequestTax(), new ExpectFinanceYearReserve()),
                         Desc = "CentralGov RequestTax Not FullFill Desc",
                         VaildDate = new VaildDate() { Day = 1 },
                         TriggerCondition = new CentralGovRequestTaxNotFullFill(),
