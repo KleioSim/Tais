@@ -48,7 +48,7 @@ class Session : ISession
         {
             case Cmd_TaskStart cmd_TaskStart:
                 {
-                    taskManager.Add(cmd_TaskStart.Def as ITaskDef, cmd_TaskStart.Target);
+                    taskManager.Add(cmd_TaskStart.Def as ITaskDef, cmd_TaskStart.Target as IEntity);
                 }
                 break;
             case Cmd_TaskCancel cmd_TaskCancel:

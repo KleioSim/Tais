@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tais.Interfaces\Tais.Interfaces.csproj" />
+    <ProjectReference Include="..\Tais.ProcessContexts\Tais.ProcessContexts.csproj" />
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
       <_Parameter1>Tais.Sessions</_Parameter1>
     </AssemblyAttribute>

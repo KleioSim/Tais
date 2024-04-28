@@ -131,7 +131,7 @@ public class TaskMock : ITask
 {
     public ITaskDef Def => throw new NotImplementedException();
 
-    public object Target => throw new NotImplementedException();
+    public IEntity Target => throw new NotImplementedException();
 
     public float Progress => throw new NotImplementedException();
 }

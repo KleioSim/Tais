@@ -5,7 +5,7 @@ namespace Tais.Interfaces;
 public interface ITask
 {
     ITaskDef Def { get; }
-    object Target { get; }
+    IEntity Target { get; }
 
     float Progress { get; }
 }
