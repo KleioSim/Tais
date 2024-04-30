@@ -4,6 +4,8 @@
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net7.0</TargetFramework>
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'ios' ">net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tais.Commands\Tais.Commands.csproj" />
@@ -15,4 +17,7 @@
     <Folder Include="MainScene\TopInfos\" />
     <Folder Include="MainScene\Warns\" />
   </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="call buildAfter.bat" />
+  </Target>
 </Project>

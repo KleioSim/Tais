@@ -1,4 +1,7 @@
 ﻿using Godot;
+using System;
+using System.IO;
+using System.Reflection;
 using Tais.Commands;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
@@ -10,6 +13,8 @@ public partial class Global : Node
 
     public override void _Ready()
     {
+        var path = System.AppDomain.CurrentDomain.BaseDirectory;
+
         CommandSender.Send += (command) =>
         {
             GD.Print($"CommandSender Send:{command.GetType()}");

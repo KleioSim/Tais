@@ -3,7 +3,7 @@ using Tais.Modders.Interfaces;
 
 namespace Tais.Modders;
 
-class TaskDef : ITaskDef
+public class TaskDef : ITaskDef
 {
     public string Name { get; init; }
 

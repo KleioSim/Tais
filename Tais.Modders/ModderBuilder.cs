@@ -1,4 +1,7 @@
-﻿using Tais.Commands;
+﻿using System.Reflection;
+using System.Reflection.Metadata;
+using System.Runtime.InteropServices;
+using Tais.Commands;
 using Tais.Effects;
 using Tais.Modders.CommandBuilders;
 using Tais.Modders.Conditions;
@@ -11,6 +14,29 @@ namespace Tais.Modders;
 
 public class ModderBuilder
 {
+    public static IModder Build(string path)
+    {
+        path = @"D:\myproject\Tais\Tais.Mods.Native\bin\Debug\net6.0\Tais.Mods.Native.dll";
+
+        // The load context needs access to the .Net "core" assemblies...
+        var allAssemblies = Directory.GetFiles(RuntimeEnvironment.GetRuntimeDirectory(), "*.dll").ToList();
+        // .. and the assemblies that I need to examine.
+        allAssemblies.Add(path);
+
+        var resolver = new PathAssemblyResolver(allAssemblies);
+        using (var mlc = new MetadataLoadContext(resolver))
+        {
+            var assm = mlc.LoadFromAssemblyPath(path);
+
+            var type = assm.GetType("Tais.Mods.Native.TaskDefExt");
+            var obj = Activator.CreateInstance(type, "Test");
+            throw new Exception();
+
+        }
+
+
+    }
+
     public static IModder Build()
     {
         var modder = new Modder()

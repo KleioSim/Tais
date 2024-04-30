@@ -102,7 +102,7 @@ public partial class DebugSession : Control
         };
 
         var global = GetNode<Global>("/root/Global");
-        global.modder = ModderBuilder.Build();
+        global.modder = ModderBuilder.Build("");
         global.session = SessionBuilder.Build(initData, global.modder);
 
         GetTree().ChangeSceneToFile("res://MainScene/MainScene.tscn");
