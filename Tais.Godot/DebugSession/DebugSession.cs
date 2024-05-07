@@ -6,6 +6,7 @@ using Tais.InitialDatas;
 using Tais.Modders;
 using Tais.Sessions;
 using Tais.InitialDatas.Interfaces;
+using System.IO;
 
 public partial class DebugSession : Control
 {
@@ -101,8 +102,15 @@ public partial class DebugSession : Control
             }
         };
 
+        var path = Path.Combine(Path.GetDirectoryName(OS.GetExecutablePath()), "mods");
+        if (OS.HasFeature("editor"))
+        {
+            path = Path.Combine(ProjectSettings.GlobalizePath("res://"), ".mods");
+        }
+
+
         var global = GetNode<Global>("/root/Global");
-        global.modder = ModderBuilder.Build("");
+        global.modder = ModderBuilder.Build(path);
         global.session = SessionBuilder.Build(initData, global.modder);
 
         GetTree().ChangeSceneToFile("res://MainScene/MainScene.tscn");

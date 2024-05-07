@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
+using System.Runtime.Loader;
 using Tais.Commands;
 using Tais.Effects;
 using Tais.Modders.CommandBuilders;
@@ -16,25 +17,49 @@ public class ModderBuilder
 {
     public static IModder Build(string path)
     {
-        path = @"D:\myproject\Tais\Tais.Mods.Native\bin\Debug\net6.0\Tais.Mods.Native.dll";
+        var nativeMod = Load(Path.Combine(path, "native"));
+        return nativeMod;
 
-        // The load context needs access to the .Net "core" assemblies...
-        var allAssemblies = Directory.GetFiles(RuntimeEnvironment.GetRuntimeDirectory(), "*.dll").ToList();
-        // .. and the assemblies that I need to examine.
-        allAssemblies.Add(path);
+        //path = @"D:\myproject\Tais\Tais.Mods.Native\bin\Debug\net6.0\Tais.Mods.Native.dll";
 
-        var resolver = new PathAssemblyResolver(allAssemblies);
-        using (var mlc = new MetadataLoadContext(resolver))
+        //// The load context needs access to the .Net "core" assemblies...
+        //var allAssemblies = Directory.GetFiles(RuntimeEnvironment.GetRuntimeDirectory(), "*.dll").ToList();
+        //// .. and the assemblies that I need to examine.
+        //allAssemblies.Add(path);
+
+        //var resolver = new PathAssemblyResolver(allAssemblies);
+        //using (var mlc = new MetadataLoadContext(resolver))
+        //{
+        //    var assm = mlc.LoadFromAssemblyPath(path);
+
+        //    var type = assm.GetType("Tais.Mods.Native.TaskDefExt");
+        //    var obj = Activator.CreateInstance(type, "Test");
+        //    throw new Exception();
+
+        //}
+
+
+    }
+
+    private static Modder Load(string path)
+    {
+        var alc = AssemblyLoadContext.GetLoadContext(Assembly.GetExecutingAssembly());
+        var assembly = alc.LoadFromAssemblyPath(ModPath.GetAssembly(path));
+
+        var types = assembly.ExportedTypes;
+
+        var modder = new Modder()
         {
-            var assm = mlc.LoadFromAssemblyPath(path);
+            PopDefs = types.Where(x => x.BaseType == typeof(PopDef))
+                           .Select(x => Activator.CreateInstance(x) as PopDef)
+                           .ToDictionary(x => x.PopName, x => x as IPopDef)
 
-            var type = assm.GetType("Tais.Mods.Native.TaskDefExt");
-            var obj = Activator.CreateInstance(type, "Test");
-            throw new Exception();
+        };
 
-        }
+        var type = assembly.GetType("Tais.Mods.Native.TaskDefExt");
+        var obj = Activator.CreateInstance(type, "Test");
 
-
+        throw new Exception();
     }
 
     public static IModder Build()
@@ -48,7 +73,7 @@ public class ModderBuilder
                     PopName = "HAO",
                     IsRegisted = true,
                     HasFamily = true,
-                    TaskDefs = new ITaskDef[] {
+                    TaskDefs = new TaskDef[] {
                         new TaskDef()
                         {
                             Name = $"HAO_POP_DEC",
@@ -72,7 +97,7 @@ public class ModderBuilder
                     PopName = "MIN",
                     IsRegisted = true,
                     HasLiving = true,
-                    TaskDefs = new ITaskDef[] {
+                    TaskDefs = new TaskDef[] {
                         new TaskDef()
                         {
                             Name = $"MIN_POP_DEC",
@@ -100,7 +125,7 @@ public class ModderBuilder
                     PopName = "YIN",
                     IsRegisted = false,
                     HasFamily = false,
-                    TaskDefs = new ITaskDef[] {
+                    TaskDefs = new TaskDef[] {
                         new TaskDef()
                         {
                             Name = $"YIN_POP_DEC",
@@ -115,7 +140,7 @@ public class ModderBuilder
 
             CityDef = new CityDef()
             {
-                TaskDefs = new ITaskDef[]
+                TaskDefs = new TaskDef[]
                 {
                     new TaskDef()
                     {
@@ -134,7 +159,7 @@ public class ModderBuilder
                         CommandBuilders = new[] { new Cmd_ChangeCityIsControlFlag_Builder(false) },
                     },
                 },
-                BufferDefs = new IBufferDef[]
+                BufferDefs = new BufferDef[]
                 {
                     new BufferDef()
                     {
@@ -151,7 +176,7 @@ public class ModderBuilder
 
             CentralGovDef = new CentralGovDef
             {
-                EventDefs = new IEventDef[]
+                EventDefs = new EventDef[]
                 {
                     new EventDef()
                     {
@@ -170,7 +195,7 @@ public class ModderBuilder
                         Opition = new OpitionDef(){ Desc = "Confirm" }
                     },
                 },
-                WarnDefs = new IWarnDef[]
+                WarnDefs = new WarnDef[]
                 {
                     new WarnDef()
                     {
@@ -186,8 +211,7 @@ public class ModderBuilder
 
         return modder;
     }
-};
-
+}
 public class PlayerDef : EntityDef, IPlayerDef
 {
 
@@ -212,8 +236,16 @@ public class BufferDef : IBufferDef
 
 public class EntityDef : IEntityDef
 {
-    public IEnumerable<ITaskDef> TaskDefs { get; init; } = new List<ITaskDef>();
-    public IEnumerable<IBufferDef> BufferDefs { get; init; } = new List<IBufferDef>();
-    public IEnumerable<IEventDef> EventDefs { get; init; } = new List<IEventDef>();
-    public IEnumerable<IWarnDef> WarnDefs { get; init; } = new List<IWarnDef>();
+    public IEnumerable<TaskDef> TaskDefs { get; init; } = new List<TaskDef>();
+    public IEnumerable<BufferDef> BufferDefs { get; init; } = new List<BufferDef>();
+    public IEnumerable<EventDef> EventDefs { get; init; } = new List<EventDef>();
+    public IEnumerable<WarnDef> WarnDefs { get; init; } = new List<WarnDef>();
+
+    IEnumerable<IBufferDef> IEntityDef.BufferDefs => BufferDefs;
+
+    IEnumerable<ITaskDef> IEntityDef.TaskDefs => TaskDefs;
+
+    IEnumerable<IEventDef> IEntityDef.EventDefs => EventDefs;
+
+    IEnumerable<IWarnDef> IEntityDef.WarnDefs => WarnDefs;
 }
