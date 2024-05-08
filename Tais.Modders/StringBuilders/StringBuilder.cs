@@ -4,7 +4,7 @@ using Tais.Modders.Interfaces;
 
 namespace Tais.Modders.StringBuilders;
 
-class StringBuilder : IStringBuilder
+public class StringBuilder : IStringBuilder
 {
     private readonly string format;
     private readonly IDataWapper[] wappers;

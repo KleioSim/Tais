@@ -3,7 +3,7 @@ using Tais.Modders.Interfaces;
 
 namespace Tais.Modders.CommandBuilders;
 
-class Cmd_ChangeCityIsControlFlag_Builder : ICommandBuilder
+public class Cmd_ChangeCityIsControlFlag_Builder : ICommandBuilder
 {
     private bool flag;
 

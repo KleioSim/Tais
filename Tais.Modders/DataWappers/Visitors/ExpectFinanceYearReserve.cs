@@ -3,7 +3,7 @@ using Tais.ProcessContexts;
 
 namespace Tais.Modders.DataWappers.Visitors;
 
-class ExpectFinanceYearReserve : IDataWapper<float>
+public class ExpectFinanceYearReserve : IDataWapper<float>
 {
     public float GetValue(object target)
     {

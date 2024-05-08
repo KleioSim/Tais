@@ -4,7 +4,7 @@ using Tais.Modders.Interfaces;
 
 namespace Tais.Modders.CommandBuilders;
 
-class Cmd_ChangeFinance_Builder : ICommandBuilder
+public class Cmd_ChangeFinance_Builder : ICommandBuilder
 {
     private IDataWapper<float> dataWapper;
 

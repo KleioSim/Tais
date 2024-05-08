@@ -50,3 +50,9 @@ public class VaildDate : IVaildDate
         return true;
     }
 }
+
+public class EventDef<T> : EventDef
+    where T : EntityDef
+{
+
+}

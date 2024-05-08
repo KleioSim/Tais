@@ -108,11 +108,13 @@ public partial class DebugSession : Control
             path = Path.Combine(ProjectSettings.GlobalizePath("res://"), ".mods");
         }
 
-
         var global = GetNode<Global>("/root/Global");
         global.modder = ModderBuilder.Build(path);
         global.session = SessionBuilder.Build(initData, global.modder);
+    }
 
+    public override void _Process(double delta)
+    {
         GetTree().ChangeSceneToFile("res://MainScene/MainScene.tscn");
     }
 }

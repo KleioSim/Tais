@@ -4,7 +4,7 @@ using Tais.Modders.Interfaces;
 
 namespace Tais.Modders.CommandBuilders;
 
-class Cmd_ChangePopLiving_Builder : ICommandBuilder
+public class Cmd_ChangePopLiving_Builder : ICommandBuilder
 {
     private IDataWapper<float> dataWapper;
 

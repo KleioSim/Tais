@@ -3,7 +3,7 @@ using Tais.Modders.Interfaces;
 
 namespace Tais.Modders.CommandBuilders;
 
-class Cmd_RevokePlayerTitle_Builder : ICommandBuilder
+public class Cmd_RevokePlayerTitle_Builder : ICommandBuilder
 {
     public ICommand Build(object target)
     {

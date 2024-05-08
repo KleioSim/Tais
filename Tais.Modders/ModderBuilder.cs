@@ -1,9 +1,5 @@
 ﻿using System.Reflection;
-using System.Reflection.Metadata;
-using System.Runtime.InteropServices;
 using System.Runtime.Loader;
-using Tais.Commands;
-using Tais.Effects;
 using Tais.Modders.CommandBuilders;
 using Tais.Modders.Conditions;
 using Tais.Modders.DataWappers;
@@ -52,14 +48,42 @@ public class ModderBuilder
         {
             PopDefs = types.Where(x => x.BaseType == typeof(PopDef))
                            .Select(x => Activator.CreateInstance(x) as PopDef)
-                           .ToDictionary(x => x.PopName, x => x as IPopDef)
+                           .ToDictionary(x => x.PopName, x => x as IPopDef),
+            CityDef = new CityDef(),
 
+            PlayerDef = new PlayerDef(),
+
+            CentralGovDef = new CentralGovDef(),
         };
 
-        var type = assembly.GetType("Tais.Mods.Native.TaskDefExt");
-        var obj = Activator.CreateInstance(type, "Test");
+        foreach (var entityDef in modder.EntityDefs)
+        {
+            var taskDefType = typeof(TaskDef<>).MakeGenericType(entityDef.GetType());
 
-        throw new Exception();
+            entityDef.TaskDefs = types.Where(x => x.BaseType == taskDefType)
+                .Select(x => Activator.CreateInstance(x) as TaskDef)
+                .ToArray();
+
+            var buffDefType = typeof(BufferDef<>).MakeGenericType(entityDef.GetType());
+
+            entityDef.BufferDefs = types.Where(x => x.BaseType == buffDefType)
+                .Select(x => Activator.CreateInstance(x) as BufferDef)
+                .ToArray();
+
+            var warnDefType = typeof(WarnDef<>).MakeGenericType(entityDef.GetType());
+
+            entityDef.WarnDefs = types.Where(x => x.BaseType == warnDefType)
+                .Select(x => Activator.CreateInstance(x) as WarnDef)
+                .ToArray();
+
+            var eventDefType = typeof(EventDef<>).MakeGenericType(entityDef.GetType());
+
+            entityDef.EventDefs = types.Where(x => x.BaseType == eventDefType)
+                .Select(x => Activator.CreateInstance(x) as EventDef)
+                .ToArray();
+        }
+
+        return modder;
     }
 
     public static IModder Build()
@@ -223,29 +247,13 @@ public class CityDef : EntityDef, ICityDef
 
 }
 
-public class BufferDef : IBufferDef
-{
-    public string BufferName { get; init; }
-
-    public ICondition ValidCondition { get; init; }
-
-    public ICondition InvalidCondition { get; init; }
-
-    public IEnumerable<IEffect> Effects { get; init; }
-}
-
 public class EntityDef : IEntityDef
 {
-    public IEnumerable<TaskDef> TaskDefs { get; init; } = new List<TaskDef>();
-    public IEnumerable<BufferDef> BufferDefs { get; init; } = new List<BufferDef>();
-    public IEnumerable<EventDef> EventDefs { get; init; } = new List<EventDef>();
-    public IEnumerable<WarnDef> WarnDefs { get; init; } = new List<WarnDef>();
+    public IEnumerable<IBufferDef> BufferDefs { get; set; } = Enumerable.Empty<IBufferDef>();
 
-    IEnumerable<IBufferDef> IEntityDef.BufferDefs => BufferDefs;
+    public IEnumerable<ITaskDef> TaskDefs { get; set; } = Enumerable.Empty<ITaskDef>();
 
-    IEnumerable<ITaskDef> IEntityDef.TaskDefs => TaskDefs;
+    public IEnumerable<IEventDef> EventDefs { get; set; } = Enumerable.Empty<IEventDef>();
 
-    IEnumerable<IEventDef> IEntityDef.EventDefs => EventDefs;
-
-    IEnumerable<IWarnDef> IEntityDef.WarnDefs => WarnDefs;
+    public IEnumerable<IWarnDef> WarnDefs { get; set; } = Enumerable.Empty<IWarnDef>();
 }

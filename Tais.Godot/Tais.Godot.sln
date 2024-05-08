@@ -15,8 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.Citys", "..\Tais.Citys
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.Pops", "..\Tais.Pops\Tais.Pops.csproj", "{CC635CD9-D8A7-4DB2-93E3-8C00A61FB12D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.Effects", "..\Tais.Effects\Tais.Effects.csproj", "{17BCD55D-6AEE-475C-AEC8-3453DF4CE548}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.Buffers", "..\Tais.Buffers\Tais.Buffers.csproj", "{FA827DDC-88E7-4189-A85B-0944CA75E60B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.Modders", "..\Tais.Modders\Tais.Modders.csproj", "{20B97D38-8A56-4469-B11A-DC217ED4E1FC}"
@@ -39,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.Warns", "..\Tais.Warns
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.Tasks", "..\Tais.Tasks\Tais.Tasks.csproj", "{6E7C9C96-3F4A-4017-93FA-F1FFED30EAA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tais.Mods.Native", "..\Tais.Mods.Native\Tais.Mods.Native.csproj", "{919A7770-A723-4565-8967-E6C7181026E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tais.Mods.Native", "..\Tais.Mods.Native\Tais.Mods.Native.csproj", "{919A7770-A723-4565-8967-E6C7181026E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,14 +95,6 @@ Global
 		{CC635CD9-D8A7-4DB2-93E3-8C00A61FB12D}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
 		{CC635CD9-D8A7-4DB2-93E3-8C00A61FB12D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC635CD9-D8A7-4DB2-93E3-8C00A61FB12D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{17BCD55D-6AEE-475C-AEC8-3453DF4CE548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17BCD55D-6AEE-475C-AEC8-3453DF4CE548}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17BCD55D-6AEE-475C-AEC8-3453DF4CE548}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17BCD55D-6AEE-475C-AEC8-3453DF4CE548}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
-		{17BCD55D-6AEE-475C-AEC8-3453DF4CE548}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
-		{17BCD55D-6AEE-475C-AEC8-3453DF4CE548}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
-		{17BCD55D-6AEE-475C-AEC8-3453DF4CE548}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17BCD55D-6AEE-475C-AEC8-3453DF4CE548}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FA827DDC-88E7-4189-A85B-0944CA75E60B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FA827DDC-88E7-4189-A85B-0944CA75E60B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA827DDC-88E7-4189-A85B-0944CA75E60B}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU

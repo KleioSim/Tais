@@ -1,5 +1,4 @@
-﻿using Tais.Effects;
-using Tais.Entities;
+﻿using Tais.Entities;
 using Tais.InitialDatas.Interfaces;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;

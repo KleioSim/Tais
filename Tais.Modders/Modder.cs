@@ -12,4 +12,10 @@ class Modder : IModder
     public ICentralGovDef CentralGovDef { get; init; }
 
     public IPlayerDef PlayerDef { get; init; }
+
+    internal IEnumerable<EntityDef> EntityDefs => PopDefs.Values.OfType<EntityDef>()
+        .Append(CityDef as EntityDef)
+        .Append(CentralGovDef as EntityDef)
+        .Append(PlayerDef as EntityDef)
+        .Where(x => x != null);
 }

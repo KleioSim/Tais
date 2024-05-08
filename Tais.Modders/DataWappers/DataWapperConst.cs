@@ -1,6 +1,6 @@
 ﻿namespace Tais.Modders.DataWappers;
 
-class DataWapperConst<T> : IDataWapper<T>
+public class DataWapperConst<T> : IDataWapper<T>
 {
     private T data;
 

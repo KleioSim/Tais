@@ -11,6 +11,10 @@
       <HintPath>..\Tais.Godot\.godot\mono\temp\bin\Debug\Tais.Modders.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Tais.Modders.Interfaces">
+      <HintPath>..\Tais.Godot\.godot\mono\temp\bin\Debug\Tais.Modders.Interfaces.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
 
 </Project>

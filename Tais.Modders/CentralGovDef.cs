@@ -2,7 +2,7 @@
 
 namespace Tais.Modders;
 
-internal class CentralGovDef : EntityDef,  ICentralGovDef
+public class CentralGovDef : EntityDef, ICentralGovDef
 {
 
 }

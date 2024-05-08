@@ -8,7 +8,7 @@ using Tais.ProcessContexts;
 
 namespace Tais.Modders.DataWappers.Visitors;
 
-class CentralGovRequestTax : IDataWapper<float>
+public class CentralGovRequestTax : IDataWapper<float>
 {
     public float GetValue(object target)
     {

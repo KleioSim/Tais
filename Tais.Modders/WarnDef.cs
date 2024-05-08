@@ -8,3 +8,9 @@ public class WarnDef : IWarnDef
     public IStringBuilder Desc { get; init; }
     public ICondition Condition { get; init; }
 }
+
+public class WarnDef<T> : WarnDef
+    where T : EntityDef
+{
+
+}

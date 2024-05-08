@@ -20,3 +20,9 @@ public class TaskDef : ITaskDef
 
     }
 }
+
+public class TaskDef<T> : TaskDef
+    where T : EntityDef
+{
+
+}
