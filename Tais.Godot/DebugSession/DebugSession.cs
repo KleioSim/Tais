@@ -102,14 +102,11 @@ public partial class DebugSession : Control
             }
         };
 
-        var path = Path.Combine(Path.GetDirectoryName(OS.GetExecutablePath()), "mods");
-        if (OS.HasFeature("editor"))
-        {
-            path = Path.Combine(ProjectSettings.GlobalizePath("res://"), ".mods");
-        }
+
 
         var global = GetNode<Global>("/root/Global");
-        global.modder = ModderBuilder.Build(path);
+        global.modder = ModderBuilder.Build(Global.ModPath);
+
         global.session = SessionBuilder.Build(initData, global.modder);
     }
 

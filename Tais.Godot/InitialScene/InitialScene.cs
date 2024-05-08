@@ -18,7 +18,7 @@ public partial class InitialScene : Control
         PresentBase.IsMock = false;
 
         var global = GetNode<Global>("/root/Global");
-        global.modder = ModderBuilder.Build();
+        global.modder = ModderBuilder.Build(Global.ModPath);
     }
 
     public override void _Process(double delta)

@@ -8,6 +8,20 @@ using Tais.Modders.Interfaces;
 
 public partial class Global : Node
 {
+    public static string ModPath
+    {
+        get
+        {
+            var path = Path.Combine(Path.GetDirectoryName(OS.GetExecutablePath()), "mods");
+            if (OS.HasFeature("editor"))
+            {
+                path = Path.Combine(ProjectSettings.GlobalizePath("res://"), ".mods");
+            }
+
+            return path;
+        }
+    }
+
     public ISession session;
     public IModder modder;
 
