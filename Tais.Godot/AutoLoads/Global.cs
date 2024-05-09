@@ -6,6 +6,7 @@ using Tais.Commands;
 using Tais.Interfaces;
 using Tais.Modders.Interfaces;
 
+
 public partial class Global : Node
 {
     public static string ModPath
@@ -45,5 +46,15 @@ public partial class Global : Node
                 session.OnCommand(command as ICommand);
             }
         };
+    }
+
+    public override void _EnterTree()
+    {
+        GD.Print("Global _EnterTree");
+    }
+
+    public override void _ExitTree()
+    {
+        GD.Print("Global _ExitTree");
     }
 }

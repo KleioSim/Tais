@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://AutoLoads/Global.cs"
+LocalisationLoader="*res://AutoLoads/LocalisationLoader.cs"
 ScenceSwitch="*res://AutoLoads/ScenceSwitch.cs"
 CommandConsole="*res://addons/csharpConsole/CommandConsole.cs"
 CheatCommander="*res://AutoLoads/CheatCommander.cs"
@@ -37,7 +38,7 @@ project/assembly_name="Tais.Godot"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/csharpConsole/plugin.cfg")
+enabled=PackedStringArray("res://addons/csharpConsole/plugin.cfg", "res://addons/localisation/plugin.cfg")
 
 [input]
 

@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bosxsgb3rrwsg"]
+[gd_scene load_steps=2 format=3 uid="uid://bosxsgb3rrwsg"]
 
-[ext_resource type="Script" path="res://LabelExt.cs" id="1_erev0"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_qt1kh"]
+[ext_resource type="Script" path="res://addons/localisation/LocalLabel.cs" id="1_lmcbw"]
 
 [node name="Test" type="Control"]
 layout_mode = 3
@@ -12,10 +10,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="LocalLabel" type="Label" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-label_settings = SubResource("LabelSettings_qt1kh")
-script = ExtResource("1_erev0")
-Id = "12134"
+script = ExtResource("1_lmcbw")
+TextId = "123"
+
+[node name="LocalLabel2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 12.0
+offset_right = 155.0
+offset_bottom = 35.0
+script = ExtResource("1_lmcbw")
+TextId = "123"

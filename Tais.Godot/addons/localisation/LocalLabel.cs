@@ -4,11 +4,22 @@ using System;
 using System.Linq;
 
 [Tool]
-public partial class LabelExt : Label
+public partial class LocalLabel : Label
 {
-    public static Func<string, string> GetLocalString;
+    public static Func<string, string> GetLocalString
+    {
+        get => _GetLocalString;
+        set
+        {
+            _GetLocalString = value;
+            GD.Print($"set GetLocalString {_GetLocalString}");
+        }
+    }
+
+    private static Func<string, string> _GetLocalString;
 
     private string _Id;
+
 
     [Export]
     public string TextId
@@ -17,6 +28,7 @@ public partial class LabelExt : Label
         set
         {
             _Id = value;
+            GD.Print($"TextId Set {value} {_GetLocalString}");
             this.Text = GetLocalString != null ? GetLocalString(_Id) : _Id;
         }
     }
