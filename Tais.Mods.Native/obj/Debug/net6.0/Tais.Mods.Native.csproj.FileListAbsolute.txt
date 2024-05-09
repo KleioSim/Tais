@@ -10,3 +10,15 @@ D:\myproject\Tais\Tais.Mods.Native\obj\Debug\net6.0\refint\Tais.Mods.Native.dll
 D:\myproject\Tais\Tais.Mods.Native\obj\Debug\net6.0\Tais.Mods.Native.pdb
 D:\myproject\Tais\Tais.Mods.Native\obj\Debug\net6.0\ref\Tais.Mods.Native.dll
 D:\myproject\Tais\Tais.Mods.Native\obj\Debug\net6.0\Tais.Mods.Native.csproj.AssemblyReference.cache
+D:\project\github\Tais\Tais.Mods.Native\bin\Debug\net6.0\Tais.Mods.Native.deps.json
+D:\project\github\Tais\Tais.Mods.Native\bin\Debug\net6.0\Tais.Mods.Native.dll
+D:\project\github\Tais\Tais.Mods.Native\bin\Debug\net6.0\Tais.Mods.Native.pdb
+D:\project\github\Tais\Tais.Mods.Native\obj\Debug\net6.0\Tais.Mods.Native.csproj.AssemblyReference.cache
+D:\project\github\Tais\Tais.Mods.Native\obj\Debug\net6.0\Tais.Mods.Native.GeneratedMSBuildEditorConfig.editorconfig
+D:\project\github\Tais\Tais.Mods.Native\obj\Debug\net6.0\Tais.Mods.Native.AssemblyInfoInputs.cache
+D:\project\github\Tais\Tais.Mods.Native\obj\Debug\net6.0\Tais.Mods.Native.AssemblyInfo.cs
+D:\project\github\Tais\Tais.Mods.Native\obj\Debug\net6.0\Tais.Mods.Native.csproj.CoreCompileInputs.cache
+D:\project\github\Tais\Tais.Mods.Native\obj\Debug\net6.0\Tais.Mods.Native.dll
+D:\project\github\Tais\Tais.Mods.Native\obj\Debug\net6.0\refint\Tais.Mods.Native.dll
+D:\project\github\Tais\Tais.Mods.Native\obj\Debug\net6.0\Tais.Mods.Native.pdb
+D:\project\github\Tais\Tais.Mods.Native\obj\Debug\net6.0\ref\Tais.Mods.Native.dll

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://diukb1qwff3oq"]
+[gd_scene load_steps=5 format=3 uid="uid://diukb1qwff3oq"]
 
 [ext_resource type="Script" path="res://MainScene/MainScene.cs" id="1_52frr"]
 [ext_resource type="PackedScene" uid="uid://dvtfgfqd3puvn" path="res://MainScene/LeftPanels/LeftPanel.tscn" id="2_31dac"]
+[ext_resource type="Script" path="res://addons/localisation/LocalLabel.cs" id="2_com07"]
 [ext_resource type="Script" path="res://MainScene/GMFailedEvent.cs" id="3_5imvs"]
 
 [node name="MainScene" type="Control"]
@@ -68,12 +69,15 @@ grow_vertical = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Type" type="Label" parent="TopInfo/City/HBoxContainer"]
+[node name="Label" type="Label" parent="TopInfo/City/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_vertical = 1
-text = "City"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 1
+script = ExtResource("2_com07")
+TextId = "COUNTRY"
 
 [node name="Count" type="Label" parent="TopInfo/City/HBoxContainer"]
 layout_mode = 2
@@ -82,23 +86,31 @@ text = "--"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Pop" type="PanelContainer" parent="TopInfo"]
-custom_minimum_size = Vector2(0, 40)
+[node name="Pop" type="Button" parent="TopInfo"]
+custom_minimum_size = Vector2(180, 40)
 layout_mode = 2
 size_flags_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TopInfo/Pop"]
 custom_minimum_size = Vector2(180, 0)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Type" type="Label" parent="TopInfo/Pop/HBoxContainer"]
+[node name="Label" type="Label" parent="TopInfo/Pop/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_vertical = 1
-text = "Pop"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 1
+script = ExtResource("2_com07")
+TextId = "POP"
 
 [node name="Count" type="Label" parent="TopInfo/Pop/HBoxContainer"]
 layout_mode = 2
@@ -107,23 +119,28 @@ text = "--"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Finance" type="PanelContainer" parent="TopInfo"]
-custom_minimum_size = Vector2(0, 40)
+[node name="Finance" type="Button" parent="TopInfo"]
+custom_minimum_size = Vector2(180, 40)
 layout_mode = 2
 size_flags_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TopInfo/Finance"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+offset_right = 180.0
+offset_bottom = 40.0
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Type" type="Label" parent="TopInfo/Finance/HBoxContainer"]
+[node name="Label" type="Label" parent="TopInfo/Finance/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_vertical = 1
-text = "Finance"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 1
+script = ExtResource("2_com07")
+TextId = "FINANCE"
 
 [node name="Current" type="Label" parent="TopInfo/Finance/HBoxContainer"]
 layout_mode = 2
@@ -164,9 +181,10 @@ vertical_alignment = 1
 [node name="Label" type="Label" parent="TopInfo/Date/HBoxContainer/Year"]
 layout_mode = 2
 size_flags_vertical = 1
-text = "Y"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("2_com07")
+TextId = "YEAR"
 
 [node name="Month" type="HBoxContainer" parent="TopInfo/Date/HBoxContainer"]
 layout_mode = 2
@@ -182,9 +200,10 @@ vertical_alignment = 1
 [node name="Label" type="Label" parent="TopInfo/Date/HBoxContainer/Month"]
 layout_mode = 2
 size_flags_vertical = 1
-text = "M"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("2_com07")
+TextId = "MONTH"
 
 [node name="Day" type="HBoxContainer" parent="TopInfo/Date/HBoxContainer"]
 layout_mode = 2
@@ -200,9 +219,10 @@ vertical_alignment = 1
 [node name="Label" type="Label" parent="TopInfo/Date/HBoxContainer/Day"]
 layout_mode = 2
 size_flags_vertical = 1
-text = "D"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("2_com07")
+TextId = "DAY"
 
 [node name="Warns" type="HBoxContainer" parent="TopInfo"]
 layout_mode = 2

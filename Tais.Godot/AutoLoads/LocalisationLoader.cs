@@ -4,36 +4,19 @@ using System;
 [Tool]
 public partial class LocalisationLoader : Node
 {
-    public override void _Ready()
-    {
-        GD.Print("_Ready");
-    }
-
     public override void _Process(double delta)
     {
-        if (LocalLabel.GetLocalString == null)
+        LocalLabel.GetLocalString ??= (id) =>
         {
-            GD.Print("_Process LocalLabel.GetLocalString == null");
-
-            LocalLabel.GetLocalString = (id) =>
-            {
-                if (id == "123") return "abc";
-                return id;
-            };
-        }
-    }
-
-    public override void _Notification(int what)
-    {
-        if (what == NotificationProcess
-            || what == NotificationInternalPhysicsProcess
-            || what == NotificationPhysicsProcess
-            || what == NotificationInternalPhysicsProcess)
-        {
-            return;
-        }
-
-        GD.Print($"_Notification {what}");
+            if (id == "123") return "abc";
+            if (id == "COUNTRY") return "县区";
+            if (id == "POP") return "户口";
+            if (id == "FINANCE") return "财政";
+            if (id == "YEAR") return "年";
+            if (id == "MONTH") return "月";
+            if (id == "DAY") return "日";
+            return id;
+        };
     }
 
 }
